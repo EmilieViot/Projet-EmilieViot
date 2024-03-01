@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <title> {% block title %} {% endblock %} | AVEN Plaquiste</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+<body>
+<header>
+    <ul>
+        <li><a href="tel:+33298108916"><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;02 98 10 89 16</a></li>
+        <li><i class="fa-solid fa-location-dot"></i>&nbsp;&nbsp;Nous contacter</a>&nbsp;&nbsp;11 ZA de Dioulan 29140 Rosporden</li>
+        <li><a href="index.phtml?route=contact"><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;Nous contacter</a></li>
+    </ul>
+
+    <section>
+        <img src="../assets/img/logoNoir.png" alt="logoNoir"><nav>
+            <ul>
+                <li>
+                    <a href="index.php?route=realisations">Les réalisations</a>
+                </li>
+                <li>
+                    <a href="index.php?route=prestations">Les prestations</a>
+                </li>
+                <li>
+                    <a href="index.php?route=avis">Les avis</a>
+                </li>
+                <li>
+                    <a href="index.php?route=contact">Nous contacter</a>
+                </li>
+                <li class="openQuotationBtn">
+                    <a href="index.php?route=devis">Devis gratuit</a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+</header>
+
+{% block main %}
+{% endblock %}
+
+<footer>
+
+</footer>
+
+{% block javascript %}
+{% endblock %}
+</body>
+</html>
