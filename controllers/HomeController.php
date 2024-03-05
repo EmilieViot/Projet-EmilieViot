@@ -1,27 +1,31 @@
 <?php
 
-class DefaultController extends AbstractController
+class HomeController extends AbstractController
 {
     public function home()
     {
         $rm = new RealisationManager();
+        $pm = new PictureManager();
         $om = new OpinionManager();
         $sm = new ServiceManager();
 
-        $realisations = $rm->findAll();
-        $key = array_rand($realisations, 1);
-        $realisation = [];
-        $realisation["realisation"] = $realisations[$key];
-
-        $services = $sm->findAll();
-        $keys = array_rand($services, 1);
-        $service = [];
-        $service["service"] = $services[$key];
+        $realisations = $rm->findAll(); //on récupère un array
+        foreach ($realisations as $realisation) {
+            $realisationId = $realisation['id'];
+            $pictures = $pm->finById($realisationId);
         }
 
-        $this->render("home/home.html.twig", [
-            "realisations" => $realisation,
-            "services" => $service,
-        ]);
+        $services = $sm->findAll(); //on récupère un array
+        foreach ($services as $service) {
+            $serviceId = $service['id'];
+            $pictures = $pm->finById($serviceId);
+        }
+
+        $opinions = $om->findAll();
+
+
+        // Appeler la vue pour afficher les données et les images associées
+        $this->render("home.html.twig", ["realisations" => $realisations, "pictures" => $pictures, "opinions" => $opinions, "services" => $services]);
+
     }
 }
