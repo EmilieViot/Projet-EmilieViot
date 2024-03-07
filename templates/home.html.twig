@@ -7,8 +7,93 @@
 
 {% block main %}
 <main id="content" class="home">
-    <p>coucou</p>
+    <section class="homeReal">
+        <div id="carouselExampleControls" class="carousel slide">
+            <div class="carousel-inner">
+                {% for key, realisation in realisations %}
+                    <div class="carousel-item{% if key == 0 %} active{% endif %}">
+                        <img src="{{ realisation.pictures[0].url }}" alt="{{ realisation.pictures[0].alt }}">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{ realisation.title }}</h5>
+                            <a href="index?route=realisations">→ Découvrez + de réalisations en cliquant ici</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
 
+    </section>
+
+    <div class="vertical-line"></div>
+
+    <section class="homeAvis">
+        <div id="opinions-carousel" class="carousel slide">
+            <div class="carousel-inner">
+                {% for key, opinion in opinions %}
+                    <article>
+                        <figure class="stars">
+                        {% if opinion.notation == 1 %}
+                            <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i>
+                        {% elseif opinion.notation == 2 %}
+                            <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i>
+                        {% elseif opinion.notation == 3 %}
+                            <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i>
+                        {% elseif opinion.notation == 4 %}
+                            <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i>
+                        {% elseif opinion.notation == 5 %}
+                            <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i>
+                        {% endif %}
+                    </figure>
+                        </figure>
+                        {% if opinion.content %}
+                            <p class="content">{{ opinion.content }}</p>
+                        {% endif %}
+                        <p class="username">{{ opinion.username }}</p>
+                    </article>
+                </article>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#opinions-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#opinions-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+    <div class="vertical-line"></div>
+
+    <section class="homePresta">
+        <article class="homePrestaQuestions">
+            <p>Et si vous créiez une salle d’eau dans votre chambre ?</p>
+            <p>Votre pièce de vie manque de convivialité ?</p>
+            <p>Chez vous, il fait trop froid  l’hiver et trop chaud l’été ?</p>
+        </article>
+        <nav class="homePrestaTitle">
+            {% for service in services %}
+                <a href="index.php?route=services&id=service.id">{{ service.title }}</a>
+            {% endfor %}
+        </nav>
+    </section>
+
+    <div class="vertical-line"></div>
+
+    <figure>
+        <figcaption>Rencontrons-nous</figcaption>
+        <img src="" alt="carte" />
+    </figure>
 
 </main>
+
 {% endblock %}

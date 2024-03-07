@@ -3,7 +3,8 @@
 class Opinion
 {
     private ?int $id = null;
-    public function __construct(private string $username,private string $content, private Realisation $realisation)
+
+    public function __construct(private string $username,private string $content, private int $notation, private ?array $realisation)
     {
     }
 
@@ -35,12 +36,20 @@ class Opinion
         $this->content = $content;
     }
 
+    public function getNotation(): int
+    {
+        return $this->notation;
+    }
+    public function setNotation(string $notation): void
+    {
+        $this->notation = $notation;
+    }
 
-    public function getRealisation(): Realisation
+    public function getRealisation(): ?array
     {
         return $this->realisation;
     }
-    public function setRealisation(Realisation $realisation): void
+    public function setRealisation(?array $realisation): void
     {
         $this->realisation = $realisation;
     }

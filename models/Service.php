@@ -3,7 +3,7 @@
 class Service
 {
     private ?int $id = null;
-    public function __construct(private string $title,private string $intro, private string $description)
+    public function __construct(private string $title,private string $intro, private string $description, private array $pictures)
     {
     }
 
@@ -25,6 +25,15 @@ class Service
         $this->title = $title;
     }
 
+    public function getIntro(): string
+    {
+        return $this->intro;
+    }
+    public function setIntro(string $intro): void
+    {
+        $this->intro = $intro;
+    }
+
     public function getDescription(): string
     {
         return $this->description;
@@ -34,13 +43,13 @@ class Service
         $this->description = $description;
     }
 
-    public function getIntro(): string
+    public function getPictures(): array
     {
-        return $this->intro;
+        return $this->pictures;
     }
-    public function setIntro(string $intro): void
+    public function setPictures(Array $pictures): void
     {
-        $this->intro = $intro;
+        $this->pictures = $pictures;
     }
 }
 

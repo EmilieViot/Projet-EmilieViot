@@ -3,7 +3,7 @@
 class Realisation
 {
     private ?int $id = null;
-    public function __construct(private string $title,private string $description)
+    public function __construct(private string $title, private string $description, private array $pictures)
     {
     }
 
@@ -33,6 +33,16 @@ class Realisation
     {
         $this->description = $description;
     }
+
+    public function getPictures(): array
+    {
+        return $this->pictures;
+    }
+    public function setPictures(Array $pictures): void
+    {
+        $this->pictures = $pictures;
+    }
 }
+
 
 
