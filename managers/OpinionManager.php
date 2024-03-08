@@ -5,7 +5,7 @@ class OpinionManager extends AbstractManager
 
     public function findAll() : array
     {
-        $realisation = new Realisation();
+        $rm = new RealisationManager();
 
         $query = $this->db->prepare('SELECT * FROM opinions');
         $query->execute();
@@ -24,7 +24,6 @@ class OpinionManager extends AbstractManager
             $opinion->setId($item["id"]);
             $opinions[] = $opinion;
         }
-
         return $opinions;
     }
 

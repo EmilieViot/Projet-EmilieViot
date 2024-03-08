@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Consulter/laisser un avis
+    {{ parent() }}
+{% endblock %}
+
+{% block main %}
+<main id="login" class="container py-5 px-3">
+        {% if session.error-message is defined %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session.error-message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+
+        <h1 class="mb-5">Comment pouvons-nous vous aider ?</h1>
+
+    <form action="index.php?route=opinionRegister" method="post">
+        <input type="hidden" name="csrf-token" id="csrf-token" value="{{ session.csrf_token }}" />
+
+        <label for="username">Pseudo</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="content">Rédigez votre avis</label>
+        <textarea id="content" name="content" rows="4" required></textarea>
+
+        <label for="notation">Note sur 5:</label>
+        <select id="notation" name="notation" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+
+        <label for="realisation_id">Cet avis est-il en lien avec une de ces réalisations :</label>
+        <select name="realisation_id" id="realisation_id">
+            <option value="">Non, aucune</option>
+            {% for realisation in realisations %}
+                <option value="{{ realisation.id }}">{{ realisation.title }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Soumettre mon avis</button>
+    </form>
+</main>
+{% endblock %}

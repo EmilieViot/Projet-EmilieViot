@@ -53,6 +53,24 @@ class PricingManager extends AbstractManager
         return null;
     }
 
+    public function createPricing(Pricing $pricing): void
+    {
+        $query = $this->db->prepare('INSERT INTO pricings (id, contactMode, firstname, lastname, email, tel, city, details, pricing, photoPath) VALUES (NULL, :contactMode, :firstname, :lastname, :email, :tel, :city,:details, :pricing, :photoPath');
+        $parameters = [
+            "contactMode" => $pricing->getContactMode(),
+            "firstname" => $pricing->getFirstname(),
+            "lastname" => $pricing->getLastname(),
+            "email" => $pricing->getEmail(),
+            "tel" => $pricing->getTel,
+            "city" => $pricing->getCity(),
+            "details" => $pricing->getDetails(),
+            "pricing" => $pricing->getPricing(),
+            "photoPath" => $pricing->getPhotoPath()
+        ];
+        $query->execute($parameters);
+        $pricing->setId($this->db->lastInsertId());
+    }
+
     public function updatePricing(Pricing $pricing): void
     {
         $query = $this->db->prepare('UPDATE pricings SET id, contactMode, firstname, lastname, email, tel, city, details, pricing, photoPath) VALUES (NULL, :contactMode, :firstname, :lastname, :email, :tel, :city,:details, :pricing, :photoPath');

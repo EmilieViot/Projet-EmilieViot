@@ -19,4 +19,9 @@ abstract class AbstractController
         echo $this->twig->render($template, $data);
 //        dump($data);
     }
+
+    protected function redirect(string $route) : void
+    {
+        header("Location: $route");
+    }
 }

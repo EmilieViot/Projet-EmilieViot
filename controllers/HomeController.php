@@ -9,8 +9,6 @@ class HomeController extends AbstractController
         $om = new OpinionManager();
         $sm = new ServiceManager();
 
-        $realisation_pictures = [];
-
         $realisations = $rm->findAll(); //on récupère un array
 
         $services = $sm->findAll(); //on récupère un array

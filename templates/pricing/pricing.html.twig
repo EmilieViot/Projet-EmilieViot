@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulaire</title>
+    <title>Devis gratuit</title>
 </head>
 <body>
 
 <form action="index.php?route=checkPricing" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="csrf-token" id="csrf-token" value="<?= $_SESSION["csrf-token"] ?>" />
+
     <label for="email">Email :</label>
     <input type="email" name="email" required>
 

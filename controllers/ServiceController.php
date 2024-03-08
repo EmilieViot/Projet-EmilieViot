@@ -2,10 +2,12 @@
 
 class ServiceController extends AbstractController
 {
-    $sm = new ServiceManager();
+
 
     public function services()
     {
+        $sm = new ServiceManager();
+
         $services = $sm->findAll();
 
         $this->render("services/services.html.twig", [
@@ -15,7 +17,9 @@ class ServiceController extends AbstractController
 
     public function service()
     {
-        $services = $sm->findById();
+        $sm = new ServiceManager();
+
+        $service = $sm->findById();
 
         $this->render("services/service.html.twig", [
             "service" => $service

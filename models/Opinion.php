@@ -4,7 +4,7 @@ class Opinion
 {
     private ?int $id = null;
 
-    public function __construct(private string $username,private string $content, private int $notation, private ?array $realisation)
+    public function __construct(private string $username,private string $content, private int $notation, private ?Realisation $realisation)
     {
     }
 
@@ -49,7 +49,7 @@ class Opinion
     {
         return $this->realisation;
     }
-    public function setRealisation(?array $realisation): void
+    public function setRealisation(?Realisation $realisation): void
     {
         $this->realisation = $realisation;
     }

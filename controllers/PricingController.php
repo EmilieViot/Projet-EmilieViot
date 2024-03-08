@@ -2,35 +2,32 @@
 
 class PricingController extends AbstractController
 {
-public function pricing() : void
+    public function pricing(): void
     {
-    $this->render("pricing", []);
+        $this->render("pricing/pricing.html.twig", []);
     }
 
-public function pricingProcessing() : void
-{
-    if ($_SERVER["REQUEST_METHOD"] == "POST")
+    public function pricingRegister() : void
     {
-        // Récupération des données du formulaire
-        $email = $_POST["email"];
-        $telephone = $_POST["telephone"];
-        $message = $_POST["message"];
+        if(isset($_POST["csrf-token"]) && isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["city"]) && isset($_POST["email"]) && isset($_POST["content"]))
+        {
+            $tokenManager = new CSRFTokenManager();
 
-        // Traitement de la photo
-        if (isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
-            $chemin_temporaire = $_FILES['photo']['tmp_name'];
-            $nom_fichier = $_FILES['photo']['name'];
+            if($tokenManager->validateCSRFToken($_POST["csrf-token"]))
+            {
+                $pm = new PricingManager();
 
-            $repertoire_destination = 'chemin/vers/repertoire/destination/';
-            $chemin_final = $repertoire_destination . $nom_fichier;
+                $pricing= new Pricing($_POST["contactMode"], $_POST["firstname"], $_POST["lastname"], $_POST["email"], $_POST["tel"], $_POST["city"], $_POST["details"], $_POST["message"], $_POST["photoPath"]);
+                $pm->createPricing($pricing);
 
-            move_uploaded_file($chemin_temporaire, $chemin_final);
-        } else {
-            // Aucune photo téléchargée
-            $chemin_final = null;
+                $this->redirect('pricingConfirmation');
+            }
         }
-
-        // Enregistrement des données dans la base de données
-
+        $this->redirect("contact");
     }
-    ?>
+
+    public function pricingConfirmation(): void
+    {
+        $this->render("contact/pricingConfirmation.html.twig", []);
+    }
+}

@@ -11,7 +11,10 @@ if(!isset($_SESSION["csrf-token"]))
     $tokenManager = new CSRFTokenManager();
     $token = $tokenManager->generateCSRFToken();
 
+
     $_SESSION["csrf-token"] = $token;
+
+//    dump($token);
 }
 
 $router = new Router();

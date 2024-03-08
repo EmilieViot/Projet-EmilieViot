@@ -4,19 +4,38 @@ class OpinionController extends AbstractController
 {
     public function opinion(): void
     {
-        $this->render("opinion", []);
+        $rm = new RealisationManager();
+        $realisations = $rm->findAll();
+        $this->render("opinions/opinion.html.twig", ["realisations" => $realisations]);
     }
 
-    public function opinionProcessing(): void
+    public function opinionRegister(): void
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Récupération des données du formulaire
+        if (isset($_POST["csrf-token"]) && isset($_POST["username"]) && isset($_POST["content"]) && isset($_POST["notation"]))
+        {
+            $tokenManager = new CSRFTokenManager();
 
+            if ($tokenManager->validateCSRFToken($_POST["csrf-token"])) {
+                $om = new OpinionManager();
 
-            $mm = new OpinionManager();
-            $opinion = $mm->createOpinion();
+                $username = $_POST['username'];
+                $content = $_POST['content'];
+                $notation = $_POST['notation'];
+                $realisationId = $_POST['realisation_id'];
 
+                $opinion = new Opinion($username, $content, $notation, $realisationId);
+                $om->createOpinion($opinion);
+
+                $this->redirect('opinionConfirmation');
+            }
+            $this->redirect("opinions");
         }
     }
+
+    public function opinionConfirmation(): void
+    {
+        $this->render("opinions/opinionConfirmation.html.twig", []);
+    }
 }
+
 
