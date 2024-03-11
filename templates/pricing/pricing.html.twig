@@ -1,14 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Devis gratuit</title>
-</head>
-<body>
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Consulter/laisser un avis
+    {{ parent() }}
+{% endblock %}
+
+{% block main %}
+
+<main>
 
 <form action="index.php?route=checkPricing" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="csrf-token" id="csrf-token" value="<?= $_SESSION["csrf-token"] ?>" />
+    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ session }}" />
 
     <label for="email">Email :</label>
     <input type="email" name="email" required>
@@ -25,5 +27,5 @@
     <button type="submit">Envoyer</button>
 </form>
 
-</body>
-</html>
+</main>
+{% endblock %}

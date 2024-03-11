@@ -6,18 +6,18 @@
 {% endblock %}
 
 {% block main %}
-<main id="login" class="container py-5 px-3">
-        {% if session.error-message is defined %}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ session.error-message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+<main id="opinion" class="container py-5 px-3">
+    {% if session['error-message'] is defined %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session['error-message'] }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         {% endif %}
 
-        <h1 class="mb-5">Comment pouvons-nous vous aider ?</h1>
+    <h1 class="mb-5">AVEN Plaquiste est à l'écoute de vos retours :</h1>
 
     <form action="index.php?route=opinionRegister" method="post">
-        <input type="hidden" name="csrf-token" id="csrf-token" value="{{ session.csrf_token }}" />
+        <input type="hidden" name="csrf-token" id="csrf-token" value="{{ session }}" />
 
         <label for="username">Pseudo</label>
         <input type="text" id="username" name="username" required>
@@ -34,7 +34,7 @@
             <option value="5">5</option>
         </select>
 
-        <label for="realisation_id">Cet avis est-il en lien avec une de ces réalisations :</label>
+        <label for="realisation_id">Une réalisation est-elle ciblée par votre avis ? </label>
         <select name="realisation_id" id="realisation_id">
             <option value="">Non, aucune</option>
             {% for realisation in realisations %}

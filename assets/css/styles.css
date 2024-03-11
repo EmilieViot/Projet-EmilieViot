@@ -37,6 +37,7 @@ body * {
 
 html {
     font-size: 62.5%;
+    font-family: 'Signika';
 }
 
 img, video {
@@ -47,29 +48,40 @@ img, video {
 GENERAL
 ***************************************************************** */
 body {
-    font-family: 'Signika';
+    margin : auto;
     font-weight:100;
     line-height: 1.5;
+    font-family : 'Signika';
     font-size: 1.8rem;
     background-color: #000;
     color:#fff;
 }
 
+.vertical-line {
+    border-left: 1px solid #bf9000;
+    height: 20vh;
+    width : 0;
+    margin: 2rem auto;
+    display : block;
+    text-align: center;
+}
+
 /* BASE.HTML.TWIG */
 
-/* Header */
+/* Header - bandeau coordonnées */
+
 .contactDetails {
     background-color: #bf9000;
-    font-size: 0.2rem;
+    font-size: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-content: center;
 }
 .contactDetails li {
-    padding : 0;
+    padding : 0.5rem;
     margin : 1rem;
-    texte-align : center;
+    text-align : center;
     font-size : 1.4rem;
     weight:light;
     align-items: center;
@@ -85,27 +97,85 @@ body {
     color : #fff
 }
 
-#navbarText {
+/* Header - menu */
+
+#logoNav {
+    font-family : 'Signika';
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content : center;
+    align-items : center;
+    align-content : center;
 }
-
+.logoHeader {
+    width : 25%;
+    margin : 2rem auto auto auto;
+    display : block;
+}
+.navbar ul {
+    margin : auto;
+}
+.navbar ul li {
+    margin : auto;
+}
+#navbarSupportedContent a {
+    font-size : 1.6rem;
+    color: #fff;
+    text-decoration: none;
+    padding : 0;
+    margin : 2rem;
+}
+.navbar-nav li:last-child {
+    background-color: #bf9000;
+    padding : 0;
+    color: #fff;
+    font-weight: 200;
+}
+#navbarSupportedContent .nav-item:not(:last-child) a:hover {
+    color: #bf9000;
+}
+#navbarSupportedContent .nav-item:last-child a:hover {
+    color: #000;
+}
+#navbarSupportedContent .nav-item.active:not(:last-child) a {
+    color : #bf9000;
+    border-bottom: 2px solid!important;
+    padding-bottom: 0.2px!important;
+}
+#navbarSupportedContent .nav-item:last-child.active a {
+    color : #fff!important;
+     border-bottom: 2px solid!important;
+    padding-bottom: 0.2px!important;
+}
 .navbar-collapse.nav-item {
     list-style: none;
 }
-.navbar-nav a {
-    text-decoration:none;
-    color : #fff !important;
-}
-.logoHeader {
-    width: 10%;
-    margin : 2rem;
-    text-align: center;
-    grid-column: 2;
-}
-
 .navbar-toggler.toggler-example {
     cursor: pointer;
 }
+
+/* Footer */
+
+footer {
+    display : flex;
+    flex-direction : column;
+    align-content : center;
+    align-items: center;
+}
+footer p:first-of-type {
+
+    padding : 2rem;
+}
+
+footer p:last-of-type {
+    background-color: #fff;
+    color : #bf9000;
+    width : 100%;
+    text-align: center;
+    padding : 1rem;
+}
+
+footer p:last-of-type a {
+    text-decoration: underline;
+    color : #bf9000;
 }
