@@ -12,11 +12,13 @@ class ServiceManager extends AbstractManager
 
         foreach($result as $item)
         {
+
             $pm = new PictureManager();
-            $pictures = $pm->findByRealId($item['id']);
+            $pictures = $pm->findByServiceId($item['id']);
             $service = new Service($item["title"], $item["intro"],$item["description"], $pictures);
             $service->setId($item["id"]);
             $services[] = $service;
+//            dump($service);
         }
 
         return $services;

@@ -1,9 +1,18 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Focus sur : {{ realisation.title }}
+    {{ realisation.title }}
 {% endblock %}
 
 {% block main %}
-
+    <card>
+        <h3>{{ realisation.title }}</h3>
+        {% for picture in realisation.pictures %}
+            <figure>
+                <img src="{{ picture.url }}" alt="{{ picture.alt }}">
+            </figure>
+        {% endfor %}
+        <p>{{ realisation.description }}</p>
+        <p><a href="index.php?route=realisation&id={{ realisation.id }}">En savoir +</a></p>
+    </card>
 {% endblock %}

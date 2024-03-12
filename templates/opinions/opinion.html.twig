@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Consulter/laisser un avis
+    Vos retours comptent !
     {{ parent() }}
 {% endblock %}
 
@@ -12,37 +12,68 @@
             {{ session['error-message'] }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        {% endif %}
+    {% endif %}
 
-    <h1 class="mb-5">AVEN Plaquiste est à l'écoute de vos retours :</h1>
+    <section>
+        {% for opinion in opinions %}
+            <article>
+                {% if opinion.notation == 1 %}
+                    <p><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i></p>
+                {% elseif opinion.notation == 2 %}
+                    <p><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i></p>
+                {% elseif opinion.notation == 3 %}
+                    <p><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i></p>
+                {% elseif opinion.notation == 4 %}
+                    <p><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i></p>
+                {% elseif opinion.notation == 5 %}
+                    <p><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i></p>
+                {% endif %}
+                <p>{{ opinion.content }}</p>
+                {% if opinion.getRealisation() %}
+                    <p>
+                        Avis en lien avec la réalisation suivante :
+                            <a href="index.php?route=realisation&id={{ opinion.getRealisation().getId()}}">
+                                {{ opinion.getRealisation().getTitle() }}
+                            </a>
+                        (cliquez pour découvrir)
+                    </p>
+                {% endif %}</p>
+                <p>{{ opinion.username }}</p>
+            </article>
+        {% endfor %}
 
-    <form action="index.php?route=opinionRegister" method="post">
-        <input type="hidden" name="csrf-token" id="csrf-token" value="{{ session }}" />
+    </section>
 
-        <label for="username">Pseudo</label>
-        <input type="text" id="username" name="username" required>
+    <section>
+        <h1 class="mb-5">Votre avis compte :</h1>
+        <form action="index.php?route=opinionRegister" method="post">
+            <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
 
-        <label for="content">Rédigez votre avis</label>
-        <textarea id="content" name="content" rows="4" required></textarea>
+            <label for="username">Pseudo</label>
+            <input type="text" id="username" name="username" required>
 
-        <label for="notation">Note sur 5:</label>
-        <select id="notation" name="notation" required>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
+            <label for="content">Rédigez votre avis</label>
+            <textarea id="content" name="content" rows="4" required></textarea>
 
-        <label for="realisation_id">Une réalisation est-elle ciblée par votre avis ? </label>
-        <select name="realisation_id" id="realisation_id">
-            <option value="">Non, aucune</option>
-            {% for realisation in realisations %}
-                <option value="{{ realisation.id }}">{{ realisation.title }}</option>
-            {% endfor %}
-        </select>
+            <label for="notation">Note sur 5:</label>
+            <select id="notation" name="notation" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
 
-        <button type="submit">Soumettre mon avis</button>
-    </form>
+            <label for="realisation_id">Une réalisation est-elle ciblée par votre avis ? </label>
+            <select name="realisation_id" id="realisation_id">
+                <option value="">Non, aucune</option>
+                {% for realisation in realisations %}
+                    <option value="{{ realisation.id }}">{{ realisation.title }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Soumettre mon avis</button>
+        </form>
+    </section>
 </main>
 {% endblock %}

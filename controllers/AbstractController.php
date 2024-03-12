@@ -10,7 +10,7 @@ abstract class AbstractController
         ]);
 
         $twig->addExtension(new \Twig\Extension\DebugExtension());
-        $twig->addGlobal('session', $_SESSION["csrf-token"]);
+        $twig->addGlobal('sessionToken', $_SESSION["csrf-token"]);
         $twig->addGlobal('url', $_SERVER['REQUEST_URI']);
 
         $uri = $_SERVER['REQUEST_URI'];

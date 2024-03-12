@@ -5,5 +5,15 @@
 {% endblock %}
 
 {% block main %}
-
+    {% for realisation in realisations %}
+            <article>
+            {% for picture in realisation.pictures %}
+                <figure>
+                    <img src="{{ picture.url }}" alt="{{ picture.alt }}">
+                </figure>
+            {% endfor %}
+                <h3>{{ realisation.title }}</h3>
+                <h4>{{ realisation.description }}</h4>
+            </article>
+    {% endfor %}
 {% endblock %}

@@ -22,7 +22,7 @@
         <h1 class="mb-5">Comment pouvons-nous vous aider ?</h1>
 
         <form action="index.php?route=messageRegister" method="post">
-            <input type="hidden" name="csrf-token" id="csrf-token" value="{{ session }}" />
+            <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
 
             <label for="firstname">Prénom :</label>
             <input type="text" id="firstname" name="firstname" required>

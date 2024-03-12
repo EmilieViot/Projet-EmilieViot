@@ -18,17 +18,22 @@ class Router extends AbstractController
             $hc->home();
         } else if (isset($get["route"]) && $get["route"] === "home") {
             $hc->home();
-        } /*REAL*/
+        }
+
+        /*REAL*/
         else if (isset($get["route"]) && $get["route"] === "realisations") {
             $rc->realisations();
         } else if (isset($get["route"]) && isset($get["id"]) && $get["route"] === "realisation") {
             $rc->realisation($get["id"]);
-        } /*SERVICES*/
+        }
+
+        /*SERVICES*/
         else if (isset($get["route"]) && $get["route"] === "services") {
             $sc->services();
         } else if (isset($get["route"]) && isset($get["id"]) && $get["route"] === "service") {
             $sc->service($get["id"]);
         }
+
         /*OPINIONS*/
         else if(isset($get["route"]) && $get["route"] === "opinions")
         {
@@ -42,6 +47,7 @@ class Router extends AbstractController
         {
             $oc->opinionConfirmation();
         }
+
         /*CONTACT*/
         else if(isset($get["route"]) && $get["route"] === "contact")
         {
@@ -55,6 +61,7 @@ class Router extends AbstractController
         {
             $mc->messageConfirmation();
         }
+
         /*PRICING*/
         else if(isset($get["route"]) && $get["route"] === "pricing")
         {
@@ -66,7 +73,7 @@ class Router extends AbstractController
         }
         else if(isset($get["route"]) && $get["route"] === "pricingConfirmation")
         {
-            $mc->pricingConfirmation();
+            $pc->pricingConfirmation();
         }
 
         /*ADMIN*/

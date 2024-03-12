@@ -12,10 +12,10 @@ class RealisationController extends AbstractController
         $this->render("realisations/realisations.html.twig", ["realisations" => $realisations]);
     }
 
-    public function realisation()
+    public function realisation(int $id)
     {
         $rm = new RealisationManager();
-        $realisation = $rm->findById();
+        $realisation = $rm->findById($id);
 
         $this->render("realisations/realisation.html.twig", ["realisation" => $realisation]);
     }

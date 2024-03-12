@@ -45,7 +45,7 @@ class Opinion
         $this->notation = $notation;
     }
 
-    public function getRealisation(): ?array
+    public function getRealisation(): ?Realisation
     {
         return $this->realisation;
     }

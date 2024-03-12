@@ -4,9 +4,9 @@ class OpinionController extends AbstractController
 {
     public function opinion(): void
     {
-        $rm = new RealisationManager();
-        $realisations = $rm->findAll();
-        $this->render("opinions/opinion.html.twig", ["realisations" => $realisations]);
+        $om = new OpinionManager();
+        $opinions = $om->findAll();
+        $this->render("opinions/opinion.html.twig", ["opinions" => $opinions]);
     }
 
     public function opinionRegister(): void

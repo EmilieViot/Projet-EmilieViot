@@ -31,11 +31,14 @@ class PictureManager extends AbstractManager
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $pictures = [];
 
+
         foreach ($result as $item) {
             $picture = new Picture($item["url"], $item["alt"]);
             $picture->setId($item["id"]);
             $pictures[] = $picture;
+
         }
+//        dump($pictures);
         return $pictures;
     }
 

@@ -1,9 +1,17 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Focus sur : {{ service.title }}
+    {{ service.title }}
 {% endblock %}
 
 {% block main %}
-
+        <card>
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.description }}</p>
+            {% for picture in service.pictures %}
+                <figure>
+                    <img src="{{ picture.url }}" alt="{{ picture.alt }}">
+                </figure>
+            {% endfor %}
+        </card>
 {% endblock %}

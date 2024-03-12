@@ -5,5 +5,14 @@
 {% endblock %}
 
 {% block main %}
-
+    {% for service in services %}
+        <card>
+            <h3>{{ service.title }}</h3>
+                <figure>
+                    <img src="{{ service.pictures[0].url }}" alt="{{ service.pictures[0].alt }}">
+                </figure>
+            <p>{{ service.intro }}</p>
+            <p><a href="index.php?route=service&id={{ service.id }}">En savoir +</a></p>
+        </card>
+    {% endfor %}
 {% endblock %}
