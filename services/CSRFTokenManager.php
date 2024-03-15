@@ -10,7 +10,6 @@ class CSRFTokenManager
 
     public function validateCSRFToken($token) : bool
     {
-
         if (isset($_SESSION['csrf-token']) && hash_equals($_SESSION['csrf-token'], $token))
         {
             return true;

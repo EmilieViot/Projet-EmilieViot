@@ -2,6 +2,7 @@
 
 class Router extends AbstractController
 {
+
     public function handleRequest(array $get): void
     {
         $hc = new HomeController();
@@ -12,6 +13,7 @@ class Router extends AbstractController
         $mc = new MessageController();
         $ac = new AuthController();
         $PC = new PageController();
+
 
         /*HOME*/
         if (!isset($get["route"])) {

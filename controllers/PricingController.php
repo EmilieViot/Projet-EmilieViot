@@ -4,16 +4,21 @@ class PricingController extends AbstractController
 {
     public function pricing(): void
     {
-        $this->render("pricing/pricing.html.twig", []);
+        $dm = new DetailManager();
+        $details = $dm->findAll();
+        $this->render("pricing/pricing.html.twig", ['details' => $details]);
     }
 
     public function pricingRegister() : void
     {
-        if(isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["city"]) && isset($_POST["email"]) && isset($_POST["details"])) {
+        if (isset($_POST["contactMode"]) && isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["email"])) {
+
             $tokenManager = new CSRFTokenManager();
-            if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
+            if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){
+                $dm = new DetailManager();
                 $pm = new PricingManager();
 
+                $contactMode = htmlspecialchars($_POST["contactMode"]);
                 $firstname = htmlspecialchars($_POST["firstname"]);
                 $lastname = htmlspecialchars($_POST["lastname"]);
                 $email = htmlspecialchars($_POST["email"]);
@@ -21,25 +26,32 @@ class PricingController extends AbstractController
                 $city = htmlspecialchars($_POST["city"]);
                 $message = htmlspecialchars($_POST["message"]);
 
-                $pricing = new Pricing($_POST["contactMode"], $firstname, $lastname, $email, $tel, $city, $_POST["details"], $message, $_FILES["photo"]);
-                $_SESSION["user"] = $user->getId();
-
+                $pricing = new Pricing($contactMode, $firstname, $lastname, $email, $tel, $city, $message);
                 unset($_SESSION["error-message"]);
-
-                dump($pricing);
-
                 $pm->createPricing($pricing);
 
-                $this->redirect('pricingConfirmation');
-            } else {
+                $details = $_POST["details"];
+                $details_array = [];
+                foreach ($details as $detailData) {
+                    $detail = $dm->findByTitle($detailData);
+                    $details_array[] = $detail;
+                    dump($details_array);
+                }
+
+                $pdm = new PricingDetailManager();
+
+                foreach ($details_array as $detail) {
+                    $pdm->createOne($pricing, $detail);
+                }
+                $this->redirect("index.php?route=pricingConfirmation");
+            }
+            else {
                 $_SESSION["error-message"] = "CSRF token invalide";
                 $this->redirect("index.php?route=pricing");
             }
-        }
-        else
-        {
+        } else {
             $_SESSION["error-message"] = "Missing fields";
-            $this->redirect("pricing");
+            $this->redirect("index.php?route=pricing");
         }
     }
 

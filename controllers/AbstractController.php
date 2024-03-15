@@ -11,8 +11,8 @@ abstract class AbstractController
 
         $twig->addExtension(new \Twig\Extension\DebugExtension());
         $twig->addGlobal('sessionToken', $_SESSION["csrf-token"]);
-        $twig->addGlobal('url', $_SERVER['REQUEST_URI']);
 
+        $twig->addGlobal('url', $_SERVER['REQUEST_URI']);
         $uri = $_SERVER['REQUEST_URI'];
         $segments = explode('/', $uri);
         $route = end($segments);
@@ -26,7 +26,6 @@ abstract class AbstractController
         echo $this->twig->render($template, $data);
 //        dump($data);
     }
-
     protected function redirect(string $route) : void
     {
         header("Location: $route");

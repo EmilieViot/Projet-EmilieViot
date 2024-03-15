@@ -4,7 +4,7 @@ class Pricing
 {
     private ?int $id = null;
 
-    public function __construct(private enum $contactMode,private string $firstname,private string $lastname, private string $email, private string $tel, private string $city, private array $details, private string $message, private string $photoPath)
+    public function __construct(private string $contactMode,private string $firstname,private string $lastname, private string $email, private string $tel, private string $city, private string $message/*, private string $photoPath*/)
     {
     }
 
@@ -17,11 +17,11 @@ class Pricing
         $this->id = $id;
     }
 
-    public function getContactMode(): enum
+    public function getContactMode(): string
     {
         return $this->contactMode;
     }
-    public function setContactMode(enum $contactMode): void
+    public function setContactMode(string $contactMode): void
     {
         $this->contactMode = $contactMode;
     }
@@ -71,15 +71,6 @@ class Pricing
         $this->city = $city;
     }
 
-    public function getDetails(): array
-    {
-        return $this->details;
-    }
-    public function setDetails(array $details): void
-    {
-        $this->details = $details;
-    }
-
     public function getMessage(): string
     {
         return $this->message;
@@ -89,14 +80,14 @@ class Pricing
         $this->message = $message;
     }
 
-    public function getPhotoPath(): string
+/*    public function getPhotoPath(): string
     {
         return $this->photoPath;
     }
     public function setPhotoPath(string $photoPath): void
     {
         $this->photoPath = $photoPath;
-    }
+    }*/
 
 
 }

@@ -19,11 +19,11 @@
                 <option value="email">Email</option>
             </select>
 
-            <label for="firstName">Prénom</label>
-            <input type="text" id="firstName" name="firstName" required="required">
+            <label for="firstname">Prénom</label>
+            <input type="text" id="firstname" name="firstname" required="required">
 
-            <label for="lastName">Nom</label>
-            <input type="text" id="lastName" name="lastName" required="required">
+            <label for="lastname">Nom</label>
+            <input type="text" id="lastname" name="lastname" required="required">
 
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required="required">
@@ -37,33 +37,15 @@
 
         <fieldset >
             <legend>Type de bien :</legend>
-
-            <input type="checkbox" id="bienAncien" name="details[]" value="Bien ancien">
-            <label for="bienAncien">Bien ancien</label>
-
-            <input type="checkbox" id="bienRecent" name="details[]" value="Bien récent">
-            <label for="bienRecent">Bien récent</label>
-
-            <input type="checkbox" id="bienNeuf" name="details[]" value="Bien neuf">
-            <label for="bienNeuf">Bien neuf</label>
-
-            <input type="checkbox" id="cloisons" name="details[]" value="Cloisons">
-            <label for="cloisons">Cloisons</label>
-
-            <input type="checkbox" id="isolationInterieure" name="details[]" value="Isolation intérieure">
-            <label for="isolationInterieure">Isolation intérieure</label>
-
-            <input type="checkbox" id="isolationExterieure" name="details[]" value="Isolation extérieure">
-            <label for="isolationExterieure">Isolation extérieure</label>
-
-            <input type="checkbox" id="fauxPlafonds" name="details[]" value="Faux plafond(s)">
-            <label for="fauxPlafonds">Faux plafond(s)</label>
+            {% for detail in details %}
+            <label for="{{ detail.title }}">{{ detail.title }}</label>
+            <input type="checkbox" id="{{ detail.title }}" name="details[]" value="{{ detail.title }}">
+            {%  endfor %}
         </fieldset>
 
         <fieldset>
             <label for="message">Message (max 1024 caractères)</label>
             <textarea id="message" name="message" maxlength="1024"></textarea>
-
             <label for="photo">Téléchargez une image :</label>
             <input type="file" name="photo" id="photo" accept="photo/*">
         </fieldset>
