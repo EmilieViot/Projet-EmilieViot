@@ -2,7 +2,6 @@
 
 class DetailManager extends AbstractManager
 {
-
     public function findAll(): array
     {
         $query = $this->db->prepare('SELECT * FROM details');

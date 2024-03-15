@@ -9,7 +9,7 @@
 
 <main>
 
-<form action="index.php?route=pricingRegister" method="post" enctype="multipart/form-data">
+<form class = "pricingForm" action="index.php?route=pricingRegister" method="post" enctype="multipart/form-data">
     <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
 
         <fieldset>
@@ -51,6 +51,10 @@
         </fieldset>
 
         <button type="submit" >Envoyer</button>
+        {%  if  message is defined %}
+            <p class="PricingFormOKMessage">{{ message }}</p>
+        {% endif %}
+
 </form>
 
 </main>

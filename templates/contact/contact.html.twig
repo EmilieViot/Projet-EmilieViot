@@ -7,21 +7,9 @@
 
 {% block main %}
 
-    <main id="login" class="container py-5 px-3">
-        <?php
-    if(isset($_SESSION["error-message"]))
-    {
-        ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <?= $_SESSION["error-message"] ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <?php
-    }
-    ?>
         <h1 class="mb-5">Comment pouvons-nous vous aider ?</h1>
 
-        <form action="index.php?route=messageRegister" method="post">
+        <form class="contactForm" action="index.php?route=messageRegister" method="post">
             <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
 
             <label for="firstname">Prénom :</label>
@@ -40,6 +28,9 @@
             <textarea id="content" name="content" rows="4" required></textarea>
 
             <button type="submit">Envoyer</button>
+            {%  if  message is defined %}
+                <p class="ContactFormOKMessage">{{ message }}</p>
+            {% endif %}
         </form>
     </main>
 {% endblock %}

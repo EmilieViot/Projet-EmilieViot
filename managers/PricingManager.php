@@ -43,7 +43,7 @@ class PricingManager extends AbstractManager
             if ($query->errorCode() !== '00000')
             {
                 $errorInfo = $query->errorInfo();
-                dump($errorInfo);
+//                dump($errorInfo);
             }
             $query->execute($parameters);
             $pricing->setId($this->db->lastInsertId());

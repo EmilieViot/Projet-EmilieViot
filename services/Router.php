@@ -26,7 +26,7 @@ class Router extends AbstractController
         else if (isset($get["route"]) && $get["route"] === "realisations") {
             $rc->realisations();
         } else if (isset($get["route"]) && isset($get["id"]) && $get["route"] === "realisation") {
-            $rc->realisation($get["id"]);
+            $rc->realisation((int)$get["id"]);
         }
 
         /*SERVICES*/
@@ -72,10 +72,6 @@ class Router extends AbstractController
         else if(isset($get["route"]) && $get["route"] === "pricingRegister")
         {
             $pc->pricingRegister();
-        }
-        else if(isset($get["route"]) && $get["route"] === "pricingConfirmation")
-        {
-            $pc->pricingConfirmation();
         }
 
         /*ADMIN*/

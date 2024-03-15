@@ -47,3 +47,28 @@
 
 </body>
 </html>
+
+
+carrousel bootstrap
+
+<div id="carouselExampleControls" class="carousel slide">
+            <div class="carousel-inner">
+                {% for key, realisation in realisations %}
+                    <div class="carousel-item{% if key == 0 %} active{% endif %}">
+                        <img src="{{ realisation.pictures[0].url }}" alt="{{ realisation.pictures[0].alt }}">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{ realisation.title }}</h5>
+                            <a href="index?route=realisations">→ Découvrez + de réalisations en cliquant ici</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>

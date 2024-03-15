@@ -35,7 +35,6 @@ class PricingController extends AbstractController
                 foreach ($details as $detailData) {
                     $detail = $dm->findByTitle($detailData);
                     $details_array[] = $detail;
-                    dump($details_array);
                 }
 
                 $pdm = new PricingDetailManager();
@@ -43,20 +42,21 @@ class PricingController extends AbstractController
                 foreach ($details_array as $detail) {
                     $pdm->createOne($pricing, $detail);
                 }
-                $this->redirect("index.php?route=pricingConfirmation");
+                $message = "Votre demande a bien été transmise. Nous revenons vers vous dans les plus brefs délais.";
+                $this->render("pricing/pricing.html.twig", ['message' => $message]);
             }
             else {
                 $_SESSION["error-message"] = "CSRF token invalide";
-                $this->redirect("index.php?route=pricing");
+                $this->redirect("pricing");
             }
         } else {
             $_SESSION["error-message"] = "Missing fields";
-            $this->redirect("index.php?route=pricing");
+            $this->redirect('pricing');
         }
     }
 
     public function pricingConfirmation(): void
     {
-        $this->render("contact/pricingConfirmation.html.twig", []);
+        $this->render("pricing/pricingConfirmation.html.twig", []);
     }
 }
