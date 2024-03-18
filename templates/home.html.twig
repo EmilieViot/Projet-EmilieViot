@@ -9,21 +9,25 @@
 <main id="content" class="home">
     <section class="homeReal">
 
-        {%  for realisation in realisations %}
-            <button>
-                <img class = "flecheGauche" src="assets/img/flecheSliderGauche.png" alt="flecheSliderGauche">
+            <button id = "prevButtonReal">
+                <img src="assets/img/flecheSliderGauche.png" alt="flecheSliderGauche">
             </button>
-            <figure "realSlider">
+
+            {%  for realisation in realisations %}
+            <figure class = "realSlider">
                 <img class = "sliderImg" src="{{ realisation.pictures[0].url }}" alt="{{ realisation.pictures[0].alt }}">
                 <figcaption class = "sliderLegend">
-                    <h2>{{ realisation.title }}</h2>
+                    <h2>Zoom sur quelques réalisations</h2>
+                    <h3>{{ realisation.title }}</h3>
                     <p><a href="index.php?route=realisation&id={{ realisation.id }}">Cliquez ici pour en découvrir +</a></p>
                 </figcaption>
             </figure>
-            <button>
-                <img class = "flecheDroite" src="assets/img/flecheSliderDroite.png" alt="flecheSliderDroite">
+            {% endfor %}
+
+            <button id = "nextButtonReal" >
+                <img src="assets/img/flecheSliderDroite.png" alt="flecheSliderDroite">
             </button>
-        {% endfor %}
+
 
     </section>
 
@@ -31,48 +35,54 @@
 
     <section class="homeOpinion">
 
-        {% for opinion in opinions %}
-            <button>
-                <img class = "flecheGauche" src="assets/img/flecheSliderGauche.png" alt="flecheSliderGauche">
+            <button id = "prevButtonOpinion" >
+                <img  src="assets/img/flecheSliderGauche.png" alt="flecheSliderGauche">
             </button>
-            <card class="opinionSlider">
-                {% if opinion.notation == 1 %}
+
+            {% for opinion in opinions %}
+            <article class="opinionSlider">
+                <div class="opinionCSS">
+                    {% if opinion.notation == 1 %}
                     <h2>
                         <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i>
                     </h2>
-                {% elseif opinion.notation == 2 %}
+                    {% elseif opinion.notation == 2 %}
                     <h2>
                         <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i>
                     </h2>
-                {% elseif opinion.notation == 3 %}
+                    {% elseif opinion.notation == 3 %}
                     <h2>
                         <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i>
                     </h2>
-                {% elseif opinion.notation == 4 %}
+                    {% elseif opinion.notation == 4 %}
                     <h2>
                         <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i>
                     </h2>
-                {% elseif opinion.notation == 5 %}
+                    {% elseif opinion.notation == 5 %}
                     <h2>
                         <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i>
                     </h2>
-                {% endif %}
+                    {% endif %}
                 <p class="content">{{ opinion.content }}</p>
-                <p class="opinionUsername">{{ opinion.username }}</p>
-            </card>
-            <button>
-                <img class = "flecheDroite" src="assets/img/flecheSliderDroite.png" alt="flecheSliderDroite">
+                <p class="opinionUsername">Merci à <strong><em>{{ opinion.username }}</em></strong> pour cet avis.</p>
+                </div>
+            </article>
+            {% endfor %}
+
+            <button id = "nextButtonOpinion">
+                <img src="assets/img/flecheSliderDroite.png" alt="flecheSliderDroite">
             </button>
-        {% endfor %}
     </section>
 
     <div class="vertical-line"></div>
 
     <section class="homePresta">
         <article class="homePrestaQuestions">
-            <p>Et si vous créiez une salle d’eau dans votre chambre ?</p>
-            <p>Votre pièce de vie manque de convivialité ?</p>
-            <p>Chez vous, il fait trop froid  l’hiver et trop chaud l’été ?</p>
+            <p>Et si vous créiez <br>une salle d’eau <br>dans votre chambre ?</p>
+            <p>/</p>
+            <p>Votre pièce de vie <br>manque de convivialité ?</p>
+            <p>/</p>
+            <p>Chez vous, <br>il fait trop froid l’hiver <br>et trop chaud l’été ?</p>
         </article>
         <nav class="homePrestaTitle">
             {% for service in services %}
@@ -83,9 +93,9 @@
 
     <div class="vertical-line"></div>
 
-    <figure>
+    <figure class = "homeMap">
         <figcaption>Rencontrons-nous</figcaption>
-        <img src="" alt="carte" />
+        <img src="assets/img/carteTest.png" alt="carte" />
     </figure>
 
 

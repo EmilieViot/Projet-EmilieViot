@@ -23,7 +23,6 @@ blockquote, q {
 blockquote:before, blockquote:after,
 q:before, q:after {
     content: '';
-    content: none;
 }
 
 table {
@@ -48,10 +47,11 @@ img, video {
 GENERAL
 ***************************************************************** */
 body {
+    width : 100%;
     margin : auto;
     font-weight:100;
     line-height: 1.5;
-    font-family : 'Signika';
+    font-family: 'Signika';
     font-size: 1.8rem;
     background-color: #000;
     color:#fff;
@@ -70,6 +70,10 @@ main {
     text-align: center;
 }
 
+button {
+    cursor: pointer;
+}
+
 /* BASE.HTML.TWIG */
 
 /* Header - bandeau coordonnées */
@@ -78,7 +82,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 999;
-    background-color : rgba(0, 0, 0, 0.9)
+    background-color : rgba(0, 0, 0, 0.95)
 }
 
 .contactDetails {
@@ -88,13 +92,14 @@ header {
     flex-direction: row;
     justify-content: space-around;
     align-content: center;
+    width : 100%
 }
 .contactDetails li {
     padding : 0;
     margin : 1rem;
     text-align : center;
     font-size : 1.4rem;
-    weight:light;
+    font-weight: lighter;
     align-items: center;
     color : #fff
 }
@@ -111,13 +116,15 @@ header {
 /* Header - menu */
 
 #logoNav {
-    font-family : 'Signika';
+    position: relative;
+    font-family: 'Signika';
     display: flex;
     flex-direction: column;
-    justify-content : center;
-    align-items : center;
-    align-content : center;
-    margin-bottom : 2rem
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 2rem;
+    z-index: 999;
 }
 .logoHeader {
     width : 30%;
@@ -129,17 +136,16 @@ header {
 }
 .navbar ul li.nav-item {
     margin : 0;
+    padding : 0
 }
-#navbarSupportedContent a {
+#navbarSupportedContent .nav-link {
     font-size : 1.6rem;
     color: #fff;
     text-decoration: none;
-
     margin : 2rem;
 }
-.navbar-nav li:last-child {
+.navbar-nav li:last-child a {
     border: 1px solid #bf9000;
-    padding : 0;
     color: #fff;
     font-weight: 200;
 }
@@ -153,7 +159,7 @@ header {
     padding-bottom: 0.2px!important;
 }
 #navbarSupportedContent .nav-item:last-child.active {
-    background-color: #bf9000
+    background-color: #bf9000;
 }
 #navbarSupportedContent .nav-item:last-child.active a {
     color : #fff!important;
@@ -164,9 +170,60 @@ header {
     list-style: none;
     padding : 0
 }
-.navbar-toggler.toggler-example {
-    cursor: pointer;
+
+/* menu scrollé */
+#logoNoScroll,
+#logoHeaderScroll {
+    transition: opacity 0.5s ease; /* Ajoutez une transition pour l'opacité */
 }
+.scrolled #logoNav {
+    display : flex;
+    flex-direction: row;
+    justify-content: center;
+    margin :0;
+}
+
+/*.scrolled #logoHeaderScroll {
+    justify-content: flex-end;
+    align-self: center;
+    margin : 0!important;
+}*/
+
+.logoHeaderScroll
+
+
+/*.navbar-toggler {
+    margin : auto;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    background-color : transparent;
+    border : 1px solid #bf9000;
+}
+.navbar-toggler-icon {
+    width: 30px; !* Largeur de l'icône *!
+    height: 3px; !* Hauteur des traits *!
+    display: block;
+    position: relative;
+    background-color: #bf9000; !* Couleur des traits *!
+}*/
+/*.navbar-toggler-icon:before,
+.navbar-toggler-icon:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    background-color: #bf9000; !* Couleur des traits *!
+}
+.navbar-toggler-icon:before {
+    top: -8px;
+}
+
+.navbar-toggler-icon:after {
+    bottom: -8px;
+}*/
+
 
 /* Footer */
 
@@ -177,8 +234,13 @@ footer {
     align-items: center;
 }
 footer p:first-of-type {
-
     padding : 2rem;
+}
+footer p:first-of-type a {
+    text-decoration: none;
+    color : white;
+    font-size: 2rem;
+    padding : 0 1rem
 }
 
 footer p:last-of-type {
@@ -198,77 +260,179 @@ footer p:last-of-type a {
 
 /* Slider réalisations */
 
+.realSlider {
+    display: none; /* par défaut */
+}
+.realSlider.active {
+    display: block; /* diapo active */
+}
+
 .home .homeReal {
     display : grid;
     grid-template-columns : 5% 90% 5%;
     align-items : center;
-    margin : auto;
     position: relative;
-    width: 100%;
 }
-
-.home .homeReal figure {
-    margin: 0;
+.home .homeReal .realSlider {
     text-align: center;
-}
-
-.homeReal .sliderImg {
     position: relative;
-    width : 60%;
+}
+.home .homeReal .sliderImg {
+    width : 100%;
+    display: block;
     margin : auto;
     border : 3px solid #bf9000;
 }
-
 .homeReal .sliderLegend {
     position: absolute;
-    bottom: 0;
-    right : 0;
-    background-color : #bf9000;
-    padding : 2rem
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 8rem;
+    font-size : 2.4rem;
+    color: #fff;
 }
-
-.home .homeReal legend a {
+.sliderLegend h2 {
+    font-weight : 100;
+    color : #bf9000;
+    margin : 0 2rem 2rem 2rem;
+}
+.sliderLegend h3 {
+    text-transform: uppercase;
+    color : #fff;
+    margin : 0 2rem 1rem
+}
+.sliderLegend p {
+    margin : 0 2rem;
+    font-style : italic
+}
+.home .homeReal .sliderLegend a {
     text-decoration: none;
-    color : black
+    color : #fff;
+    font-size : 1.4rem
 }
-
 .home .homeReal button {
     width : 4rem;
     margin : auto;
-    display : block;
     background-color: transparent;
     border : none;
-    justify-items : end;
+    justify-items : center;
+    text-align : center
 }
 
 /* Slider Avis */
 
+.opinionSlider {
+    display: none; /* par défaut */
+}
+.opinionSlider.active {
+    display: flex; /* diapo active */
+}
+
 .homeOpinion {
     display : grid;
-    grid-template-columns : 5% 90% 5%;
+    grid-template-columns : 32.5% 35% 32.5%;
     align-items : center;
-    margin : 6rem;
     position: relative;
     width: 100%;
 }
 .opinionSlider {
-    border : 1px solid #bf9000;
-    border-radius: 10%;
-    width :80%;
-    margin : auto;
-    padding: 20px;
+    background-color : rgba(191, 144, 0, 0.3) ;
+    /*border: 1px solid #bf9000;*/
+    margin: auto;
+    width: 50rem;
+    height: 50rem;
+    border-radius: 50rem;
+    text-align: center;
+    padding: 5rem;
 }
 
+.opinionCSS {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+.opinionSlider h2 {
+    padding : 0 0 4rem 0;
+}
+.opinionSlider p:first-of-type {
+    padding : 0 0 4rem 0;
+}
+.opinionSlider p:last-of-type {
+    font-weight : 100;
+    color : rgba(191, 144, 0, 0.7)
+}
 .opinionSlider h2 p {
-
     margin : auto;
 }
-
 .home .homeOpinion button {
     width : 4rem;
     margin : auto;
-    display : block;
     background-color: transparent;
     border : none;
-    justify-items : end;
+    justify-items : center;
+    text-align : center
 }
+
+/* Home Prestas */
+
+.home .homePresta {
+    display : grid;
+    grid-template-rows: 80% 20%;
+    background-color : #bf9000;
+    width : 100%;
+    margin : 0 !important;
+    text-align : center;
+}
+.home .homePrestaQuestions {
+    display : grid;
+    grid-template-columns: 1fr 0.1fr 1fr 0.1fr 1fr;
+    margin : 0 4rem;
+    text-align : center;
+}
+
+.home .homePrestaQuestions p {
+    padding : 2rem 6rem 0 6rem!important;
+    text-align : center;
+    font-size : 2rem;
+    align-self: center;
+}
+.home .homePrestaTitle {
+    display : grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width : 100%;
+    margin : 0 0 8rem 0;
+    padding : 1rem;
+    text-align : center;
+    font-size : 2.5rem;
+
+
+}
+.home .homePrestaTitle a {
+    text-decoration: none;
+    color : #bf9000;
+    background-color: #000;
+    border : 1px solid #bf9000;
+    padding : 2rem;
+    margin : 4rem 0 0 0;
+}
+
+/* Carte */
+.homeMap img {
+    width : 100%;
+}
+.homeMap figcaption {
+    font-size : 2.5rem;
+    text-align : center;
+    color : #bf9000;
+    padding : 2rem
+}
+
+
