@@ -27,6 +27,27 @@ class OpinionManager extends AbstractManager
         return $opinions;
     }
 
+    public function getOpinionById(int $id): ?Opinion
+    {
+        $query = $this->db->prepare('SELECT * FROM opinions WHERE id = :id');
+        $query->execute(["id" => $id]);
+
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        if ($result)
+        {
+            $realisation = null;
+
+            if (!empty($result['realisation_id'])) {
+                $realisation = $rm->findById($result['realisation_id']);
+            }
+            $opinion = new Opinion($item["username"], $item["content"], $item["notation"], $realisation);
+            $opinion->setId($item["id"]);
+            return $opinion;
+        }
+        return null;
+    }
+
     public function createOpinion(Opinion $opinion): void
     {
         $query = $this->db->prepare('INSERT INTO opinions (id, username, content, notation) VALUES (NULL, :firstname, :lastname, :city, :email, :content)');

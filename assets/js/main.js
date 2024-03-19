@@ -1,4 +1,4 @@
-/*** MENU ***/
+/* ** MENU ** */
 const logoNoScroll = document.getElementById("logoNoScroll");
 const logoHeaderScroll = document.getElementById("logoHeaderScroll");
 window.addEventListener('scroll', function() {
@@ -15,7 +15,7 @@ window.addEventListener('scroll', function() {
 });
 
 
-/*** SLIDERS ***/
+/* ** SLIDERS ** */
 /* SLIDER REALS */
 const prevButtonReal = document.getElementById("prevButtonReal");
 const nextButtonReal = document.getElementById("nextButtonReal");
@@ -77,3 +77,20 @@ function prevOpinion() {
     nextButtonOpinion.addEventListener("click", nextOpinion);
 
     opinionSlider[currentOpinionIndex].classList.add('active');
+
+/* ** MAPPING ** */
+
+let map = L.map('map').setView([47.963552981598, -3.849275961448], 13);
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+let marker = L.marker([47.963552981598, -3.849275961448]).addTo(map);
+
+marker.bindPopup("Rencontrons-nous !").openPopup();
+circle.bindPopup("I am a circle.");
+polygon.bindPopup("I am a polygon.");
+
+/* ** PAGE REALISATIONS ** */

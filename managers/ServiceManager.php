@@ -43,4 +43,16 @@ class ServiceManager extends AbstractManager
         }
         return null;
     }
+
+    public function updateService(Service $service): bool
+    {
+        $query = $this->db->prepare('UPDATE services SET title = :title, intro = :intro, description = :description WHERE id = :id');
+        $parameters = [
+            "id" => $service->getId(),
+            "title" => $service->getTitle(),
+            "intro" => $service->getIntro(),
+            "description" => $service->getDescription()
+        ];
+        return $query->execute($parameters);
+    }
 }

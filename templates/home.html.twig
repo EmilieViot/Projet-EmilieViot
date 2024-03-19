@@ -78,25 +78,25 @@
 
     <section class="homePresta">
         <article class="homePrestaQuestions">
-            <p>Et si vous créiez <br>une salle d’eau <br>dans votre chambre ?</p>
+            <p>Et si vous créiez <br>une salle d’eau <br>dans votre chambre <br>?</p>
             <p>/</p>
-            <p>Votre pièce de vie <br>manque de convivialité ?</p>
+            <p>Votre pièce de vie <br>manque de <br>convivialité <br>?</p>
             <p>/</p>
-            <p>Chez vous, <br>il fait trop froid l’hiver <br>et trop chaud l’été ?</p>
+            <p>Chez vous, <br>il fait trop froid l’hiver <br>et trop chaud l’été <br>?</p>
         </article>
         <nav class="homePrestaTitle">
             {% for service in services %}
-                <a href="index.php?route=services&id=service.id">{{ service.title }}</a>
+                <a href="index.php?route=service&id={{ service.id }}">{{ service.title }}</a>
             {% endfor %}
         </nav>
     </section>
 
-    <div class="vertical-line"></div>
+    <div class="vertical-line presta"></div>
 
-    <figure class = "homeMap">
-        <figcaption>Rencontrons-nous</figcaption>
-        <img src="assets/img/carteTest.png" alt="carte" />
-    </figure>
+    <article class = "homeMap">
+        <h2>Rencontrons-nous</h2>
+        <div id="map"></div>
+    </article>
 
 
 

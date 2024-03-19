@@ -57,10 +57,6 @@ body {
     color:#fff;
 }
 
-main {
-    margin : 2rem;
-}
-
 .vertical-line {
     border-left: 1px solid #bf9000;
     height: 10vh;
@@ -74,7 +70,9 @@ button {
     cursor: pointer;
 }
 
-/* BASE.HTML.TWIG */
+/* *****************************************************************
+BASE.HTML.TWIG
+***************************************************************** */
 
 /* Header - bandeau coordonnées */
 
@@ -232,9 +230,12 @@ footer {
     flex-direction : column;
     align-content : center;
     align-items: center;
+    justify-content: center;
+    margin : auto;
 }
 footer p:first-of-type {
-    padding : 2rem;
+    text-align : center;
+    padding : 0 0 2rem 0;
 }
 footer p:first-of-type a {
     text-decoration: none;
@@ -242,7 +243,6 @@ footer p:first-of-type a {
     font-size: 2rem;
     padding : 0 1rem
 }
-
 footer p:last-of-type {
     background-color: #fff;
     color : #bf9000;
@@ -250,13 +250,14 @@ footer p:last-of-type {
     text-align: center;
     padding : 1rem;
 }
-
 footer p:last-of-type a {
     text-decoration: underline;
     color : #bf9000;
 }
 
-/* HOME.HTML.TWIG */
+/* *****************************************************************
+HOME.HTML.TWIG
+***************************************************************** */
 
 /* Slider réalisations */
 
@@ -268,9 +269,8 @@ footer p:last-of-type a {
 }
 
 .home .homeReal {
-    display : grid;
-    grid-template-columns : 5% 90% 5%;
-    align-items : center;
+    display : flex;
+    justify-content : center;
     position: relative;
 }
 .home .homeReal .realSlider {
@@ -278,7 +278,7 @@ footer p:last-of-type a {
     position: relative;
 }
 .home .homeReal .sliderImg {
-    width : 100%;
+    width : 90%;
     display: block;
     margin : auto;
     border : 3px solid #bf9000;
@@ -332,14 +332,13 @@ footer p:last-of-type a {
 }
 
 .homeOpinion {
-    display : grid;
-    grid-template-columns : 32.5% 35% 32.5%;
+    display : flex;
     align-items : center;
     position: relative;
     width: 100%;
 }
-.opinionSlider {
-    background-color : rgba(191, 144, 0, 0.3) ;
+
+.opinionCSS {
     /*border: 1px solid #bf9000;*/
     margin: auto;
     width: 50rem;
@@ -347,16 +346,16 @@ footer p:last-of-type a {
     border-radius: 50rem;
     text-align: center;
     padding: 5rem;
-}
-
-.opinionCSS {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     align-content: center;
     align-items: center;
+    /*
     justify-items: center;
+    */
     justify-content: center;
+    background-color : rgba(191, 144, 0, 0.3) ;
 }
 
 .opinionSlider h2 {
@@ -388,6 +387,7 @@ footer p:last-of-type a {
     grid-template-rows: 80% 20%;
     background-color : #bf9000;
     width : 100%;
+    height : auto;
     margin : 0 !important;
     text-align : center;
 }
@@ -399,7 +399,7 @@ footer p:last-of-type a {
 }
 
 .home .homePrestaQuestions p {
-    padding : 2rem 6rem 0 6rem!important;
+    padding : 2rem 6rem 0 2rem!important;
     text-align : center;
     font-size : 2rem;
     align-self: center;
@@ -408,12 +408,10 @@ footer p:last-of-type a {
     display : grid;
     grid-template-columns: 1fr 1fr 1fr;
     width : 100%;
-    margin : 0 0 8rem 0;
+    margin : 0 0 4rem 0;
     padding : 1rem;
     text-align : center;
     font-size : 2.5rem;
-
-
 }
 .home .homePrestaTitle a {
     text-decoration: none;
@@ -421,18 +419,107 @@ footer p:last-of-type a {
     background-color: #000;
     border : 1px solid #bf9000;
     padding : 2rem;
-    margin : 4rem 0 0 0;
+    /*margin : 4rem 0 0 0;*/
+}
+
+.vertical-line.presta {
+    margin-top : 8rem;
 }
 
 /* Carte */
-.homeMap img {
-    width : 100%;
+#map {
+    height: 300px;
 }
-.homeMap figcaption {
+
+.homeMap h2 {
     font-size : 2.5rem;
     text-align : center;
     color : #bf9000;
-    padding : 2rem
+    padding : 0 0 2rem 0
+}
+
+/* *****************************************************************
+REALISATIONS.HTML.TWIG
+***************************************************************** */
+
+.realPage {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.realisation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.realImgslider {
+    flex: 1;
+    order: 1;
+}
+
+.text-content {
+    flex: 1;
+    order: 2;
+}
+
+.realisation.even .realImgslider {
+    order: 2;
+}
+
+.realisation.even .text-content {
+    order: 1;
+}
+
+.realImg img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.realImgslider {
+    text-align: center;
+}
+
+.text-content {
+    text-align: center;
 }
 
 
+/* *****************************************************************
+ADMIN.HTML.TWIG
+***************************************************************** */
+
+/* page accueil admin */
+
+.adminHeader p {
+    text-align : center;
+    font-weight: lighter;
+}
+.logoAdmin {
+    display : flex;
+    justify-content: center;
+    align-content: center;
+    margin : 4rem auto;
+    text-align: center;
+    width : 10%
+}
+.adminHome {
+    margin : 8rem 2rem;
+}
+.adminHome ul {
+    display : grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 2rem;
+    margin : auto;
+    text-align : center;
+}
+.adminHome ul li {
+    background-color: #bf9000;
+}
+.adminHome ul li a {
+    text-decoration : none;
+    color : #fff
+}

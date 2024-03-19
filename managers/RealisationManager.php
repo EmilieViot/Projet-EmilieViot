@@ -41,4 +41,26 @@ class RealisationManager extends AbstractManager
         }
         return null;
     }
+
+    public function createReal(Realisation $realisation): void
+    {
+        $query = $this->db->prepare('INSERT INTO realisations (id, title, description) VALUES (NULL, :title, :description)');
+        $parameters = [
+            "title" => $realisation->getTitle(),
+            "lastname" => $realisation->getDescription()
+        ];
+        $query->execute($parameters);
+        $realisation->setId($this->db->lastInsertId());
+    }
+
+    public function updateReal(Realisation $realisation): bool
+    {
+        $query = $this->db->prepare('UPDATE realisations SET title = :title, description = :description WHERE id = :id');
+        $parameters = [
+            "id" => $realisation->getId(),
+            "title" => $realisation->getTitle(),
+            "description" => $realisation->getDescription()
+        ];
+        return $query->execute($parameters);
+    }
 }

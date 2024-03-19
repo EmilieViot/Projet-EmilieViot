@@ -5,15 +5,23 @@
 {% endblock %}
 
 {% block main %}
-    {% for realisation in realisations %}
-            <article>
-            {% for picture in realisation.pictures %}
-                <figure>
-                    <img src="{{ picture.url }}" alt="{{ picture.alt }}">
-                </figure>
-            {% endfor %}
-                <h3>{{ realisation.title }}</h3>
-                <h4>{{ realisation.description }}</h4>
+
+    <div class="realPage">
+        {% for realisation in realisations %}
+            <article class = "realisation" id="realisation{{ loop.index }}">
+                <div class="realImgslider">
+                {% for picture in realisation.pictures %}
+                    <figure class="realImg">
+                        <img src="{{ picture.url }}" alt="{{ picture.alt }}">
+                    </figure>
+                {% endfor %}
+                </div>
+                <div text-content>
+                    <h3>{{ realisation.title }}</h3>
+                    <h4>{{ realisation.description }}</h4>
+                </div>
             </article>
-    {% endfor %}
+        {% endfor %}
+    </div>
+
 {% endblock %}
