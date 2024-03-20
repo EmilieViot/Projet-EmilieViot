@@ -13,6 +13,7 @@ class Router extends AbstractController
         $mc = new MessageController();
         $ac = new AuthController();
         $adc = new AdminController();
+        $otherController = new PageController();
 
 
     /*HOME*/
@@ -79,6 +80,10 @@ class Router extends AbstractController
         else if(isset($get["route"]) && $get["route"] === "login")
         {
             $ac->login();
+        }
+        else if(isset($get["route"]) && $get["route"] === "logout")
+        {
+            $ac->logout();
         }
         else if(isset($get["route"]) && $get["route"] === "loginCheck")
         {
@@ -181,6 +186,12 @@ class Router extends AbstractController
         else if(isset($get["route"]) && $get["route"] === "legal")
         {
             $PC->legal();
+        }
+
+    /*ERROR 404*/
+        else
+        {
+            $otherController -> error404();
         }
     }
 }

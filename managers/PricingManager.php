@@ -13,7 +13,9 @@ class PricingManager extends AbstractManager
 
         if($result)
         {
-            $pricing = new Pricing($result["contactMode"], $result["firstname"], $result["lastname"], $result["email"], $result["tel"], $result["city"], $result["message"], $result["photoPath"]);
+            $dm = new DetailManager();
+            $details = $dm->findById($result['id']);
+            $pricing = new Pricing($result["contactMode"], $result["firstname"], $result["lastname"], $result["email"], $result["tel"], $result["city"], $result["message"], $details/*, $result["photoPath"]*/);
             $pricing->setId($result["id"]);
             return $pricing;
         }
@@ -53,16 +55,19 @@ class PricingManager extends AbstractManager
 
     public function findAll(): array
     {
-        $query = $this->db->prepare('SELECT * FROM pricings');
+        $query = $this->db->prepare('SELECT pricings.*, details.id AS detail_id, details.title AS detail_title FROM pricings JOIN pricing_detail AS pd ON pricings.id = pd.pricing_id JOIN details ON pd.detail_id = details.id');
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $pricings = [];
 
         foreach ($result as $item) {
-            $pricing = new Pricing($item["contactMode"], $item["firstname"], $item["lastname"], $item["email"], $item["tel"], $item["city"], $item["details"], $item["pricing"], $item["photo"]);
-            $pricing->setId($item["id"]);
+            $dm = new DetailManager();
+            $details = $dm->findByPricing($item['id']);
+            $pricing = new Pricing($item["contactMode"], $item["firstname"], $item["lastname"], $item["email"], $item["tel"], $item["city"], $item["message"], $details);
+
             $pricings[] = $pricing;
         }
+
         return $pricings;
     }
 
@@ -71,11 +76,12 @@ class PricingManager extends AbstractManager
     {
         $query = $this->db->prepare('SELECT * FROM pricings WHERE id = :id');
         $query->execute(["id" => $id]);
-
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
-            $pricing = new Pricing($result["contactMode"], $result["firstname"], $result["lastname"], $result["email"], $result["tel"], $result["city"], $result["details"], $result["pricing"], $result["photo"]);
+            $dm = new DetailManager();
+            $details = $dm->findById($result['id']);
+            $pricing = new Pricing($result["contactMode"], $result["firstname"], $result["lastname"], $result["email"], $result["tel"], $result["city"], $details, $result["message"], $result["photo"]);
             $pricing->setId($result["id"]);
             return $pricing;
         }

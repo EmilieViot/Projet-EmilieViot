@@ -487,39 +487,3 @@ REALISATIONS.HTML.TWIG
 }
 
 
-/* *****************************************************************
-ADMIN.HTML.TWIG
-***************************************************************** */
-
-/* page accueil admin */
-
-.adminHeader p {
-    text-align : center;
-    font-weight: lighter;
-}
-.logoAdmin {
-    display : flex;
-    justify-content: center;
-    align-content: center;
-    margin : 4rem auto;
-    text-align: center;
-    width : 10%
-}
-.adminHome {
-    margin : 8rem 2rem;
-}
-.adminHome ul {
-    display : grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-template-rows: 1fr 1fr;
-    grid-gap: 2rem;
-    margin : auto;
-    text-align : center;
-}
-.adminHome ul li {
-    background-color: #bf9000;
-}
-.adminHome ul li a {
-    text-decoration : none;
-    color : #fff
-}

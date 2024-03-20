@@ -59,4 +59,15 @@ class PictureManager extends AbstractManager
         }
         return $pictures;
     }
+
+    public function downloadPictures(Picture $picture): void
+    {
+        $query = $this->db->prepare('INSERT INTO pictures (id, url, alt) VALUES (NULL, :url, :alt)');
+        $parameters = [
+            "url" => $picture->getUrl(),
+            "alt" => $picture->getAlt(),
+        ];
+        $query->execute($parameters);
+        $picture->setId($this->db->lastInsertId());
+    }
 }

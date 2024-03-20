@@ -1,0 +1,49 @@
+{% extends "admin/base-admin.html.twig" %}
+
+{% block title %}
+    Devis
+    {{ parent() }}
+{% endblock %}
+
+
+    {% block main %}
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Choix contact</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Téléphone</th>
+                <th scope="col">Ville</th>
+                <th scope="col">Message</th>
+                <th scope="col">Options</th>{#
+                <th scope="col">Image</th>#}
+            </tr>
+            </thead>
+            <tbody>
+
+            {%  for pricing in pricings %}
+            <tr>
+                <td>{{ pricing.contactMode }}</td>
+                <td>{{ pricing.firstname }}</td>
+                <td>{{ pricing.lastname }}</td>
+                <td>{{ pricing.email }}</td>
+                <td>{{ pricing.tel }}</td>
+                <td>{{ pricing.city }}</td>
+                <td>{{ pricing.message }}</td>
+                <td>
+                    <ul>
+                        {%  for detail in pricing.details %}
+                            <li>{{ detail.title }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+    {% endblock %}

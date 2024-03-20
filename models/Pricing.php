@@ -4,7 +4,7 @@ class Pricing
 {
     private ?int $id = null;
 
-    public function __construct(private string $contactMode,private string $firstname,private string $lastname, private string $email, private string $tel, private string $city, private string $message/*, private string $photoPath*/)
+    public function __construct(private string $contactMode,private string $firstname,private string $lastname, private string $email, private string $tel, private string $city, private string $message, private array $details)
     {
     }
 
@@ -78,6 +78,15 @@ class Pricing
     public function setMessage(string $message): void
     {
         $this->message = $message;
+    }
+
+    public function getDetails(): array
+    {
+        return $this->details;
+    }
+    public function setDetails(array $details): void
+    {
+        $this->details = $details;
     }
 
 /*    public function getPhotoPath(): string

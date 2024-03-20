@@ -7,3 +7,9 @@ class PageController extends AbstractController
         $this->render("legal.html.twig", []);
     }
 
+    public function error404(): void
+    {
+        $this->render("404.html.twig", []);
+    }
+}
+

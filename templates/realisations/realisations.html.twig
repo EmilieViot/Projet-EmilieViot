@@ -6,7 +6,7 @@
 
 {% block main %}
 
-    <div class="realPage">
+    <section class="realPage">
         {% for realisation in realisations %}
             <article class = "realisation" id="realisation{{ loop.index }}">
                 <div class="realImgslider">
@@ -22,6 +22,6 @@
                 </div>
             </article>
         {% endfor %}
-    </div>
+    </section>
 
 {% endblock %}

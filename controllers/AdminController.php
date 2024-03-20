@@ -84,6 +84,7 @@ class AdminController extends AbstractController
     {
         $pm = new PricingManager();
         $pricings = $pm->findAll();
+        /*dump($pricings[0]);*/
 
         $this->render("admin/pricing/list-pricings.html.twig", ["pricings" => $pricings]);
     }
