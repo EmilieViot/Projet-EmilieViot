@@ -10,7 +10,7 @@ class DetailManager extends AbstractManager
         $details = [];
 
         foreach ($result as $item) {
-            $detail = new Detail($item["id"]);
+            $detail = new Detail($item["title"]);
             $detail->setId($item["id"]);
             $details[] = $detail;
         }

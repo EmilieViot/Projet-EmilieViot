@@ -47,9 +47,10 @@ class RealisationManager extends AbstractManager
         $query = $this->db->prepare('INSERT INTO realisations (id, title, description) VALUES (NULL, :title, :description)');
         $parameters = [
             "title" => $realisation->getTitle(),
-            "lastname" => $realisation->getDescription()
+            "description" => $realisation->getDescription()
         ];
         $query->execute($parameters);
+
         $realisation->setId($this->db->lastInsertId());
     }
 

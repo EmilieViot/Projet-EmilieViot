@@ -13,7 +13,7 @@ class PricingDetail
     {
         return $this->pricing;
     }
-    public function setPlayer(Pricing $pricing): void
+    public function setPricing(Pricing $pricing): void
     {
         $this->pricing = $pricing;
     }

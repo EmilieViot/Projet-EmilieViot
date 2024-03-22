@@ -4,7 +4,7 @@ class Pricing
 {
     private ?int $id = null;
 
-    public function __construct(private string $contactMode,private string $firstname,private string $lastname, private string $email, private string $tel, private string $city, private string $message, private array $details)
+    public function __construct(private string $contactMode,private string $firstname,private string $lastname, private string $email, private string $tel, private ?string $city, private ?string $message, private ?array $details, private ?string $photoPath)
     {
     }
 
@@ -89,15 +89,14 @@ class Pricing
         $this->details = $details;
     }
 
-/*    public function getPhotoPath(): string
+    public function getPhotoPath(): string
     {
         return $this->photoPath;
     }
     public function setPhotoPath(string $photoPath): void
     {
         $this->photoPath = $photoPath;
-    }*/
-
+    }
 
 }
 

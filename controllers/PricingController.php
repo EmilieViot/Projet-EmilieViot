@@ -11,8 +11,12 @@ class PricingController extends AbstractController
 
     public function pricingRegister() : void
     {
-        if (isset($_POST["contactMode"]) && isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["email"])) {
-
+        if (
+            isset($_POST["contactMode"])
+            && isset($_POST["firstname"])
+            && isset($_POST["lastname"])
+            && (isset($_POST["email"]) || isset($_POST["tel"]))
+        ){
             $tokenManager = new CSRFTokenManager();
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){
                 $dm = new DetailManager();
@@ -26,9 +30,9 @@ class PricingController extends AbstractController
                 $city = htmlspecialchars($_POST["city"]);
                 $message = htmlspecialchars($_POST["message"]);
 
-                $pricing = new Pricing($contactMode, $firstname, $lastname, $email, $tel, $city, $message);
-                unset($_SESSION["error-message"]);
-                $pm->createPricing($pricing);
+                $uploader = new Uploader();
+                $picture= $uploader->upload($_FILES, "picture");
+                $photoPath = $picture->getUrl();
 
                 $details = $_POST["details"];
                 $details_array = [];
@@ -36,6 +40,11 @@ class PricingController extends AbstractController
                     $detail = $dm->findByTitle($detailData);
                     $details_array[] = $detail;
                 }
+
+                $pricing = new Pricing($contactMode, $firstname, $lastname, $email, $tel, $city, $message, $details_array, $photoPath);
+                unset($_SESSION["error-message"]);
+                $pm->createPricing($pricing);
+
 
                 $pdm = new PricingDetailManager();
 
@@ -53,10 +62,5 @@ class PricingController extends AbstractController
             $_SESSION["error-message"] = "Missing fields";
             $this->redirect('pricing');
         }
-    }
-
-    public function pricingConfirmation(): void
-    {
-        $this->render("pricing/pricingConfirmation.html.twig", []);
     }
 }

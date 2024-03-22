@@ -14,23 +14,17 @@ class PricingManager extends AbstractManager
         if($result)
         {
             $dm = new DetailManager();
-            $details = $dm->findById($result['id']);
-            $pricing = new Pricing($result["contactMode"], $result["firstname"], $result["lastname"], $result["email"], $result["tel"], $result["city"], $result["message"], $details/*, $result["photoPath"]*/);
+            $details = $dm->findByPricing($result['id']);
+            $pricing = new Pricing($result["contactMode"], $result["firstname"], $result["lastname"], $result["email"], $result["tel"], $result["city"], $result["message"], $details, $result["photoPath"]);
             $pricing->setId($result["id"]);
             return $pricing;
         }
         return null;
     }
 
-    public function createPricing(Pricing $pricing): ?Pricing
+    public function createPricing(Pricing $pricing): void
     {
-        /*if(isset($_POST["formName"]))
-        {
-            $uploader = new Uploader();
-            $media = $uploader->upload($_FILES, "image");
-            var_dump($media);
-        }*/
-            $query = $this->db->prepare('INSERT INTO pricings (id, contactMode, firstname, lastname, email, tel, city, message) VALUES (NULL, :contactMode, :firstname, :lastname, :email, :tel, :city, :message)');
+            $query = $this->db->prepare('INSERT INTO pricings (id, contactMode, firstname, lastname, email, tel, city, message, photoPath) VALUES (NULL, :contactMode, :firstname, :lastname, :email, :tel, :city, :message, :photoPath)');
             $parameters = [
                 "contactMode" => $pricing->getContactMode(),
                 "firstname" => $pricing->getFirstname(),
@@ -39,7 +33,7 @@ class PricingManager extends AbstractManager
                 "tel" => $pricing->getTel(),
                 "city" => $pricing->getCity(),
                 "message" => $pricing->getMessage(),
-               /* "photo" => $this->saveUploadedFile($_FILES["photo"])*/
+                "photoPath" => $pricing->getPhotoPath()
             ];
 
             if ($query->errorCode() !== '00000')
@@ -49,13 +43,11 @@ class PricingManager extends AbstractManager
             }
             $query->execute($parameters);
             $pricing->setId($this->db->lastInsertId());
-
-            return $pricing;
-        }
+    }
 
     public function findAll(): array
     {
-        $query = $this->db->prepare('SELECT pricings.*, details.id AS detail_id, details.title AS detail_title FROM pricings JOIN pricing_detail AS pd ON pricings.id = pd.pricing_id JOIN details ON pd.detail_id = details.id');
+        $query = $this->db->prepare('SELECT * FROM pricings');
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $pricings = [];
@@ -63,51 +55,28 @@ class PricingManager extends AbstractManager
         foreach ($result as $item) {
             $dm = new DetailManager();
             $details = $dm->findByPricing($item['id']);
-            $pricing = new Pricing($item["contactMode"], $item["firstname"], $item["lastname"], $item["email"], $item["tel"], $item["city"], $item["message"], $details);
+            $pricing = new Pricing($item["contactMode"], $item["firstname"], $item["lastname"], $item["email"], $item["tel"], $item["city"], $item["message"], $details, $item["photoPath"]);
 
             $pricings[] = $pricing;
         }
-
         return $pricings;
     }
-
 
     public function getPricingById(int $id): ?Pricing
     {
         $query = $this->db->prepare('SELECT * FROM pricings WHERE id = :id');
         $query->execute(["id" => $id]);
         $result = $query->fetch(PDO::FETCH_ASSOC);
+        dump($result);
 
         if ($result) {
             $dm = new DetailManager();
-            $details = $dm->findById($result['id']);
-            $pricing = new Pricing($result["contactMode"], $result["firstname"], $result["lastname"], $result["email"], $result["tel"], $result["city"], $details, $result["message"], $result["photo"]);
+            $details = $dm->findByPricing($result['id']);
+            $pricing = new Pricing($result["contactMode"], $result["firstname"], $result["lastname"], $result["email"], $result["tel"], $result["city"], $result["message"], $result["photoPath"]);
             $pricing->setId($result["id"]);
             return $pricing;
         }
         return null;
-    }
-
-    public function updatePricing(Pricing $pricing): void
-    {
-        $details1 = $_POST['details'];
-
-        for ($i = 0; $i < sizeof($details1); $i++) {
-            $query = $this->db->prepare('UPDATE pricings SET contactMode = :contactMode, firstname = :firstname, lastname = :lastname, email = :email, tel = :tel, city = :city, details = :details, message = :message, photo = :photo WHERE id = :id');
-
-        $parameters = [
-            "contactMode" => $pricing->getContactMode(),
-            "firstname" => $pricing->getFirstname(),
-            "lastname" => $pricing->getLastname(),
-            "email" => $pricing->getEmail(),
-            "tel" => $pricing->getTel(),
-            "city" => $pricing->getCity(),
-            "details" => $details1[$i],
-            "message" => $pricing->getMessage(),
-            "photo" => $this->saveUploadedFile($_FILES["photo"])
-        ];
-        $query->execute($parameters);
-        }
     }
 
     public function deletePricing(int $id): void

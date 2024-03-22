@@ -112,18 +112,70 @@ class AdminController extends AbstractController
 
     public function checkRealCreation(): void
     {
-        if (isset($_POST['title']) && isset($_POST['description']) /*&& $_POST['photoPath']*/) {
+        if (isset($_POST['title']) && isset($_POST['description']) && (isset($_FILES['picture1']) || isset($_FILES['picture2']) || isset($_FILES['picture3']) || isset($_FILES['picture4']))) {
 
             $tokenManager = new CSRFTokenManager();
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
 
-                $title = $_POST['title'];
-                $description = $_POST['description'];
-                $realisation = new Realisation($title, $description);
+                if(!empty($_POST['title'])) {$title = $_POST['title'];}
+                if(!empty($_POST['description'])) {$description = $_POST['description'];}
+                if(!empty($_FILES['picture1'])) {$picture1 = $_FILES['picture1'];}
+                if(!empty($_FILES['picture2'])) {$picture2 = $_FILES['picture2'];}
+                if(!empty($_FILES['picture3'])) {$picture3 = $_FILES['picture3'];}
+                if(!empty($_FILES['picture4'])) {$picture4 = $_FILES['picture4'];}
 
                 $rm = new RealisationManager();
-                $this->$rm->createReal($realisation);
+                $pm = new PictureManager();
 
+                /*dump($picture1);dump($picture2);dump($picture3);dump($picture4);*/
+
+                $pictures = [];
+
+                /*créa de la réal*/
+                    /* image 1 */
+                    $uploader = new Uploader();
+                    $pic1 = $uploader->uploadPictures($_FILES, "picture1");
+                    $url = $pic1->getUrl();
+                    $alt = $pic1->getAlt();
+                    $newPic1 = new Picture($url,$alt);
+                    $pictures[]=$newPic1;
+                    /*dump($newPic1);*/
+                    $pm->createPicture($newPic1);
+                    /* image 2 */
+                    $uploader = new Uploader();
+                    $pic2 = $uploader->uploadPictures($_FILES, "picture2");
+                    $url = $pic2->getUrl();
+                    $alt = $pic2->getAlt();
+                    $newPic2 = new Picture($url,$alt);
+                    $pictures[]=$newPic2;
+                    /*dump($newPic2);*/
+                    $pm->createPicture($newPic2);
+                    /* image 3 */
+                    $uploader = new Uploader();
+                    $pic3 = $uploader->uploadPictures($_FILES, "picture3");
+                    $url = $pic3->getUrl();
+                    $alt = $pic3->getAlt();
+                    $newPic3 = new Picture($url,$alt);
+                    $pictures[]=$newPic3;
+                    /*dump($newPic3);*/
+                    $pm->createPicture($newPic3);
+                    /* image 4 */
+                    $uploader = new Uploader();
+                    $pic4 = $uploader->uploadPictures($_FILES, "picture1");
+                    $url = $pic4->getUrl();
+                    $alt = $pic4->getAlt();
+                    $newPic4 = new Picture($url,$alt);
+                    $pictures[]=$newPic4;
+                    /*dump($newPic1);*/
+                    $pm->createPicture($newPic4);
+
+                $realisation = new Realisation($title, $description, $pictures);
+                $rm->createReal($realisation);
+
+                $rm = new RealisationPictureManager();
+                foreach ($pictures as $picture) {
+                    $rm->createOne($realisation, $picture);
+                }
                 $message = "Votre réalisation a bien été ajoutée.";
                 $this->render("admin/realisations/list-reals.html.twig", ['message' => $message]);
 

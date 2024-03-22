@@ -19,10 +19,10 @@
                 <option value="email">Email</option>
             </select>
 
-            <label for="firstname">Prénom</label>
+            <label for="firstname">Votre prénom</label>
             <input type="text" id="firstname" name="firstname" required="required">
 
-            <label for="lastname">Nom</label>
+            <label for="lastname">votre Nom</label>
             <input type="text" id="lastname" name="lastname" required="required">
 
             <label for="email">Email</label>
@@ -32,11 +32,11 @@
             <input type="tel" id="tel" name="tel" required="required">
 
             <label for="city">Ville</label>
-            <input type="text" id="city" name="city" required="required">
+            <input type="text" id="city" name="city">
         </fieldset>
 
         <fieldset >
-            <legend>Type de bien :</legend>
+            <legend>Quelques informations :</legend>
             {% for detail in details %}
             <label for="{{ detail.title }}">{{ detail.title }}</label>
             <input type="checkbox" id="{{ detail.title }}" name="details[]" value="{{ detail.title }}">
@@ -46,8 +46,9 @@
         <fieldset>
             <label for="message">Message (max 1024 caractères)</label>
             <textarea id="message" name="message" maxlength="1024"></textarea>
-            <label for="photo">Téléchargez une image :</label>
-            <input type="file" name="photo" id="photo" accept="photo/*">
+
+            <label for="picture">Téléchargez un document :</label>
+            <input type="file" name="picture" id="picture" accept="photo/*">
         </fieldset>
 
         <button type="submit" >Envoyer</button>

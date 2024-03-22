@@ -94,3 +94,41 @@ circle.bindPopup("I am a circle.");
 polygon.bindPopup("I am a polygon.");
 
 /* ** PAGE REALISATIONS ** */
+
+
+/* ** PAGE DEVIS * **/
+
+
+    let contactMode = document.getElementById("contactMode");
+    let telField = document.getElementById("tel");
+    let emailField = document.getElementById("email");
+    let btn = document.querySelector("button[type='submit']");
+
+    contactMode.addEventListener("change", function() {
+        if (contactMode.value === "Téléphone") {
+            telField.setAttribute("required", "required");
+            emailField.removeAttribute("required");
+        } else if (contactMode.value === "Email") {
+            emailField.setAttribute("required", "required");
+            telField.removeAttribute("required");
+        }
+    });
+
+    submitButton.addEventListener("click", function(event) {
+        if ((firstname.value === "") {
+            event.preventDefault();
+            alert("Veuillez renseigner votre prénom.");
+        }
+        else if ((lastname.value === "") {
+            event.preventDefault();
+            alert("Veuillez renseigner votre nom.");
+        }
+        else if ((contactMode.value === "Téléphone" && telField.value === "") {
+            event.preventDefault();
+            alert("Veuillez renseigner votre numéro de téléphone.");
+        };
+        else if (contactMode.value === "Email" && emailField.value === "")) {
+            event.preventDefault();
+            alert("Veuillez renseigner votre adresse email.);
+        }
+    });
