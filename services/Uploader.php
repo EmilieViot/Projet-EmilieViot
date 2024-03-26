@@ -3,8 +3,8 @@
 class Uploader {
 
     private array $extensions = ["jpeg","jpg","png", "pdf"];
-    private string $uploadFolder = "uploads";
-    private string $picturesFolder = "assets/img";
+    private string $uploadFolder = "/uploads";
+    private string $picturesFolder = "/assets/img";
     private RandomStringGenerator $gen;
 
     public function __construct()

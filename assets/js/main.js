@@ -1,134 +1,176 @@
 /* ** MENU ** */
-const logoNoScroll = document.getElementById("logoNoScroll");
-const logoHeaderScroll = document.getElementById("logoHeaderScroll");
-window.addEventListener('scroll', function() {
-    let header = document.querySelector('header');
-    if (window.scrollY > 0) {
-        header.classList.add('scrolled');
-        logoNoScroll.style.display = "none";
-        logoHeaderScroll.style.display = "block";
-    } else {
-        header.classList.remove('scrolled');
-        logoNoScroll.style.display = "block";
-        logoHeaderScroll.style.display = "none";
+document.addEventListener("DOMContentLoaded", () => {
+    function getRoute()
+    {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+        return urlParams.get('route');
     }
-});
+
+    const route = getRoute();
+    // console.log(route);
+
+
+    const logoNoScroll = document.getElementById("logoNoScroll");
+    const logoHeaderScroll = document.getElementById("logoHeaderScroll");
+    window.addEventListener('scroll', function () {
+        let header = document.querySelector('header');
+        if (window.scrollY > 0) {
+            header.classList.add('scrolled');
+            logoNoScroll.style.display = "none";
+            logoHeaderScroll.style.display = "block";
+        } else {
+            header.classList.remove('scrolled');
+            logoNoScroll.style.display = "block";
+            logoHeaderScroll.style.display = "none";
+        }
+    });
+
 
 
 /* ** SLIDERS ** */
-/* SLIDER REALS */
-const prevButtonReal = document.getElementById("prevButtonReal");
-const nextButtonReal = document.getElementById("nextButtonReal");
-const realSlider = document.querySelectorAll(".realSlider");
 
-let currentRealIndex = 0;
+    /* SLIDER REALS - HOME */
 
-function nextReal() {
-    realSlider[currentRealIndex].classList.remove('active');
-    currentRealIndex++;
-    if (currentRealIndex >= realSlider.length) {
-        currentRealIndex = 0;
-    }
-    realSlider[currentRealIndex].classList.add('active');
-}
+    if(route === 'home') {
+        const homePrevButtonReal = document.querySelector(".homePrevButtonReal");
+        const homeNextButtonReal = document.querySelector(".homeNextButtonReal");
+        const homeRealSliders = document.querySelectorAll(".homeRealSlider");
 
-function prevReal() {
-    realSlider[currentRealIndex].classList.remove('active');
-    currentRealIndex--;
-    if (currentRealIndex < 0) {
-        currentRealIndex = realSlider.length - 1; // Aller à la dernière diapositive si on est sur la première
-    }
-    realSlider[currentRealIndex].classList.add('active');
-}
-document.addEventListener('DOMContentLoaded', () => {
-    prevButtonReal.addEventListener("click", prevReal);
-    nextButtonReal.addEventListener("click", nextReal);
+        let currentRealIndex = 0;
+        // console.log(currentRealIndex);
 
-// Afficher la première diapositive au chargement de la page
-    realSlider[currentRealIndex].classList.add('active');
-})
-
-/* SLIDER OPINIONS */
-const prevButtonOpinion = document.getElementById("prevButtonOpinion");
-const nextButtonOpinion = document.getElementById("nextButtonOpinion");
-const opinionSlider = document.querySelectorAll(".opinionSlider");
-
-let currentOpinionIndex = 0;
-console.log(currentOpinionIndex);
-function nextOpinion() {
-    opinionSlider[currentOpinionIndex].classList.remove('active');
-    currentOpinionIndex++;
-    if (currentOpinionIndex >= opinionSlider.length) {
-        currentOpinionIndex = 0;
-    }
-    opinionSlider[currentOpinionIndex].classList.add('active');
-}
-
-function prevOpinion() {
-    opinionSlider[currentOpinionIndex].classList.remove('active');
-    currentOpinionIndex--;
-    if (currentOpinionIndex < 0) {
-        currentOpinionIndex = opinionSlider.length - 1;
-    }
-    opinionSlider[currentOpinionIndex].classList.add('active');
-}
-
-    prevButtonOpinion.addEventListener("click", prevOpinion);
-    nextButtonOpinion.addEventListener("click", nextOpinion);
-
-    opinionSlider[currentOpinionIndex].classList.add('active');
-
-/* ** MAPPING ** */
-
-let map = L.map('map').setView([47.963552981598, -3.849275961448], 13);
-
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
-
-let marker = L.marker([47.963552981598, -3.849275961448]).addTo(map);
-
-marker.bindPopup("Rencontrons-nous !").openPopup();
-circle.bindPopup("I am a circle.");
-polygon.bindPopup("I am a polygon.");
-
-/* ** PAGE REALISATIONS ** */
-
-
-/* ** PAGE DEVIS * **/
-
-
-    let contactMode = document.getElementById("contactMode");
-    let telField = document.getElementById("tel");
-    let emailField = document.getElementById("email");
-    let btn = document.querySelector("button[type='submit']");
-
-    contactMode.addEventListener("change", function() {
-        if (contactMode.value === "Téléphone") {
-            telField.setAttribute("required", "required");
-            emailField.removeAttribute("required");
-        } else if (contactMode.value === "Email") {
-            emailField.setAttribute("required", "required");
-            telField.removeAttribute("required");
+        function homeNextReal() {
+            homeRealSliders[currentRealIndex].classList.remove('active');
+            currentRealIndex++;
+            // console.log(currentRealIndex);
+            if (currentRealIndex >= homeRealSliders.length) {
+                currentRealIndex = 0;
+            }
+            homeRealSliders[currentRealIndex].classList.add('active');
         }
-    });
 
-    submitButton.addEventListener("click", function(event) {
-        if ((firstname.value === "") {
-            event.preventDefault();
-            alert("Veuillez renseigner votre prénom.");
+        function homePrevReal() {
+            homeRealSliders[currentRealIndex].classList.remove('active');
+            currentRealIndex--;
+            // console.log(currentRealIndex);
+            if (currentRealIndex < 0) {
+                currentRealIndex = homeRealSliders.length - 1; // Aller à la dernière diapo si on est sur la première
+            }
+            homeRealSliders[currentRealIndex].classList.add('active');
         }
-        else if ((lastname.value === "") {
-            event.preventDefault();
-            alert("Veuillez renseigner votre nom.");
+
+        homePrevButtonReal.addEventListener("click", homePrevReal);
+        homeNextButtonReal.addEventListener("click", homeNextReal);
+
+        // Afficher la première diapo au chargement de la page
+        homeRealSliders[currentRealIndex].classList.add('active');
+
+
+        /* SLIDER OPINIONS */
+        const prevButtonOpinion = document.querySelector(".prevButtonOpinion");
+        const nextButtonOpinion = document.querySelector(".nextButtonOpinion");
+        const opinionSlider = document.querySelectorAll(".opinionSlider");
+
+        let currentOpinionIndex = 0;
+        // console.log(currentOpinionIndex);
+
+        function nextOpinion() {
+            opinionSlider[currentOpinionIndex].classList.remove('active');
+            currentOpinionIndex++;
+            if (currentOpinionIndex >= opinionSlider.length) {
+                currentOpinionIndex = 0;
+            }
+            opinionSlider[currentOpinionIndex].classList.add('active');
         }
-        else if ((contactMode.value === "Téléphone" && telField.value === "") {
-            event.preventDefault();
-            alert("Veuillez renseigner votre numéro de téléphone.");
-        };
-        else if (contactMode.value === "Email" && emailField.value === "")) {
-            event.preventDefault();
-            alert("Veuillez renseigner votre adresse email.);
+
+        function prevOpinion() {
+            opinionSlider[currentOpinionIndex].classList.remove('active');
+            currentOpinionIndex--;
+            if (currentOpinionIndex < 0) {
+                currentOpinionIndex = opinionSlider.length - 1;
+            }
+            opinionSlider[currentOpinionIndex].classList.add('active');
         }
-    });
+
+        prevButtonOpinion.addEventListener("click", prevOpinion);
+        nextButtonOpinion.addEventListener("click", nextOpinion);
+
+        opinionSlider[currentOpinionIndex].classList.add('active');
+    }
+
+     /* SLIDER REALS - PAGE REALS */
+
+    if(route === 'realisations') {
+        let currentSlideIndex = 0;
+        // console.log(currentSlideIndex);
+
+        const realSections = document.querySelectorAll(".realSection");
+
+        realSections.forEach(section => {
+            const realPrevButton = section.querySelector(".prevButtonReal");
+            const realNextButton = section.querySelector(".nextButtonReal");
+            const realSliderImgs = section.querySelectorAll(".realSliderImg");
+
+            realSliderImgs[currentSlideIndex].classList.add('active');
+            function nextSlide() {
+                realSliderImgs[currentSlideIndex].classList.remove('active');
+                currentSlideIndex++;
+                // console.log(currentSlideIndex);
+                if (currentSlideIndex >= realSliderImgs.length) {
+                    currentSlideIndex = 0;
+                }
+                realSliderImgs[currentSlideIndex].classList.add('active');
+            }
+            function prevSlide() {
+                realSliderImgs[currentSlideIndex].classList.remove('active');
+                currentSlideIndex--;
+                // console.log(currentSlideIndex);
+                if (currentSlideIndex < 0) {
+                    currentSlideIndex = realSliderImgs.length - 1; // Aller à la dernière diapo si on est sur la première
+                }
+                realSliderImgs[currentSlideIndex].classList.add('active');
+            }
+
+            realPrevButton.addEventListener("click", prevSlide);
+            realNextButton.addEventListener("click", nextSlide);
+
+        });
+    }
+
+    /* ** PAGE DEVIS * **/
+    if(route === 'pricing') {
+        let contactMode = document.getElementById("contactMode");
+        let telField = document.getElementById("tel");
+        let emailField = document.getElementById("email");
+        let btn = document.querySelector("button[type='submit']");
+
+        contactMode.addEventListener("change", function () {
+            if (contactMode.value === "Téléphone") {
+                telField.setAttribute("required", "required");
+                emailField.removeAttribute("required");
+            } else if (contactMode.value === "Email") {
+                emailField.setAttribute("required", "required");
+                telField.removeAttribute("required");
+            }
+        });
+
+        btn.addEventListener("click", function (event) {
+            if ((firstname.value === "")) {
+                event.preventDefault();
+                alert("Veuillez renseigner votre prénom.");
+            } else if ((lastname.value === "")) {
+                event.preventDefault();
+                alert("Veuillez renseigner votre nom.");
+            } else if ((contactMode.value === "Téléphone" && telField.value === "")) {
+                event.preventDefault();
+                alert("Veuillez renseigner votre numéro de téléphone pour être recontacté(e).");
+            } else if (contactMode.value === "Email" && emailField.value === "") {
+                event.preventDefault();
+                alert("Veuillez renseigner votre adresse email pour être recontacté(e).");
+            }
+        });
+    }
+
+});

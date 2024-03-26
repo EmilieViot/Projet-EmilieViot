@@ -5,23 +5,32 @@
 {% endblock %}
 
 {% block main %}
+    <main id="content" class="realPage">
 
-    <section class="realPage">
-        {% for realisation in realisations %}
-            <article class = "realisation" id="realisation{{ loop.index }}">
-                <div class="realImgslider">
+    {% for realisation in realisations %}
+        <section class ="realSection">
+
+            <div class="sliderNBtn {% if loop.index is even %}animate__slideInLeft{% else %}animate__slideInRight{% endif %}">
+                <button class = "prevButtonReal">
+                    <img src="assets/img/flecheSliderGauche.png" alt="flecheSliderGauche">
+                </button>
+
                 {% for picture in realisation.pictures %}
-                    <figure class="realImg">
-                        <img src="{{ picture.url }}" alt="{{ picture.alt }}">
-                    </figure>
+                    <img class = "realSliderImg " src="{{ picture.url }}" alt="{{ picture.alt }}">
                 {% endfor %}
-                </div>
-                <div text-content>
-                    <h3>{{ realisation.title }}</h3>
-                    <h4>{{ realisation.description }}</h4>
-                </div>
-            </article>
-        {% endfor %}
-    </section>
 
+                <button class = "nextButtonReal" >
+                    <img src="assets/img/flecheSliderDroite.png" alt="flecheSliderDroite">
+                </button>
+            </div>
+
+            <div class="text-content {% if loop.index is even %}animate__slideInRight{% else %}animate__slideInLeft{% endif %}">
+                <h3>{{ realisation.title }}</h3><br>
+                <p>{{ realisation.description }}</p>
+            </div>
+
+        </section>
+    {% endfor %}
+
+    </main>
 {% endblock %}

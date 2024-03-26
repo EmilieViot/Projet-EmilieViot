@@ -2,7 +2,6 @@
 
 class Router extends AbstractController
 {
-
     public function handleRequest(array $get): void
     {
         $hc = new HomeController();
@@ -13,8 +12,7 @@ class Router extends AbstractController
         $mc = new MessageController();
         $ac = new AuthController();
         $adc = new AdminController();
-        $otherController = new PageController();
-
+        $PC = new PageController();
 
     /*HOME*/
         if (!isset($get["route"])) {
@@ -191,7 +189,7 @@ class Router extends AbstractController
     /*ERROR 404*/
         else
         {
-            $otherController -> error404();
+            $PC -> error404();
         }
     }
 }

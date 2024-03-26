@@ -9,13 +9,13 @@
 <main id="content" class="home">
     <section class="homeReal">
 
-            <button id = "prevButtonReal">
+            <button class = "homePrevButtonReal">
                 <img src="assets/img/flecheSliderGauche.png" alt="flecheSliderGauche">
             </button>
 
             {%  for realisation in realisations %}
-            <figure class = "realSlider">
-                <img class = "sliderImg" src="{{ realisation.pictures[0].url }}" alt="{{ realisation.pictures[0].alt }}">
+            <figure class = "homeRealSlider">
+                <img class = "homeSliderImg" src="{{ realisation.pictures[0].url }}" alt="{{ realisation.pictures[0].alt }}">
                 <figcaption class = "sliderLegend">
                     <h2>Zoom sur quelques réalisations</h2>
                     <h3>{{ realisation.title }}</h3>
@@ -24,7 +24,7 @@
             </figure>
             {% endfor %}
 
-            <button id = "nextButtonReal" >
+            <button class = "homeNextButtonReal" >
                 <img src="assets/img/flecheSliderDroite.png" alt="flecheSliderDroite">
             </button>
 
@@ -35,7 +35,7 @@
 
     <section class="homeOpinion">
 
-            <button id = "prevButtonOpinion" >
+            <button class = "prevButtonOpinion" >
                 <img  src="assets/img/flecheSliderGauche.png" alt="flecheSliderGauche">
             </button>
 
@@ -69,7 +69,7 @@
             </article>
             {% endfor %}
 
-            <button id = "nextButtonOpinion">
+            <button class = "nextButtonOpinion">
                 <img src="assets/img/flecheSliderDroite.png" alt="flecheSliderDroite">
             </button>
     </section>
@@ -97,7 +97,5 @@
         <h2>Rencontrons-nous</h2>
         <div id="map"></div>
     </article>
-
-
 
 {% endblock %}

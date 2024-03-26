@@ -1,3 +1,4 @@
+/*colors :*/
 /*ocre : #bf9000*/
 /*gris foncé : #404040*/
 
@@ -10,7 +11,6 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     padding: 0;
     border: 0;
 }
-/*colors :*/
 
 ol, ul {
     list-style: none;
@@ -48,6 +48,7 @@ GENERAL
 ***************************************************************** */
 body {
     width : 100%;
+    height : 100vh;
     margin : auto;
     font-weight:100;
     line-height: 1.5;
@@ -172,24 +173,46 @@ header {
 /* menu scrollé */
 #logoNoScroll,
 #logoHeaderScroll {
-    transition: opacity 0.5s ease; /* Ajoutez une transition pour l'opacité */
+    transition: opacity 2s ease; /* transition pour l'opacité */
 }
-.scrolled #logoNav {
+
+#logoNav {
     display : flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
     margin :0;
 }
 
-/*.scrolled #logoHeaderScroll {
-    justify-content: flex-end;
-    align-self: center;
+.scrolled #logoNav {
+    display : flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     margin : 0!important;
-}*/
+}
+.lienLogoScroll {
+    margin : 2rem ;
+    text-align: right ;
+}
+.lienLogoScroll img {
+    width : 50%;
+    margin : 2rem;
+    padding : 2rem 2rem 2rem 0;
+    margin : auto
+}
 
-.logoHeaderScroll
+.scrolled #logoHeaderScroll {
+    text-align : right; /* Par défaut, cachez le logo scrollé */
+}
 
-
+.lienLogoScroll {
+    text-align: right;
+    margin : 0;
+    padding : 0
+}
 /*.navbar-toggler {
     margin : auto;
     cursor: pointer;
@@ -261,28 +284,28 @@ HOME.HTML.TWIG
 
 /* Slider réalisations */
 
-.realSlider {
-    display: none; /* par défaut */
-}
-.realSlider.active {
-    display: block; /* diapo active */
-}
-
 .home .homeReal {
     display : flex;
     justify-content : center;
     position: relative;
 }
-.home .homeReal .realSlider {
+.homeRealSlider {
+    display: none; /* par défaut */
+}
+.homeRealSlider.active {
+    display: block; /* diapo active */
+}
+.home .homeReal .homeRealSlider {
     text-align: center;
     position: relative;
 }
-.home .homeReal .sliderImg {
+.home .homeReal .homeSliderImg {
     width : 90%;
     display: block;
     margin : auto;
     border : 3px solid #bf9000;
 }
+
 .homeReal .sliderLegend {
     position: absolute;
     top: 50%;
@@ -330,14 +353,12 @@ HOME.HTML.TWIG
 .opinionSlider.active {
     display: flex; /* diapo active */
 }
-
 .homeOpinion {
     display : flex;
     align-items : center;
     position: relative;
     width: 100%;
 }
-
 .opinionCSS {
     /*border: 1px solid #bf9000;*/
     margin: auto;
@@ -357,7 +378,6 @@ HOME.HTML.TWIG
     justify-content: center;
     background-color : rgba(191, 144, 0, 0.3) ;
 }
-
 .opinionSlider h2 {
     padding : 0 0 4rem 0;
 }
@@ -381,7 +401,6 @@ HOME.HTML.TWIG
 }
 
 /* Home Prestas */
-
 .home .homePresta {
     display : grid;
     grid-template-rows: 80% 20%;
@@ -441,49 +460,126 @@ HOME.HTML.TWIG
 /* *****************************************************************
 REALISATIONS.HTML.TWIG
 ***************************************************************** */
-
+/* Grids */
 .realPage {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
+    grid-template-rows: repeat(auto-fill, 1fr);
+    grid-gap: 4rem;
+}
+.sliderNBtn {
+    display: grid;
+    grid-template-columns: 5% 90% 5%;
+    text-align: center;
+}
+.realSection:nth-of-type(odd) {
+    display: grid;
+    grid-template-columns: 0.7fr 0.3fr;
+    grid-template-rows : 1fr;
+    grid-gap: 1rem;
+}
+.realSection:nth-of-type(even) {
+    display: grid;
+    grid-template-columns: 0.3fr 0.7fr;
+    grid-template-rows : 1fr;
+    grid-gap: 1rem;
+}
+.realSection:nth-of-type(odd) .sliderNBtn {
+    grid-column: 1;
+}
+.realSection:nth-of-type(even) .sliderNBtn {
+    grid-column: 2;
+}
+.realSection:nth-of-type(odd) .text-content {
+    grid-column: 2 / 3;
+    grid-row : 1 / 2
+}
+.realSection:nth-of-type(even) .text-content {
+    grid-column: 1 / 2;
+    grid-row : 1 / 2
 }
 
-.realisation {
+/* Mise en forme */
+.realSection .prevButtonReal,
+.realSection .nextButtonReal {
+    width : 4rem;
+    background-color: transparent;
+    border : none;
+    margin:auto;
+}
+.realSection .prevButtonReal {
+    text-align: right;
+}.realSection .nextButtonReal {
+    text-align: left;
+}
+.realPage .prevButtonReal img,
+.realPage .nextButtonReal img {
+    width: 3rem;
+    display: block;
+    margin : 0;
+    padding : 0;
+    text-align: center!important;
+}
+.realSliderImg {
+    display: none; /* par défaut */
+    text-align: center;
+    padding : 0!important;
+    margin : 0!important;
+}
+.realSliderImg.active {
+    display: block; /* diapo active */
+    padding : 0!important;
+    margin : 0!important;
+}
+.realPage .realSliderImg {
+    text-align: center;
+    width : 100%;
+    height : 50vh;
+    object-fit : cover;
+    object-position : center;
+    margin : 0;
+    border : 3px solid #bf9000;
+}
+.text-content {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    padding: 20px;
+    padding : 2rem
 }
 
-.realImgslider {
-    flex: 1;
-    order: 1;
+.text-content h3{
+    color : #bf9000;
+    font-size: larger;
+}
+.text-content p{
+    font-size: smaller;
 }
 
-.text-content {
-    flex: 1;
-    order: 2;
+/* Animations */
+
+.realSection .sliderNBtn,
+.realSection .text-content {
+    opacity: 0;
 }
 
-.realisation.even .realImgslider {
-    order: 2;
+.sliderNBtn.animate__slideInLeft ,
+.sliderNBtn.animate__slideInRight {
+    animation-name: opacity;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
 }
 
-.realisation.even .text-content {
-    order: 1;
+.text-content.animate__slideInLeft,
+.text-content.animate__slideInRight{
+    animation-name: opacity;
+    animation-duration: 1s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
 }
 
-.realImg img {
-    max-width: 100%;
-    max-height: 100%;
+@keyframes opacity {
+    from {
+        opacity: 0;
+    } to {
+          opacity: 1;
+      }
 }
-
-.realImgslider {
-    text-align: center;
-}
-
-.text-content {
-    text-align: center;
-}
-
-

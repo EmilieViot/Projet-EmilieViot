@@ -18,7 +18,6 @@ class RealisationManager extends AbstractManager
             $realisation->setId($item["id"]);
             $realisations[] = $realisation;
         }
-
         return $realisations;
     }
 
