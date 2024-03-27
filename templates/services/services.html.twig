@@ -5,14 +5,27 @@
 {% endblock %}
 
 {% block main %}
-    {% for service in services %}
-        <card>
-            <h3>{{ service.title }}</h3>
-                <figure>
-                    <img src="{{ service.pictures[0].url }}" alt="{{ service.pictures[0].alt }}">
-                </figure>
-            <p>{{ service.intro }}</p>
-            <p><a href="index.php?route=service&id={{ service.id }}">En savoir +</a></p>
-        </card>
-    {% endfor %}
+    <div class="vertical-line"></div>
+    <main class = "servicePage">
+        <article class = "serviceArticle">
+            <h3>{{ services[0].title }}</h3>
+            <img src="assets/img/pictoCloison.png" alt="pictoCloison">
+            <p>{{ services[0].intro }}</p>
+            <p><a href="index.php?route=service&id={{ services[0].id }}">Cliquez ici pour en savoir +</a></p>
+        </article>
+
+        <article class = "serviceArticle">
+            <h3>{{ services[1].title }}</h3>
+            <img src="assets/img/pictoPlafond.png" alt="pictoPlafond">
+            <p>{{ services[1].intro }}</p>
+            <p><a href="index.php?route=service&id={{ services[1].id }}">Cliquez ici pour en savoir +</a></p>
+        </article>
+
+        <article class = "serviceArticle">
+            <h3>{{ services[2].title }}</h3>
+            <img src="assets/img/pictoIsolation.png" alt="pictoIsolation">
+            <p>{{ services[2].intro }}</p>
+            <p><a href="index.php?route=service&id={{ services[2].id }}">Cliquez ici pour en savoir +</a></p>
+        </article>
+    </main>
 {% endblock %}

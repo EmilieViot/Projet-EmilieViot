@@ -198,16 +198,13 @@ header {
     text-align: right ;
 }
 .lienLogoScroll img {
-    width : 50%;
-    margin : 2rem;
+    width : 30%;
     padding : 2rem 2rem 2rem 0;
     margin : auto
 }
-
 .scrolled #logoHeaderScroll {
     text-align : right; /* Par défaut, cachez le logo scrollé */
 }
-
 .lienLogoScroll {
     text-align: right;
     margin : 0;
@@ -582,4 +579,169 @@ REALISATIONS.HTML.TWIG
     } to {
           opacity: 1;
       }
+}
+
+/* *****************************************************************
+SERVICES.HTML.TWIG
+***************************************************************** */
+/* Grids */
+.servicePage {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 4rem;
+    margin : 2rem 6rem;
+}
+
+/* Mise en page */
+.serviceArticle {
+    display : grid;
+    grid-template-rows : 20% 50% 20% 10%;
+    grid-template-columns: 1fr;
+    border : 1px solid #bf9000;
+    border-radius: 10px;
+    padding : 1rem
+}
+
+.serviceArticle h3 {
+    color : #bf9000;
+    font-size : 2rem;
+    text-transform: uppercase;
+    font-weight: 100;
+    text-align: center;
+    align-self: center;
+    margin : 1rem
+}
+.serviceArticle img {
+    text-align: center;
+    height : 80%;
+    object-fit : cover;
+    object-position : center;
+    margin : 2rem auto;
+}
+.serviceArticle p:first-of-type {
+    color : #fff;
+    text-align: center;
+    margin : 1rem auto 0 auto;
+}
+.serviceArticle p:last-of-type {
+    color : #fff;
+    margin : 2rem auto;
+    text-align: center;
+}
+.serviceArticle p:last-of-type a {
+    text-decoration: none;
+    color : #bf9000;
+}
+
+/* *****************************************************************
+SERVICE.HTML.TWIG
+***************************************************************** */
+
+/* Gallery */
+
+.gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(auto-fill, 1fr);
+    grid-gap : 2rem;
+    padding : 2rem;
+}
+.thumbnails {
+    width: 100%;
+    height: 100%;
+    object-fit : cover;
+    object-position : center;
+    margin: 1rem;
+    cursor: pointer;
+    border : 1px solid #bf9000;
+    border-radius: 10px;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000; /* Pour être au-dessus du header */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-top: 5rem; /* Pour éviter que la modal soit coupée par le header */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-height: 80%;
+    border : 1px solid #bf9000;
+    border-radius: 10px;
+}
+.close {
+    position: absolute;
+    top: 1.5rem;
+    right: 3.5rem;
+    color: #fff;
+    font-size: 4rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Mise en forme */
+
+.oneServicePage {
+    margin : 2rem
+}
+
+.oneServicePage h3 {
+    text-align : center;;
+    display: block;
+    width : 30%;
+    font-weight : 100;
+    margin : 2rem auto;
+    padding : 2rem;
+    border : 1px solid #bf9000;
+    border-radius : 10px;
+}
+.oneServicePage h3 span {
+    text-transform: uppercase;
+    color : #bf9000;
+    line-height : 2.5;
+}
+.oneServicePage p {
+    font-weight : lighter;
+    text-align: center;
+    margin : 2rem
+}
+
+/* *****************************************************************
+SERVICE.HTML.TWIG
+***************************************************************** */
+
+/* Gallery */
+
+.opinionsGallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(auto-fill, 1fr);
+    grid-gap : 4rem;
+    padding : 2rem;
+}
+.opinion {
+    text-align : center;
+    font-size : 1.4rem;
+    border : 1px solid #bf9000;
+    padding : 2rem;
+    border-radius: 10px;
+}
+.opinionRealisation {
+    color : #bf9000;
+}
+.opinionRealisation a {
+    color : #bf9000;
+    text-decoration: underline;
+}
+.opinionAuthor {
+    font-size : 1.2rem
 }

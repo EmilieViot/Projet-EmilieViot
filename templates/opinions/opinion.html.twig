@@ -14,9 +14,9 @@
         </div>
     {% endif %}
 
-    <section>
+    <section class="opinionsGallery">
         {% for opinion in opinions %}
-            <article>
+            <article class="opinion">
                 {% if opinion.notation == 1 %}
                     <p><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i></p>
                 {% elseif opinion.notation == 2 %}
@@ -29,24 +29,24 @@
                     <p><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i></p>
                 {% endif %}
                 <p>{{ opinion.content }}</p>
+                <p class = "opinionAuthor">Auteur : {{ opinion.username }}</p>
                 {% if opinion.getRealisation() %}
-                    <p>
-                        Avis en lien avec la réalisation suivante :
+                    <p class="opinionRealisation">
+                        Avis en lien avec la réalisation suivante :<br>
                             <a href="index.php?route=realisation&id={{ opinion.getRealisation().getId()}}">
                                 {{ opinion.getRealisation().getTitle() }}
-                            </a>
+                            </a><br>
                         (cliquez pour découvrir)
                     </p>
                 {% endif %}</p>
-                <p>{{ opinion.username }}</p>
             </article>
         {% endfor %}
 
     </section>
 
-    <section>
+    <section class = "opinionFormSection>
         <h1 class="mb-5">Votre avis compte :</h1>
-        <form class="OpinionForm" action="index.php?route=opinionRegister" method="post">
+        <form class="opinionForm" action="index.php?route=opinionRegister" method="post">
             <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
 
             <label for="username">Pseudo</label>

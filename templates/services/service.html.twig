@@ -5,13 +5,25 @@
 {% endblock %}
 
 {% block main %}
-        <card>
-            <h3>{{ service.title }}</h3>
+    <main class = "oneServicePage">
+        <article>
+            <h3>Focus <br><span>"{{ service.title }}"</span></h3>
+            <div class="vertical-line"></div>
             <p>{{ service.description }}</p>
-            {% for picture in service.pictures %}
-                <figure>
-                    <img src="{{ picture.url }}" alt="{{ picture.alt }}">
-                </figure>
-            {% endfor %}
-        </card>
+            <div class="vertical-line"></div>
+                <article class="gallery">
+
+                    {% for picture in service.pictures %}
+                    <img class="thumbnails" src="{{ picture.url }}" alt="{{ picture.alt }}">
+                    {% endfor %}
+
+                    <div class="modal">
+                        <span class="close">&times;</span>
+                        <img class="modal-content" id="modal-image">
+                    </div>
+
+                </article>
+
+        </article>
+    </main>
 {% endblock %}

@@ -102,42 +102,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
      /* SLIDER REALS - PAGE REALS */
 
-    if(route === 'realisations') {
-        let currentSlideIndex = 0;
-        // console.log(currentSlideIndex);
+    if(route === 'service') {
+        const thumbnails = document.querySelectorAll('.thumbnails');
+        const modal = document.querySelector('.modal');
+        const modalImage = document.getElementById('modal-image');
+        const close = document.querySelector('.close');
 
-        const realSections = document.querySelectorAll(".realSection");
-
-        realSections.forEach(section => {
-            const realPrevButton = section.querySelector(".prevButtonReal");
-            const realNextButton = section.querySelector(".nextButtonReal");
-            const realSliderImgs = section.querySelectorAll(".realSliderImg");
-
-            realSliderImgs[currentSlideIndex].classList.add('active');
-            function nextSlide() {
-                realSliderImgs[currentSlideIndex].classList.remove('active');
-                currentSlideIndex++;
-                // console.log(currentSlideIndex);
-                if (currentSlideIndex >= realSliderImgs.length) {
-                    currentSlideIndex = 0;
-                }
-                realSliderImgs[currentSlideIndex].classList.add('active');
-            }
-            function prevSlide() {
-                realSliderImgs[currentSlideIndex].classList.remove('active');
-                currentSlideIndex--;
-                // console.log(currentSlideIndex);
-                if (currentSlideIndex < 0) {
-                    currentSlideIndex = realSliderImgs.length - 1; // Aller à la dernière diapo si on est sur la première
-                }
-                realSliderImgs[currentSlideIndex].classList.add('active');
-            }
-
-            realPrevButton.addEventListener("click", prevSlide);
-            realNextButton.addEventListener("click", nextSlide);
-
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', function (event) {
+                const imageUrl = event.currentTarget.getAttribute('src');
+                modal.style.display = 'block';
+                modalImage.src = imageUrl;
+            });
         });
-    }
+
+        close.addEventListener('click', function () {
+            closeModal();
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+    };
 
     /* ** PAGE DEVIS * **/
     if(route === 'pricing') {
@@ -155,6 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 telField.removeAttribute("required");
             }
         });
+
 
         btn.addEventListener("click", function (event) {
             if ((firstname.value === "")) {
