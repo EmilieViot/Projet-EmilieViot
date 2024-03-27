@@ -716,7 +716,7 @@ SERVICE.HTML.TWIG
 }
 
 /* *****************************************************************
-SERVICE.HTML.TWIG
+OPINION.HTML.TWIG
 ***************************************************************** */
 
 /* Gallery */
@@ -735,6 +735,12 @@ SERVICE.HTML.TWIG
     padding : 2rem;
     border-radius: 10px;
 }
+.fa-sharp {
+    margin : 0 0 2rem 0
+}
+.opinionContent {
+    margin : 0 0 2rem 0
+}
 .opinionRealisation {
     color : #bf9000;
 }
@@ -743,5 +749,59 @@ SERVICE.HTML.TWIG
     text-decoration: underline;
 }
 .opinionAuthor {
-    font-size : 1.2rem
+    font-size : 1.2rem;
+    margin : 0 0 2rem 0
+
+}
+
+.opinionFormSection legend {
+    text-align: center;
+    color : #fff;
+    margin-bottom : 1rem;
+    font-size: 2rem;
+}
+
+.opinionForm {
+    display: flex;
+    flex-direction: column;
+    width : 50%;
+    margin : auto
+}
+
+.opinionForm input,
+.opinionForm select,
+.opinionForm textarea {
+    background-color : #000;
+    color : #fff;
+    border : 1px solid #404040;
+    border-radius: 10px;
+    font-weight : lighter
+}
+
+.opinionForm label {
+    color : #bf9000;
+    font-size : 1.2rem;
+    text-align : center;
+    margin-top : 2rem;
+    margin-bottom : 1rem;
+    font-weight : lighter;
+}
+
+.notationOptions {
+    width : 10%;
+    margin : auto
+}
+select option {
+    text-align: center;
+}
+.realChoice option {
+    font-size : 1.2rem;
+    font-weight : lighter;
+}
+
+.opinionForm button {
+    background-color: #bf9000;
+    color : black;
+    border-radius: 10px;
+    margin : 2rem 0 2rem 0
 }

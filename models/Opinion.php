@@ -4,7 +4,7 @@ class Opinion
 {
     private ?int $id = null;
 
-    public function __construct(private string $username,private string $content, private int $notation, private ?Realisation $realisation)
+    public function __construct(private string $username,private string $content, private int $notation, private ?int $realisationId)
     {
     }
 
@@ -45,13 +45,13 @@ class Opinion
         $this->notation = $notation;
     }
 
-    public function getRealisation(): ?Realisation
+    public function getRealisationId(): ?int
     {
-        return $this->realisation;
+        return $this->realisationId;
     }
-    public function setRealisation(?Realisation $realisation): void
+    public function setRealisationId(?int $realisationId): void
     {
-        $this->realisation = $realisation;
+        $this->realisationId = $realisationId;
     }
 }
 

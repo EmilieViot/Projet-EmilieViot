@@ -13,6 +13,42 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     {% endif %}
+    <div class="vertical-line"></div>
+    <section class = "opinionFormSection">
+
+        <form class="opinionForm" action="index.php?route=opinionRegister" method="post">
+            <legend> Votre avis compte : </legend>
+            <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
+
+            <label for="username" >Choisissez un pseudo *</label>
+            <input type="text" id="username" name="username" required="required">
+
+            <label for="content">Rédigez votre avis (max 1024 caractères)</label>
+            <textarea id="content" name="content" rows="4" required="required"></textarea>
+
+            <label for="notation">Note sur 5:</label>
+            <select class="notationOptions" id="notation" name="notation" required="required">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+            <label for="realisation_id">Une réalisation est-elle ciblée par votre avis ? </label>
+            <select class="realChoice" name="realisation_id" id="realisation_id">
+                <option value="defaultChoice">Non, aucune</option>
+                {% for realisation in realisations %}
+                <option  name="{{ realisation.id }}" value="{{ realisation.id }}">{{ realisation.title }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Soumettre mon avis</button>
+            {%  if  message is defined %}
+                <p class="OpinionFormOKMessage">{{ message }}</p>
+            {% endif %}
+        </form>
+    </section>
 
     <section class="opinionsGallery">
         {% for opinion in opinions %}
@@ -28,8 +64,8 @@
                 {% elseif opinion.notation == 5 %}
                     <p><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i></p>
                 {% endif %}
-                <p>{{ opinion.content }}</p>
-                <p class = "opinionAuthor">Auteur : {{ opinion.username }}</p>
+                <p class = "opinionContent">{{ opinion.content }}</p>
+                <p class = "opinionAuthor">De : {{ opinion.username }}</p>
                 {% if opinion.getRealisation() %}
                     <p class="opinionRealisation">
                         Avis en lien avec la réalisation suivante :<br>
@@ -41,42 +77,7 @@
                 {% endif %}</p>
             </article>
         {% endfor %}
-
     </section>
 
-    <section class = "opinionFormSection>
-        <h1 class="mb-5">Votre avis compte :</h1>
-        <form class="opinionForm" action="index.php?route=opinionRegister" method="post">
-            <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
-
-            <label for="username">Pseudo</label>
-            <input type="text" id="username" name="username" required>
-
-            <label for="content">Rédigez votre avis</label>
-            <textarea id="content" name="content" rows="4" required></textarea>
-
-            <label for="notation">Note sur 5:</label>
-            <select id="notation" name="notation" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-
-            <label for="realisation_id">Une réalisation est-elle ciblée par votre avis ? </label>
-            <select name="realisation_id" id="realisation_id">
-                <option value="">Non, aucune</option>
-                {% for realisation in realisations %}
-                    <option value="{{ realisation.id }}">{{ realisation.title }}</option>
-                {% endfor %}
-            </select>
-
-            <button type="submit">Soumettre mon avis</button>
-            {%  if  message is defined %}
-                <p class="OpinionFormOKMessage">{{ message }}</p>
-            {% endif %}
-        </form>
-    </section>
 </main>
 {% endblock %}

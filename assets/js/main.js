@@ -7,11 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return urlParams.get('route');
     }
-
     const route = getRoute();
-    // console.log(route);
 
-
+/* ** BASCULE DE LOGO DANS LE HEADER ** */
     const logoNoScroll = document.getElementById("logoNoScroll");
     const logoHeaderScroll = document.getElementById("logoHeaderScroll");
     window.addEventListener('scroll', function () {
@@ -27,20 +25,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-
-
 /* ** SLIDERS ** */
 
     /* SLIDER REALS - HOME */
-
     if(route === 'home') {
         const homePrevButtonReal = document.querySelector(".homePrevButtonReal");
         const homeNextButtonReal = document.querySelector(".homeNextButtonReal");
         const homeRealSliders = document.querySelectorAll(".homeRealSlider");
-
         let currentRealIndex = 0;
         // console.log(currentRealIndex);
-
         function homeNextReal() {
             homeRealSliders[currentRealIndex].classList.remove('active');
             currentRealIndex++;
@@ -50,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             homeRealSliders[currentRealIndex].classList.add('active');
         }
-
         function homePrevReal() {
             homeRealSliders[currentRealIndex].classList.remove('active');
             currentRealIndex--;
@@ -60,11 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             homeRealSliders[currentRealIndex].classList.add('active');
         }
-
         homePrevButtonReal.addEventListener("click", homePrevReal);
         homeNextButtonReal.addEventListener("click", homeNextReal);
-
-        // Afficher la première diapo au chargement de la page
         homeRealSliders[currentRealIndex].classList.add('active');
 
 
@@ -72,10 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const prevButtonOpinion = document.querySelector(".prevButtonOpinion");
         const nextButtonOpinion = document.querySelector(".nextButtonOpinion");
         const opinionSlider = document.querySelectorAll(".opinionSlider");
-
         let currentOpinionIndex = 0;
-        // console.log(currentOpinionIndex);
-
         function nextOpinion() {
             opinionSlider[currentOpinionIndex].classList.remove('active');
             currentOpinionIndex++;
@@ -84,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             opinionSlider[currentOpinionIndex].classList.add('active');
         }
-
         function prevOpinion() {
             opinionSlider[currentOpinionIndex].classList.remove('active');
             currentOpinionIndex--;
@@ -93,15 +78,45 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             opinionSlider[currentOpinionIndex].classList.add('active');
         }
-
         prevButtonOpinion.addEventListener("click", prevOpinion);
         nextButtonOpinion.addEventListener("click", nextOpinion);
-
         opinionSlider[currentOpinionIndex].classList.add('active');
     }
 
-     /* SLIDER REALS - PAGE REALS */
+    /* SLIDER REALS - PAGE REALS */
+    if(route === 'realisations') {
+        let currentSlideIndex = 0;
+        // console.log(currentSlideIndex);
+        const realSections = document.querySelectorAll(".realSection");
+        realSections.forEach(section => {
+            const realPrevButton = section.querySelector(".prevButtonReal");
+            const realNextButton = section.querySelector(".nextButtonReal");
+            const realSliderImgs = section.querySelectorAll(".realSliderImg");
+            realSliderImgs[currentSlideIndex].classList.add('active');
+            function nextSlide() {
+                realSliderImgs[currentSlideIndex].classList.remove('active');
+                currentSlideIndex++;
+                // console.log(currentSlideIndex);
+                if (currentSlideIndex >= realSliderImgs.length) {
+                    currentSlideIndex = 0;
+                }
+                realSliderImgs[currentSlideIndex].classList.add('active');
+            }
+            function prevSlide() {
+                realSliderImgs[currentSlideIndex].classList.remove('active');
+                currentSlideIndex--;
+                // console.log(currentSlideIndex);
+                if (currentSlideIndex < 0) {
+                    currentSlideIndex = realSliderImgs.length - 1; // Aller à la dernière diapo si on est sur la première
+                }
+                realSliderImgs[currentSlideIndex].classList.add('active');
+            }
+            realPrevButton.addEventListener("click", prevSlide);
+            realNextButton.addEventListener("click", nextSlide);
+        });
+    }
 
+/* MODALE - PAGE ONE SERVICE */
     if(route === 'service') {
         const thumbnails = document.querySelectorAll('.thumbnails');
         const modal = document.querySelector('.modal');
@@ -135,15 +150,14 @@ document.addEventListener("DOMContentLoaded", () => {
         function closeModal() {
             modal.style.display = 'none';
         }
-    };
+    }
 
-    /* ** PAGE DEVIS * **/
+/* ** FORMULAIRE DEMANDE DE DEVIS * **/
     if(route === 'pricing') {
         let contactMode = document.getElementById("contactMode");
         let telField = document.getElementById("tel");
         let emailField = document.getElementById("email");
         let btn = document.querySelector("button[type='submit']");
-
         contactMode.addEventListener("change", function () {
             if (contactMode.value === "Téléphone") {
                 telField.setAttribute("required", "required");
@@ -153,8 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 telField.removeAttribute("required");
             }
         });
-
-
         btn.addEventListener("click", function (event) {
             if ((firstname.value === "")) {
                 event.preventDefault();
@@ -171,5 +183,4 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-
 });

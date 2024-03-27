@@ -11,12 +11,7 @@ class PricingController extends AbstractController
 
     public function pricingRegister() : void
     {
-        if (
-            isset($_POST["contactMode"])
-            && isset($_POST["firstname"])
-            && isset($_POST["lastname"])
-            && (isset($_POST["email"]) || isset($_POST["tel"]))
-        ){
+        if (isset($_POST["contactMode"]) && isset($_POST["firstname"]) && isset($_POST["lastname"]) && (isset($_POST["email"]) || isset($_POST["tel"]))){
             $tokenManager = new CSRFTokenManager();
             if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])){
                 $dm = new DetailManager();
@@ -51,15 +46,15 @@ class PricingController extends AbstractController
                 foreach ($details_array as $detail) {
                     $pdm->createOne($pricing, $detail);
                 }
-                $message = "Votre demande a bien été transmise. Nous revenons vers vous dans les plus brefs délais.";
-                $this->render("pricing/pricing.html.twig", ['message' => $message]);
+                $errorMessage = "Votre demande a bien été transmise. Nous revenons vers vous dans les plus brefs délais.";
+                $this->render("pricing/pricing.html.twig", ['message' => $errorMessage]);
             }
             else {
                 $_SESSION["error-message"] = "CSRF token invalide";
                 $this->redirect("pricing");
             }
         } else {
-            $_SESSION["error-message"] = "Missing fields";
+            $_SESSION["error-message"] = "Merci de compléter tous les champs requis";
             $this->redirect('pricing');
         }
     }

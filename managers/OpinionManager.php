@@ -2,25 +2,20 @@
 
 class OpinionManager extends AbstractManager
 {
-
-    public function findAll() : array
+    public function findAll(): array
     {
-        $rm = new RealisationManager();
-
         $query = $this->db->prepare('SELECT * FROM opinions');
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $opinions = [];
 
-        foreach($result as $item)
-        {
-            $realisation = null;
+        foreach ($result as $item) {
+            $realisationId = null;
 
             if (!empty($item['realisation_id'])) {
-                $realisation = $rm->findById($item['realisation_id']);
+                $realisationId = $item['realisation_id'];
             }
-
-            $opinion = new Opinion($item["username"], $item["content"], $item["notation"], $realisation);
+            $opinion = new Opinion($item["username"], $item["content"], $item["notation"], $realisationId);
             $opinion->setId($item["id"]);
             $opinions[] = $opinion;
         }
@@ -34,14 +29,13 @@ class OpinionManager extends AbstractManager
 
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        if ($result)
-        {
-            $realisation = null;
+        if ($result) {
+            $realisationId = null;
 
             if (!empty($result['realisation_id'])) {
-                $realisation = $rm->findById($result['realisation_id']);
+                $realisationId = $result['realisation_id'];
             }
-            $opinion = new Opinion($item["username"], $item["content"], $item["notation"], $realisation);
+            $opinion = new Opinion($item["username"], $item["content"], $item["notation"], $realisationId);
             $opinion->setId($item["id"]);
             return $opinion;
         }
@@ -50,14 +44,22 @@ class OpinionManager extends AbstractManager
 
     public function createOpinion(Opinion $opinion): void
     {
-        $query = $this->db->prepare('INSERT INTO opinions (id, username, content, notation) VALUES (NULL, :firstname, :lastname, :city, :email, :content)');
-        $parameters = [
-            "firstname" => $opinion->getFirstname(),
-            "lastname" => $opinion->getLastname(),
-            "city" => $opinion->getCity(),
-            "email" => $opinion->getEmail(),
-            "content" => $opinion->getContent()
-        ];
+        if ($opinion->getRealisationId() === null) {
+            $query = $this->db->prepare('INSERT INTO opinions (id, username, content, notation, realisationId) VALUES (NULL, :username, :content, :notation, NULL)');
+            $parameters = [
+                "username" => $opinion->getUsername(),
+                "content" => $opinion->getContent(),
+                "notation" => $opinion->getNotation(),
+            ];
+        } else {
+            $query = $this->db->prepare('INSERT INTO opinions (id, username, content, notation, realisationId) VALUES (NULL, :firstname, :lastname, :city, :email, :content, :realisationId)');
+            $parameters = [
+                "username" => $opinion->getUsername(),
+                "content" => $opinion->getContent(),
+                "notation" => $opinion->getNotation(),
+                "realisationId" => $opinion->getRealisationId(),
+            ];
+        }
         $query->execute($parameters);
         $opinion->setId($this->db->lastInsertId());
     }
