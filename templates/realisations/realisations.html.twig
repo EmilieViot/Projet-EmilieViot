@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block main %}
-    <main id="content" class="realPage">
+    <main id="realPage">
 
     {% for realisation in realisations %}
         <section class ="realSection">
@@ -24,13 +24,12 @@
                 </button>
             </div>
 
-            <div class="text-content {% if loop.index is even %}animate__slideInRight{% else %}animate__slideInLeft{% endif %}">
-                <h3>{{ realisation.title }}</h3><br>
-                <p>{{ realisation.description }}</p>
+            <div class="text-content" {% if loop.index is even %}animate__slideInRight{% else %}animate__slideInLeft{% endif %}">
+                <h3 >{{ realisation.title }}</h3><br>
+                <p class="realDescription">{{ realisation.description }}</p>
             </div>
 
         </section>
     {% endfor %}
-
     </main>
 {% endblock %}

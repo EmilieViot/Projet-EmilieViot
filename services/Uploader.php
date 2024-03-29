@@ -3,8 +3,8 @@
 class Uploader {
 
     private array $extensions = ["jpeg","jpg","png", "pdf"];
-    private string $uploadFolder = "/uploads";
-    private string $picturesFolder = "/assets/img";
+    private string $uploadFolder = "uploads"; /* pour l'envoi d'un photo via  le formulaire de devis */
+    private string $picturesFolder = "/assets/img";  /* admin > création d'une réalisation avec photos à l'appui */
     private RandomStringGenerator $gen;
 
     public function __construct()
@@ -23,16 +23,17 @@ class Uploader {
             try {
                 $file_name = $files[$uploadField]['name'];
                 $file_tmp =$files[$uploadField]['tmp_name'];
-
+                $maxsize = 5 * 1024 * 1024; /*pour limiter la taille à 5Mo : 5 Mo×1024 Ko/Mo×1024 octets/Ko=5×1024×1024 octets*/
+                $filesize = $_FILES[$uploadField]["size"];
                 $tabFileName = explode('.',$file_name);
                 $file_ext=strtolower(end($tabFileName));
-
                 $newFileName = $this->gen->generate(8);
 
-                if(in_array($file_ext, $this->extensions) === false){
-                    throw new Exception("Bad file extension. Please upload a JPG, PDF or PNG file.");
-                }
-                else
+                if($filesize > $maxsize){
+                    throw new Exception("Erreur : La taille du fichier est supérieure à la limite autorisée.");
+                } else if(in_array($file_ext, $this->extensions) === false){
+                    throw new Exception("Mauvaise extension. Nous acceptons les formats suivants : JPG, JPEG, PDF or PNG file.");
+                } else
                 {
                     $url = $this->uploadFolder."/".$newFileName.".".$file_ext;
                     move_uploaded_file($file_tmp, $url);
@@ -44,7 +45,6 @@ class Uploader {
                 echo $e->getMessage();
                 return null;
             }
-
         }
 
         return null;
@@ -56,16 +56,18 @@ class Uploader {
             try {
                 $file_name = $files[$uploadField]['name'];
                 $file_tmp =$files[$uploadField]['tmp_name'];
-
+                $maxsize = 5 * 1024 * 1024; /*pour limiter la taille à 5Mo : 5 Mo×1024 Ko/Mo×1024 octets/Ko=5×1024×1024 octets*/
+                $filesize = $_FILES[$uploadField]["size"];
                 $tabFileName = explode('.',$file_name);
                 $file_ext=strtolower(end($tabFileName));
 
                 $newFileName = $this->gen->generate(8);
 
-                if(in_array($file_ext, $this->extensions) === false){
-                    throw new Exception("Bad file extension. Please upload a JPG, PDF or PNG file.");
-                }
-                else
+                if($filesize > $maxsize){
+                    throw new Exception("Erreur : La taille du fichier est supérieure à la limite autorisée.");
+                } else if(in_array($file_ext, $this->extensions) === false){
+                    throw new Exception("Mauvaise extension. Nous acceptons les formats suivants : JPG, JPEG, PDF or PNG file.");
+                } else
                 {
                     $url = $this->picturesFolder."/".$newFileName.".".$file_ext;
                     move_uploaded_file($file_tmp, $url);

@@ -7,7 +7,7 @@ class RealisationController extends AbstractController
     public function realisations()
     {
         $rm = new RealisationManager();
-        $realisations = $rm->findAll();
+        $realisations = $rm->findLatest();
         /*dump($realisations);*/
 
         $this->render("realisations/realisations.html.twig", ["realisations" => $realisations]);

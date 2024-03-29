@@ -7,30 +7,40 @@
 
 {% block main %}
 
-        <h1 class="mb-5">Comment pouvons-nous vous aider ?</h1>
+<main id="contactPage">
+    {% if session['error-message'] is defined %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ errorMessage }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+
+
+        <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
+        {%  if  message is defined %}
+            <p class="OpinionFormOKMessage">{{ message }}</p>
+        {% endif %}
 
         <form class="contactForm" action="index.php?route=messageRegister" method="post">
             <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
+            <legend>Comment pouvons-nous vous aider ?</legend>
+            <div class="vertical-line"></div>
+            <label for="firstname">Prénom * :</label>
+            <input type="text" id="firstname" name="firstname" required="required">
 
-            <label for="firstname">Prénom :</label>
-            <input type="text" id="firstname" name="firstname" required>
+            <label for="lastname">Nom * :</label>
+            <input type="text" id="lastname" name="lastname" required="required">
 
-            <label for="lastname">Nom :</label>
-            <input type="text" id="lastname" name="lastname" required>
+            <label for="city">Ville * :</label>
+            <input type="text" id="city" name="city" required="required">
 
-            <label for="city">Ville :</label>
-            <input type="text" id="city" name="city" required>
+            <label for="email">Email * :</label>
+            <input type="email" id="email" name="email" required="required">
 
-            <label for="email">Email :</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="content">Votre message :</label>
-            <textarea id="content" name="content" rows="4" required></textarea>
+            <label for="content">Votre message (max 1024 caractères) * :</label>
+            <textarea id="content" name="content" rows="4" required="required"></textarea>
 
             <button type="submit">Envoyer</button>
-            {%  if  message is defined %}
-                <p class="ContactFormOKMessage">{{ message }}</p>
-            {% endif %}
         </form>
-    </main>
+</main>
 {% endblock %}

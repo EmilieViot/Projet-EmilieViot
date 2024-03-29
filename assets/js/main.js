@@ -11,24 +11,85 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* ** BASCULE DE LOGO DANS LE HEADER ** */
     const logoNoScroll = document.getElementById("logoNoScroll");
-    const logoHeaderScroll = document.getElementById("logoHeaderScroll");
-    window.addEventListener('scroll', function () {
-        let header = document.querySelector('header');
-        if (window.scrollY > 0) {
-            header.classList.add('scrolled');
-            logoNoScroll.style.display = "none";
-            logoHeaderScroll.style.display = "block";
+    const logoHeaderScroll = document.querySelector(".logoHeaderScroll");
+    let header = document.querySelector('header');
+        if (window.innerWidth >= 1200) {
+            window.addEventListener('scroll', function () {
+
+                if (window.scrollY > 0) {
+                    header.classList.add('mobile');
+                    logoNoScroll.style.display = "none";
+                    logoHeaderScroll.style.display = "block";
+                } else {
+                    header.classList.remove('mobile');
+                    logoNoScroll.style.display = "block";
+                    logoHeaderScroll.style.display = "none";
+                }
+            });
         } else {
-            header.classList.remove('scrolled');
-            logoNoScroll.style.display = "block";
-            logoHeaderScroll.style.display = "none";
+            header.classList.add('mobile');
+            logoHeaderScroll.style.display = "block";
+            logoNoScroll.style.display = "none";
+        }
+
+/* ** BURGER MENU POUR LES INFOS DE CONTACT ** */
+
+        const contactBurgerMenu = document.querySelector('.contactBurgerMenu');
+        const contactModal = document.querySelector('.modalContactBurger');
+        const closeContactModalButton = document.querySelector(".close-contactModal");
+
+        contactBurgerMenu.addEventListener('click', (e) => {
+            contactModal.classList.toggle('modalContactBurger');
+            contactModal.classList.toggle('modalContactBurger_visible');
+        });
+
+        closeContactModalButton.addEventListener('click', (e) => {
+            contactModal.classList.toggle('modalContactBurger');
+            contactModal.classList.toggle('modalContactBurger_visible');
+        });
+
+        function closeContactFromEverywhere() {
+            contactModal.classList.remove('modalContactBurger_visible');
+            contactModal.classList.add('modalContactBurger');
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!contactModal.contains(e.target) && !contactBurgerMenu.contains(e.target)) {
+                closeContactFromEverywhere();
+            }
+        });
+
+/* ** BURGER MENU POUR LA NAV ** */
+
+    const navBurgerMenu = document.querySelector('.navBurgerMenu');
+    const navModal = document.querySelector('.modalNavBurger');
+    const closeNavModalButton = document.querySelector(".close-navModal");
+
+    navBurgerMenu.addEventListener('click', (e) => {
+        navModal.classList.toggle('modalNavBurger');
+        navModal.classList.toggle('modalNavBurger_visible');
+    });
+
+    closeNavModalButton.addEventListener('click', (e) => {
+        navModal.classList.toggle('modalNavBurger');
+        navModal.classList.toggle('modalNavBurger_visible');
+    });
+
+    function closeNavFromEverywhere() {
+        navModal.classList.remove('modalNavBurger_visible');
+        navModal.classList.add('modalNavBurger');
+    }
+
+    document.addEventListener('click', (e) => {
+        if (!navModal.contains(e.target) && !navBurgerMenu.contains(e.target)) {
+            closeNavFromEverywhere();
         }
     });
 
 /* ** SLIDERS ** */
 
     /* SLIDER REALS - HOME */
-    if(route === 'home') {
+    if(route === 'home' || route === null) {
         const homePrevButtonReal = document.querySelector(".homePrevButtonReal");
         const homeNextButtonReal = document.querySelector(".homeNextButtonReal");
         const homeRealSliders = document.querySelectorAll(".homeRealSlider");

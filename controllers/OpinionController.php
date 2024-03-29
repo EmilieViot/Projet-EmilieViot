@@ -22,17 +22,17 @@ class OpinionController extends AbstractController
                 $content = htmlspecialchars($_POST['content']);
                 $notation = $_POST['notation'];
 
-                if (!empty($item['realisation_id'])) {
-                    $realisationId = $_POST['realisation_id'];
-                    $opinion = new Opinion($username, $content, $notation, $realisationId);
-                    unset($_SESSION["error-message"]);
-                    $om->createOpinion($opinion);
-                } else {
+                if($_POST['realisation_id'] === "") {
                     $realisationId = null;
-                    $opinion = new Opinion($username, $content, $notation,$realisationId);
-                    unset($_SESSION["error-message"]);
-                    $om->createOpinion($opinion);
                 }
+                else {
+                    $realisationId = intval($_POST['realisation_id']);
+                }
+
+                $opinion = new Opinion($username, $content, $notation, $realisationId);
+                unset($_SESSION["error-message"]);
+                $om->createOpinion($opinion);
+
                 $errorMessage = "Merci d'avoir pris le temps de laisser un avis. Nous restons à votre disposition pour toute demande.";
                 $this->render("opinions/opinion.html.twig", ['message' => $errorMessage]);
             } else {

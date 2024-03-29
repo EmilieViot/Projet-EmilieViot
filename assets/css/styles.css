@@ -48,8 +48,8 @@ GENERAL
 ***************************************************************** */
 body {
     width : 100%;
-    height : 100vh;
-    margin : auto;
+    height : 100%;/**/
+    margin : 0;
     font-weight:100;
     line-height: 1.5;
     font-family: 'Signika';
@@ -58,9 +58,25 @@ body {
     color:#fff;
 }
 
+header {
+    height : 8rem;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color : rgba(0, 0, 0, 0.85);
+    border-bottom: 1px solid #bf9000;
+    margin: 0 auto 2rem auto;
+    display : flex;
+    flex-direction : column;
+
+}
+
+main {
+    margin : auto
+}
 .vertical-line {
     border-left: 1px solid #bf9000;
-    height: 10vh;
+    height: 5vh;
     width : 0;
     margin: 2rem auto;
     display : block;
@@ -75,174 +91,191 @@ button {
 BASE.HTML.TWIG
 ***************************************************************** */
 
-/* Header - bandeau coordonnées */
-
-header {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    background-color : rgba(0, 0, 0, 0.95)
+/* Header - Grid du header mobile et desktop scrollé */
+.mobile {
+    display : grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 8rem;
 }
 
-.contactDetails {
-    background-color: #bf9000;
-    font-size: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-content: center;
-    width : 100%
+#nav {
+    grid-column: 1/2;
+    grid-row: 1/2;
 }
-.contactDetails li {
-    padding : 0;
-    margin : 1rem;
-    text-align : center;
-    font-size : 1.4rem;
-    font-weight: lighter;
-    align-items: center;
-    color : #fff
-}
-.contactDetails li i {
-    color : #000;
-    padding : 0 1rem 0 0
-}
-.contactDetails li a {
-    align-items: center;
-    text-decoration : none;
-    color : #fff
+#contactNav {
+    grid-column: 3/4;
+    grid-row: 1/2;
+    text-align: right;
 }
 
-/* Header - menu */
-
-#logoNav {
-    position: relative;
-    font-family: 'Signika';
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    margin-bottom: 2rem;
-    z-index: 999;
+/* Header - contact menu */
+.mobile .slash {
+    display : none
 }
-.logoHeader {
-    width : 30%;
-    margin : 3rem auto auto auto;
-    display : block;
+.mobile .contactBurgerMenu{
+    border : 1px solid #bf9000;
+    background-color: transparent;
+    width: 4rem;
+    height : 4rem;
+    margin: 2rem;
 }
-.navbar ul {
-    margin : auto;
-}
-.navbar ul li.nav-item {
-    margin : 0;
-    padding : 0
-}
-#navbarSupportedContent .nav-link {
-    font-size : 1.6rem;
-    color: #fff;
-    text-decoration: none;
-    margin : 2rem;
-}
-.navbar-nav li:last-child a {
-    border: 1px solid #bf9000;
-    color: #fff;
-    font-weight: 200;
-}
-#navbarSupportedContent .nav-item a:hover {
-    color: #bf9000;
-}
-
-#navbarSupportedContent .nav-item.active a {
+.mobile .contactBurgerMenu span {
     color : #bf9000;
-    border-bottom: 2px solid!important;
-    padding-bottom: 0.2px!important;
+    font-size : 2rem;
 }
-#navbarSupportedContent .nav-item:last-child.active {
+.mobile .modalContactBurger {
     background-color: #bf9000;
-}
-#navbarSupportedContent .nav-item:last-child.active a {
-    color : #fff!important;
-    border-bottom: 2px solid!important;
-    padding-bottom: 0.2px!important;
-}
-.navbar-collapse.nav-item {
-    list-style: none;
-    padding : 0
-}
-
-/* menu scrollé */
-#logoNoScroll,
-#logoHeaderScroll {
-    transition: opacity 2s ease; /* transition pour l'opacité */
-}
-
-#logoNav {
-    display : flex;
+    display : none;
+    position: absolute;
+    top: 6rem;
+    right:2rem;
+    width: auto;
+    margin : auto;
     flex-direction: column;
-    align-content: center;
-    text-align: center;
-    justify-content: space-between;
-    align-items: center;
-    margin :0;
+    justify-content: right;
+    align-content: end;
+    transition: all 1s;
+    z-index: 1000;
+    opacity: 0;
+}
+.mobile .modalContactBurger_visible {
+    background-color: #bf9000;
+    position: absolute;
+    top: 6rem;
+    right:2rem;
+    width: auto;
+    margin : auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    align-content: end;
+    transition: all 1s;
+    z-index: 1000;
+    opacity: 1;
+}
+.mobile .close-contactModal {
+    position: absolute;
+    color : #000;
+    top: 2%;
+    right: 2%;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+.mobile .contact_list {
+    list-style: none;
+    padding: 1rem;
+    text-align: right;
+}
+.mobile .contact_list li {
+    font-size: 1.2rem;
+    text-align: left;
+}
+.mobile .contact_list a {
+    text-decoration : underline;
+    color : #fff;
+    cursor: pointer;
+    text-align: left;
+}
+.mobile .contact_list i {
+    color : #000;
+    margin: 0 1rem 0 0;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
-.scrolled #logoNav {
-    display : flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin : 0!important;
+/* Header - logos */
+.mobile .logoHeaderScroll {
+    height : 4rem
 }
-.lienLogoScroll {
+.mobile .lienLogoScroll {
     margin : 2rem ;
-    text-align: right ;
+    text-align:center ;
 }
-.lienLogoScroll img {
-    width : 30%;
-    padding : 2rem 2rem 2rem 0;
-    margin : auto
+.mobile .lienLogoScroll img {
+    width : auto;
+    margin : 2rem auto
 }
-.scrolled #logoHeaderScroll {
-    text-align : right; /* Par défaut, cachez le logo scrollé */
+.mobile .scrolled #logoHeaderScroll {
+    text-align :center;
 }
-.lienLogoScroll {
+.mobile .lienLogoScroll {
     text-align: right;
     margin : 0;
     padding : 0
 }
-/*.navbar-toggler {
-    margin : auto;
-    cursor: pointer;
-    border-radius: 4px;
-    padding: 0.5rem 1rem;
-    background-color : transparent;
+
+/* Header - nav */
+.mobile .navBurgerMenu{
     border : 1px solid #bf9000;
+    background-color: transparent;
+    width: 4rem;
+    height : 4rem;
+    margin: 2rem;
 }
-.navbar-toggler-icon {
-    width: 30px; !* Largeur de l'icône *!
-    height: 3px; !* Hauteur des traits *!
-    display: block;
-    position: relative;
-    background-color: #bf9000; !* Couleur des traits *!
-}*/
-/*.navbar-toggler-icon:before,
-.navbar-toggler-icon:after {
-    content: '';
-    width: 100%;
-    height: 100%;
+.mobile .navBurgerMenu span {
+    color : #bf9000;
+    font-size : 2rem;
+}
+.mobile .modalNavBurger {
+    background-color: #bf9000;
     position: absolute;
-    left: 0;
-    background-color: #bf9000; !* Couleur des traits *!
+    top: 6rem;
+    left:2rem;
+    width: auto;
+    margin : auto;
+    display: none;
+    transition: all 1s;
+    z-index: 1000;
+    opacity: 0;
 }
-.navbar-toggler-icon:before {
-    top: -8px;
+.mobile .modalNavBurger_visible {
+    background-color: #bf9000;
+    position: absolute;
+    top: 6rem;
+    left:2rem;
+    width: auto;
+    margin : auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-content: start;
+    transition: all 1s;
+    z-index: 1000;
+    opacity: 1;
 }
-
-.navbar-toggler-icon:after {
-    bottom: -8px;
-}*/
-
-
+.mobile .close-navModal {
+    position: absolute;
+    color : #000;
+    top: 2%;
+    right: 2%;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+.mobile .navList {
+    list-style: none;
+    padding: 1rem;
+    text-align: left;
+}
+.mobile .navList li {
+    font-size: 1.2rem;
+}
+.mobile .navList li:not(:last-of-type) a {
+    text-decoration : none;
+    color : #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-align: left;
+}
+.mobile .navList li:last-of-type a {
+    color : #000;
+    text-decoration: underline;
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-align: left;
+}
+.mobile .nav-item a:hover {
+    color: #bf9000;
+}
 /* Footer */
 
 footer {
@@ -253,6 +286,9 @@ footer {
     justify-content: center;
     margin : auto;
 }
+footer p {
+    font-size: 1.4rem;
+}
 footer p:first-of-type {
     text-align : center;
     padding : 0 0 2rem 0;
@@ -260,7 +296,6 @@ footer p:first-of-type {
 footer p:first-of-type a {
     text-decoration: none;
     color : white;
-    font-size: 2rem;
     padding : 0 1rem
 }
 footer p:last-of-type {
@@ -282,59 +317,64 @@ HOME.HTML.TWIG
 /* Slider réalisations */
 
 .home .homeReal {
-    display : flex;
-    justify-content : center;
-    position: relative;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 20fr 1fr;
+    justify-content: center;
+    align-items: flex-start; /* Ajouter cette ligne */
 }
 .homeRealSlider {
     display: none; /* par défaut */
+    text-align: center;
 }
 .homeRealSlider.active {
-    display: block; /* diapo active */
-}
-.home .homeReal .homeRealSlider {
-    text-align: center;
-    position: relative;
+    display: flex; /* diapo active */
+    flex-direction: column;
 }
 .home .homeReal .homeSliderImg {
     width : 90%;
+    height : 50%;
+    object-fit : cover;
+    object-position : center;
     display: block;
-    margin : auto;
+    margin : 1rem auto;
     border : 3px solid #bf9000;
 }
 
 .homeReal .sliderLegend {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+    width : 80%;
     background-color: rgba(0, 0, 0, 0.9);
-    padding: 8rem;
-    font-size : 2.4rem;
+    padding: 0;
+    margin : 0 auto;
+    font-size : 1.2rem;
     color: #fff;
+    width : 60%
 }
 .sliderLegend h2 {
     font-weight : 100;
     color : #bf9000;
-    margin : 0 2rem 2rem 2rem;
+    margin : 1rem 0 0 0;
+    font-size : 1rem;
 }
 .sliderLegend h3 {
     text-transform: uppercase;
     color : #fff;
-    margin : 0 2rem 1rem
+    margin : 0 0 0 0;
+    font-weight: lighter;
 }
 .sliderLegend p {
-    margin : 0 2rem;
-    font-style : italic
+    margin : 0 0 0 0;
+    font-style : italic;
+    border-bottom: 0.5px solid #bf9000;
+    padding-bottom : 1rem;
 }
 .home .homeReal .sliderLegend a {
     text-decoration: none;
-    color : #fff;
-    font-size : 1.4rem
+    color : #bf9000;
+    font-size : 1rem
 }
 .home .homeReal button {
-    width : 4rem;
+    width : 2rem;
     margin : auto;
     background-color: transparent;
     border : none;
@@ -352,45 +392,51 @@ HOME.HTML.TWIG
 }
 .homeOpinion {
     display : flex;
-    align-items : center;
+    flex-direction: column;
+    justify-items : center;
     position: relative;
-    width: 100%;
+
 }
 .opinionCSS {
-    /*border: 1px solid #bf9000;*/
     margin: auto;
-    width: 50rem;
-    height: 50rem;
-    border-radius: 50rem;
+    width: 30rem;
+    height: 30rem;
+    border-radius: 50%;
     text-align: center;
-    padding: 5rem;
+    padding: 0;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     align-content: center;
     align-items: center;
-    /*
-    justify-items: center;
-    */
     justify-content: center;
     background-color : rgba(191, 144, 0, 0.3) ;
 }
 .opinionSlider h2 {
-    padding : 0 0 4rem 0;
+    font-size: 1rem;
+    padding : 0;
+    margin : 0
+}
+.opinionSlider h2 i {
+    padding : 0;
+    margin : 0
 }
 .opinionSlider p:first-of-type {
-    padding : 0 0 4rem 0;
+    padding : 1rem;
+    font-size: 1.2rem;
 }
 .opinionSlider p:last-of-type {
     font-weight : 100;
+    font-size: 1.2rem;
     color : rgba(191, 144, 0, 0.7)
 }
 .opinionSlider h2 p {
     margin : auto;
 }
 .home .homeOpinion button {
-    width : 4rem;
+    width : 2rem;
     margin : auto;
+    height : auto;
     background-color: transparent;
     border : none;
     justify-items : center;
@@ -403,31 +449,33 @@ HOME.HTML.TWIG
     grid-template-rows: 80% 20%;
     background-color : #bf9000;
     width : 100%;
-    height : auto;
+    height : 30%;
     margin : 0 !important;
+    padding : 0;
     text-align : center;
 }
 .home .homePrestaQuestions {
     display : grid;
-    grid-template-columns: 1fr 0.1fr 1fr 0.1fr 1fr;
-    margin : 0 4rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin : 0;
     text-align : center;
 }
 
 .home .homePrestaQuestions p {
-    padding : 2rem 6rem 0 2rem!important;
+    padding : 1rem;
     text-align : center;
-    font-size : 2rem;
+    font-size : 1.4rem;
     align-self: center;
 }
+
 .home .homePrestaTitle {
     display : grid;
     grid-template-columns: 1fr 1fr 1fr;
     width : 100%;
-    margin : 0 0 4rem 0;
+    margin : 0 0 2rem 0;
     padding : 1rem;
     text-align : center;
-    font-size : 2.5rem;
+    font-size : 2rem;
 }
 .home .homePrestaTitle a {
     text-decoration: none;
@@ -435,11 +483,10 @@ HOME.HTML.TWIG
     background-color: #000;
     border : 1px solid #bf9000;
     padding : 2rem;
-    /*margin : 4rem 0 0 0;*/
 }
 
 .vertical-line.presta {
-    margin-top : 8rem;
+    margin-top : 6rem;
 }
 
 /* Carte */
@@ -448,7 +495,8 @@ HOME.HTML.TWIG
 }
 
 .homeMap h2 {
-    font-size : 2.5rem;
+    font-size : 2rem;
+    font-weight : lighter;
     text-align : center;
     color : #bf9000;
     padding : 0 0 2rem 0
@@ -458,143 +506,110 @@ HOME.HTML.TWIG
 REALISATIONS.HTML.TWIG
 ***************************************************************** */
 /* Grids */
-.realPage {
-    display: grid;
-    grid-template-rows: repeat(auto-fill, 1fr);
-    grid-gap: 4rem;
+.realSection {
+    display : grid;
+    grid-template-rows: repeat(3,auto);
+    margin-bottom : 2rem
+}
+.text-content {
+    grid-row : 1/2;
+    grid-column : 1/2
+}
+.realSliderImg {
+    grid-row : 2/3;
+}
+.realDescription {
+    grid-row : 3/4;
 }
 .sliderNBtn {
     display: grid;
     grid-template-columns: 5% 90% 5%;
+    grid-template-rows: 1fr;
     text-align: center;
 }
-.realSection:nth-of-type(odd) {
-    display: grid;
-    grid-template-columns: 0.7fr 0.3fr;
-    grid-template-rows : 1fr;
-    grid-gap: 1rem;
-}
-.realSection:nth-of-type(even) {
-    display: grid;
-    grid-template-columns: 0.3fr 0.7fr;
-    grid-template-rows : 1fr;
-    grid-gap: 1rem;
-}
-.realSection:nth-of-type(odd) .sliderNBtn {
-    grid-column: 1;
-}
-.realSection:nth-of-type(even) .sliderNBtn {
-    grid-column: 2;
-}
-.realSection:nth-of-type(odd) .text-content {
-    grid-column: 2 / 3;
+.prevButtonReal {
+    grid-column : 1/2;
     grid-row : 1 / 2
 }
-.realSection:nth-of-type(even) .text-content {
-    grid-column: 1 / 2;
+.realSliderImg {
+    grid-column : 2/3;
+    grid-row : 1 / 2
+}
+.nextButtonReal {
+    grid-column : 3/4;
     grid-row : 1 / 2
 }
 
 /* Mise en forme */
-.realSection .prevButtonReal,
-.realSection .nextButtonReal {
-    width : 4rem;
+.realSection {
+    margin : auto
+}
+.realSection button {
+    width : 2rem;
+    margin : auto;
+    height : auto;
     background-color: transparent;
     border : none;
-    margin:auto;
+    justify-items : center;
+    text-align : center
 }
 .realSection .prevButtonReal {
     text-align: right;
-}.realSection .nextButtonReal {
-    text-align: left;
 }
-.realPage .prevButtonReal img,
-.realPage .nextButtonReal img {
-    width: 3rem;
-    display: block;
-    margin : 0;
-    padding : 0;
-    text-align: center!important;
+.realSection .nextButtonReal {
+     text-align: left;
+}
+.sliderNBtn {
+    margin : auto;
+    justify-content: center;
 }
 .realSliderImg {
-    display: none; /* par défaut */
-    text-align: center;
-    padding : 0!important;
-    margin : 0!important;
-}
-.realSliderImg.active {
-    display: block; /* diapo active */
-    padding : 0!important;
-    margin : 0!important;
-}
-.realPage .realSliderImg {
-    text-align: center;
-    width : 100%;
-    height : 50vh;
+    width : 90vw;
+    height : 30vh;
     object-fit : cover;
     object-position : center;
-    margin : 0;
-    border : 3px solid #bf9000;
+    display: none;
+    margin : 1rem auto;
+    border : 1px solid #bf9000;
+}
+.realSliderImg.active {
+    width : 90vw;
+    height : 30vh;
+    object-fit : cover;
+    object-position : center;
+    display: block;
+    margin : 1rem auto;
+    border : 1px solid #bf9000;
 }
 .text-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding : 2rem
+    margin : 2rem
 }
-
 .text-content h3{
     color : #bf9000;
-    font-size: larger;
+    font-size: 2rem;
+    font-weight: lighter;
+    text-align: center;
 }
-.text-content p{
-    font-size: smaller;
-}
-
-/* Animations */
-
-.realSection .sliderNBtn,
-.realSection .text-content {
-    opacity: 0;
-}
-
-.sliderNBtn.animate__slideInLeft ,
-.sliderNBtn.animate__slideInRight {
-    animation-name: opacity;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-}
-
-.text-content.animate__slideInLeft,
-.text-content.animate__slideInRight{
-    animation-name: opacity;
-    animation-duration: 1s;
-    animation-delay: 1s;
-    animation-fill-mode: forwards;
-}
-
-@keyframes opacity {
-    from {
-        opacity: 0;
-    } to {
-          opacity: 1;
-      }
+.text-content p {
+    font-size : 1.2rem;
+    font-weight: lighter;
+    text-align: justify;
 }
 
 /* *****************************************************************
 SERVICES.HTML.TWIG
 ***************************************************************** */
 /* Grids */
-.servicePage {
+.servicesPage { /**** DESKTOP - A CHANGER ****/
     display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-gap: 4rem;
     margin : 2rem 6rem;
 }
 
 /* Mise en page */
-.serviceArticle {
+.serviceArticle { /**** DESKTOP - OK EN MOBILE ****/
     display : grid;
     grid-template-rows : 20% 50% 20% 10%;
     grid-template-columns: 1fr;
@@ -639,13 +654,12 @@ SERVICE.HTML.TWIG
 ***************************************************************** */
 
 /* Gallery */
-
-.gallery {
+.gallery { /**** DESKTOP - A CHANGER ****/
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: repeat(auto-fill, 1fr);
-    grid-gap : 2rem;
-    padding : 2rem;
+    grid-template-columns: repeat(3,30%);
+    grid-template-rows: repeat(autofill, 100%);
+    grid-gap : 1rem;
+    padding : 0;
 }
 .thumbnails {
     width: 100%;
@@ -653,10 +667,11 @@ SERVICE.HTML.TWIG
     object-fit : cover;
     object-position : center;
     margin: 1rem;
-    cursor: pointer;
     border : 1px solid #bf9000;
     border-radius: 10px;
+    cursor: pointer;
 }
+/* Modale */ /**** DESKTOP - UTILE EN MOBILE ? ****/
 .modal {
     display: none;
     position: fixed;
@@ -673,8 +688,8 @@ SERVICE.HTML.TWIG
 .modal-content {
     margin: auto;
     display: block;
-    width: 80%;
-    max-height: 80%;
+    width: 100%;
+    max-height: 100%;
     border : 1px solid #bf9000;
     border-radius: 10px;
 }
@@ -688,16 +703,14 @@ SERVICE.HTML.TWIG
     cursor: pointer;
 }
 
-/* Mise en forme */
-
+/* Page */
 .oneServicePage {
     margin : 2rem
 }
-
 .oneServicePage h3 {
     text-align : center;;
     display: block;
-    width : 30%;
+    width : 50%;
     font-weight : 100;
     margin : 2rem auto;
     padding : 2rem;
@@ -710,26 +723,36 @@ SERVICE.HTML.TWIG
     line-height : 2.5;
 }
 .oneServicePage p {
-    font-weight : lighter;
+    font-weight : 50;
     text-align: center;
-    margin : 2rem
+    margin : 1.4rem;
+    text-align: justify;
 }
 
 /* *****************************************************************
 OPINION.HTML.TWIG
 ***************************************************************** */
+/* Page */
+#opinionPage {
+    margin : 0 auto;
+    padding : 0 2rem
+}
 
 /* Gallery */
-
-.opinionsGallery {
+.opinionsGallery { /**** DESKTOP - A CHANGER EN 1 COLONNE ET AUTOFILL DE LIGNES ****/
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr ;
     grid-template-rows: repeat(auto-fill, 1fr);
-    grid-gap : 4rem;
+    grid-gap : 1rem;
     padding : 2rem;
 }
 .opinion {
+    width: 100%;
+    height: 100%;
+    object-fit : cover;
+    object-position : center;
     text-align : center;
+    align-self: center;
     font-size : 1.4rem;
     border : 1px solid #bf9000;
     padding : 2rem;
@@ -739,7 +762,7 @@ OPINION.HTML.TWIG
     margin : 0 0 2rem 0
 }
 .opinionContent {
-    margin : 0 0 2rem 0
+    margin : 0 0 2rem 0;
 }
 .opinionRealisation {
     color : #bf9000;
@@ -750,24 +773,20 @@ OPINION.HTML.TWIG
 }
 .opinionAuthor {
     font-size : 1.2rem;
-    margin : 0 0 2rem 0
-
+    color : #bf9000;
 }
-
 .opinionFormSection legend {
     text-align: center;
     color : #fff;
     margin-bottom : 1rem;
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
-
 .opinionForm {
     display: flex;
     flex-direction: column;
-    width : 50%;
+    width : 100%;
     margin : auto
 }
-
 .opinionForm input,
 .opinionForm select,
 .opinionForm textarea {
@@ -777,31 +796,166 @@ OPINION.HTML.TWIG
     border-radius: 10px;
     font-weight : lighter
 }
-
 .opinionForm label {
     color : #bf9000;
-    font-size : 1.2rem;
+    font-size : 1.4rem;
     text-align : center;
     margin-top : 2rem;
     margin-bottom : 1rem;
     font-weight : lighter;
 }
-
 .notationOptions {
     width : 10%;
     margin : auto
 }
-select option {
+.opinionForm select option {
     text-align: center;
+    font-size : 1.2rem;
 }
 .realChoice option {
     font-size : 1.2rem;
     font-weight : lighter;
 }
-
 .opinionForm button {
     background-color: #bf9000;
     color : black;
+    font-size: 1.4rem;
     border-radius: 10px;
     margin : 2rem 0 2rem 0
 }
+.opinionFormOKMessage {
+    color : #bf9000;
+    font-weight : lighter;
+    font-style: italic;
+    font-size : 1.2rem;
+    text-align : center;
+    margin-bottom : 2rem;
+    margin-top : 2rem;
+}
+
+/* *****************************************************************
+CONTACT.HTML.TWIG
+***************************************************************** */
+/* Page */
+#contactPage {
+    margin : 0 auto;
+    padding : 0 2rem
+}
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    width : 100%;
+    margin : auto
+}
+.contactForm legend {
+    text-align: center;
+    color : #fff;
+    margin-bottom : 1rem;
+    font-size: 1.8rem;
+}
+.contactForm input,
+.contactForm textarea {
+    background-color : #000;
+    color : #fff;
+    border : 1px solid #404040;
+    border-radius: 10px;
+    font-weight : lighter
+}
+.contactForm label {
+    color : #bf9000;
+    font-size : 1.4rem;
+    text-align : center;
+    margin-top : 2rem;
+    margin-bottom : 1rem;
+    font-weight : lighter;
+}
+.contactForm button {
+    background-color: #bf9000;
+    color : black;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    margin : 2rem 0 2rem 0
+}
+.contactFormOKMessage {
+    color : #bf9000;
+    font-weight : lighter;
+    font-style: italic;
+    font-size : 1.2rem;
+    text-align : center;
+    margin-bottom : 2rem;
+    margin-top : 2rem;
+}
+
+/* *****************************************************************
+PRICING.HTML.TWIG
+***************************************************************** */
+/* Page */
+#pricingPage {
+    margin : 0 auto;
+}
+.pricingForm {
+    width : 90%;
+    margin : auto;
+    padding : 0;
+    text-align : center;
+}
+.pricingForm>fieldset:first-of-type {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    border : 1px solid #404040;
+    padding : 0 1rem
+}
+.pricingForm legend {
+    text-align: center;
+    color : #fff;
+    margin-bottom : 1rem;
+    font-size: 1.8rem;
+}
+.pricingForm input,
+.pricingForm select,
+.pricingForm textarea {
+    background-color : #000;
+    color : #fff;
+    border : 1px solid #404040;
+    border-radius: 10px;
+    font-weight : lighter
+}
+.pricingForm label {
+    color : #bf9000;
+    font-size : 1.4rem;
+    text-align : center;
+    margin-top : 2rem;
+    margin-bottom : 1rem;
+    font-weight : lighter;
+}
+.pricingForm select option {
+    text-align: center;
+    font-size : 1.2rem;
+}
+.formDetails {    /**** DESKTOP - A CHANGER ****/
+    display : grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: 1fr 1fr;
+    margin-top : 2rem;
+}
+.pricingForm button {
+    background-color: #bf9000;
+    color : black;
+    border-radius: 10px;
+    width : 30%;
+    font-size: 1.4rem;
+    margin : 2rem auto
+}
+.pricingForm .pricingFormOKMessage {
+    color : #bf9000;
+    font-weight : lighter;
+    font-style: italic;
+    font-size : 1.2rem;
+    text-align : center;
+    margin-bottom : 2rem;
+    margin-top : 2rem;
+}
+

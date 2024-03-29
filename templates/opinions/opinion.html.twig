@@ -6,49 +6,14 @@
 {% endblock %}
 
 {% block main %}
-<main id="opinion" class="container py-5 px-3">
+<main id="opinionPage">
     {% if session['error-message'] is defined %}
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ session['error-message'] }}
+            {{ errorMessage }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     {% endif %}
     <div class="vertical-line"></div>
-    <section class = "opinionFormSection">
-
-        <form class="opinionForm" action="index.php?route=opinionRegister" method="post">
-            <legend> Votre avis compte : </legend>
-            <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
-
-            <label for="username" >Choisissez un pseudo *</label>
-            <input type="text" id="username" name="username" required="required">
-
-            <label for="content">Rédigez votre avis (max 1024 caractères)</label>
-            <textarea id="content" name="content" rows="4" required="required"></textarea>
-
-            <label for="notation">Note sur 5:</label>
-            <select class="notationOptions" id="notation" name="notation" required="required">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-
-            <label for="realisation_id">Une réalisation est-elle ciblée par votre avis ? </label>
-            <select class="realChoice" name="realisation_id" id="realisation_id">
-                <option value="defaultChoice">Non, aucune</option>
-                {% for realisation in realisations %}
-                <option  name="{{ realisation.id }}" value="{{ realisation.id }}">{{ realisation.title }}</option>
-                {% endfor %}
-            </select>
-
-            <button type="submit">Soumettre mon avis</button>
-            {%  if  message is defined %}
-                <p class="OpinionFormOKMessage">{{ message }}</p>
-            {% endif %}
-        </form>
-    </section>
 
     <section class="opinionsGallery">
         {% for opinion in opinions %}
@@ -65,7 +30,7 @@
                     <p><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i></p>
                 {% endif %}
                 <p class = "opinionContent">{{ opinion.content }}</p>
-                <p class = "opinionAuthor">De : {{ opinion.username }}</p>
+                <p class = "opinionAuthor">Avis laissé par :<br> {{ opinion.username }}</p>
                 {% if opinion.getRealisation() %}
                     <p class="opinionRealisation">
                         Avis en lien avec la réalisation suivante :<br>
@@ -77,6 +42,41 @@
                 {% endif %}</p>
             </article>
         {% endfor %}
+    </section>
+    <div class="vertical-line"></div>
+    <section class = "opinionFormSection">
+
+        <form class="opinionForm" action="index.php?route=opinionRegister" method="post">
+            <legend> Votre avis compte </legend>
+            <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
+            {%  if  message is defined %}
+                <p class="opinionFormOKMessage">{{ message }}</p>
+            {% endif %}
+            <label for="username" >Choisissez un pseudo * : </label>
+            <input type="text" id="username" name="username" required="required">
+
+            <label for="content">Rédigez votre avis (max 1024 caractères) * : </label>
+            <textarea id="content" name="content" rows="4" required="required"></textarea>
+
+            <label for="notation">Note sur 5 * :</label>
+            <select class="notationOptions" id="notation" name="notation" required="required">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+            <label for="realisation_id">Une réalisation est-elle ciblée par votre avis ? </label>
+            <select class="realChoice" name="realisation_id" id="realisation_id">
+                <option value=""></option>
+                {% for realisation in realisations %}
+                    <option  name="{{ realisation.id }}" value="{{ realisation.id }}">{{ realisation.title }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Soumettre mon avis</button>
+        </form>
     </section>
 
 </main>

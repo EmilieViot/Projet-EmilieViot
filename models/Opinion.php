@@ -40,7 +40,7 @@ class Opinion
     {
         return $this->notation;
     }
-    public function setNotation(string $notation): void
+    public function setNotation(int $notation): void
     {
         $this->notation = $notation;
     }

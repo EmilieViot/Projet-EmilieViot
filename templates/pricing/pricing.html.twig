@@ -7,22 +7,33 @@
 
 {% block main %}
 
-<main>
+<main id="pricingPage">
+    {% if session['error-message'] is defined %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ errorMessage }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
 
-<form class = "pricingForm" action="index.php?route=pricingRegister" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
-
+    <form class = "pricingForm" action="index.php?route=pricingRegister" method="post" enctype="multipart/form-data">
         <fieldset>
+            <legend> Ciblons ensemble vos besoins </legend>
+            <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
+
+            {%  if  message is defined %}
+                <p class="pricingFormOKMessage">{{ message }}</p>
+            {% endif %}
+
             <label for="contactMode">Comment souhaitez-vous être recontacté(e) ?</label>
             <select id="contactMode" name="contactMode" required="required">
                 <option value="telephone">Téléphone</option>
                 <option value="email">Email</option>
             </select>
 
-            <label for="firstname">Votre prénom</label>
+            <label for="firstname">Prénom</label>
             <input type="text" id="firstname" name="firstname" required="required">
 
-            <label for="lastname">votre Nom</label>
+            <label for="lastname">Nom</label>
             <input type="text" id="lastname" name="lastname" required="required">
 
             <label for="email">Email</label>
@@ -33,30 +44,26 @@
 
             <label for="city">Ville</label>
             <input type="text" id="city" name="city">
-        </fieldset>
 
-        <fieldset >
-            <legend>Quelques informations :</legend>
-            {% for detail in details %}
-            <label for="{{ detail.title }}">{{ detail.title }}</label>
-            <input type="checkbox" id="{{ detail.title }}" name="details[]" value="{{ detail.title }}">
-            {%  endfor %}
-        </fieldset>
 
-        <fieldset>
+            <div class="formDetails">
+                {% for detail in details %}
+                <fieldset >
+                    <label for="{{ detail.title }}">{{ detail.title }}</label>
+                    <input type="checkbox" id="{{ detail.title }}" name="details[]" value="{{ detail.title }}">
+                </fieldset>
+                {%  endfor %}
+            </div>
+
             <label for="message">Message (max 1024 caractères)</label>
             <textarea id="message" name="message" maxlength="1024"></textarea>
 
-            <label for="picture">Téléchargez un document :</label>
+            <label for="picture">Télécharger un document (5Mo maximum) :</label>
             <input type="file" name="picture" id="picture" accept="photo/*">
+
+            <button type="submit" >Envoyer</button>
         </fieldset>
-
-        <button type="submit" >Envoyer</button>
-        {%  if  message is defined %}
-            <p class="PricingFormOKMessage">{{ message }}</p>
-        {% endif %}
-
-</form>
+    </form>
 
 </main>
 {% endblock %}

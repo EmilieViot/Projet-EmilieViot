@@ -45,14 +45,14 @@ class OpinionManager extends AbstractManager
     public function createOpinion(Opinion $opinion): void
     {
         if ($opinion->getRealisationId() === null) {
-            $query = $this->db->prepare('INSERT INTO opinions (id, username, content, notation, realisationId) VALUES (NULL, :username, :content, :notation, NULL)');
+            $query = $this->db->prepare('INSERT INTO opinions (id, username, content, notation, realisation_id) VALUES (NULL, :username, :content, :notation, NULL)');
             $parameters = [
                 "username" => $opinion->getUsername(),
                 "content" => $opinion->getContent(),
                 "notation" => $opinion->getNotation(),
             ];
         } else {
-            $query = $this->db->prepare('INSERT INTO opinions (id, username, content, notation, realisationId) VALUES (NULL, :firstname, :lastname, :city, :email, :content, :realisationId)');
+            $query = $this->db->prepare('INSERT INTO opinions (id, username, content, notation, realisation_id) VALUES (NULL, :username, :content, :notation, :realisationId)');
             $parameters = [
                 "username" => $opinion->getUsername(),
                 "content" => $opinion->getContent(),

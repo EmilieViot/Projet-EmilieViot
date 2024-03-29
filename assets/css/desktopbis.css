@@ -1,0 +1,414 @@
+
+    header {
+        height: 10rem;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        background-color: rgba(0, 0, 0, 0.85);
+        border-bottom: 1px solid #bf9000;
+        margin: 0 auto 2rem auto;
+    }
+
+    /* *****************************************************************
+    BASE.HTML.TWIG
+    ***************************************************************** */
+
+    /* Header - Grid du header mobile et desktop scrollé */
+    .mobile {
+        grid-template-rows: 10rem;
+    }
+
+    #nav {
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+
+    #contactNav {
+        grid-column: 3/4;
+        grid-row: 1/2;
+        text-align: right;
+    }
+
+    /* Header - contact menu */
+    .slash {
+        display: block
+    }
+    .contactBurgerMenu {
+        width: 6rem;
+        height : 6rem;
+        display : none
+    }
+    .mobile .contactBurgerMenu {
+        display : block
+    }
+    .contactBurgerMenu span {
+        font-size: 3rem;
+    }
+    .modalContactBurger {
+        top: 8rem;
+        right: 4rem;
+    }
+
+    .modalContactBurger_visible {
+        top: 8rem;
+        right: 3.1rem;
+    }
+    .contact_list li {
+        font-size: 2rem;
+    }
+
+    .contact_list a {
+        text-decoration: underline;
+        color: #fff;
+        cursor: pointer;
+        text-align: left;
+    }
+
+    .contact_list i {
+        color: #000;
+        margin: 0 1rem 0 0;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    /* Header - logos */
+    .logoHeaderScroll {
+        height: 4rem
+    }
+
+    .lienLogoScroll {
+        margin: 2rem;
+        text-align: center;
+    }
+
+    .lienLogoScroll img {
+        width: auto;
+        margin: 2rem auto
+    }
+
+    .scrolled #logoHeaderScroll {
+        text-align: center;
+    }
+
+    .lienLogoScroll {
+        text-align: right;
+        margin: 0;
+        padding: 0
+    }
+
+    /* Header - nav */
+
+    /* version non scrollée */
+
+    .contactBurgerMenu {display : none;}
+    .contactBurgerMenu span {display : none;}
+    .modalContactBurger_visible {display : none}
+    .close-contactModal {display : none}
+    .navBurgerMenu {display : none}
+    .navBurgerMenu span {display : none}
+    .close-navModal {display : none}
+
+    .slash {
+        display: block;
+        color : #000
+    }
+
+    .contact_list {
+        display : flex;
+        justify-content: space-evenly;
+        text-align: center;
+        padding : 1rem;
+        margin : auto;
+        background-color: #bf9000;
+    }
+    .contact_list li {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+    .contact_list a {
+        text-decoration : none;
+        color : #fff;
+        cursor: pointer;
+        text-align: left;
+    }
+    .contact_list a:hover {
+        text-decoration : underline;
+    }
+
+    .navbar {
+        position: relative;
+        font-family: 'Signika';
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        margin-bottom: 2rem;
+        z-index: 999;
+    }
+    .navbar ul {
+        margin: auto;
+    }
+    .nav-link {
+        font-size: 1.6rem;
+        color: #fff;
+        text-decoration: none;
+        margin: 2rem;
+    }
+    .navbar ul li.nav-item {
+        margin: 0;
+        padding: 0
+    }
+
+    .navbar-nav li:last-child a {
+        border: 1px solid #bf9000;
+        color: #fff;
+        font-weight: 200;
+    }
+
+    .nav-item a:hover {
+        color: #bf9000;
+    }
+
+    .nav-item.active a {
+        text-decoration: none;
+        color: #bf9000;
+        border-bottom: 2px solid !important;
+        padding-bottom: 0.2px !important;
+    }
+
+    .nav-item:last-child.active {
+        background-color: #bf9000;
+    }
+
+    .nav-item:last-child.active a {
+        color: #fff !important;
+        border-bottom: 2px solid !important;
+        padding-bottom: 0.2px !important;
+    }
+
+    .nav-item {
+        list-style: none;
+        padding: 0
+    }
+
+    /* version scroll (.mobile) */
+
+    .mobile .navBurgerMenu {
+        width: 6rem;
+        height : 6rem;
+        display : block
+    }
+    .mobile .navBurgerMenu span {
+        font-size: 3rem;
+    }
+    .mobile .modalContactBurger {
+        top: 8rem;
+        right: 4rem;
+    }
+    .mobile .modalContactBurger_visible {
+        top: 8rem;
+        right: 3.1rem;
+    }
+
+    .mobile .navList li:not(:last-of-type) a {
+        font-size: 2rem;
+    }
+
+    .mobile .navList li:last-of-type a {
+        font-size: 2rem;
+    }
+
+    .mobile .nav-item a:hover {
+        color: #bf9000;
+    }
+
+    /* Footer */
+    footer p {
+        font-size: 1.8rem;
+    }
+
+    /* *****************************************************************
+    HOME.HTML.TWIG
+    ***************************************************************** */
+    /* Slider réalisations */
+
+    .home .homeReal .homeSliderImg {
+        height: 30%;
+    }
+
+    .homeReal .sliderLegend {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width : 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        padding: 8rem;
+        font-size: 2.4rem;
+    }
+
+    .sliderLegend h2 {
+        font-size: 1.4rem;
+    }
+
+    .sliderLegend h3 {
+        font-size : 2rem;
+    }
+    .home .homeReal .sliderLegend a {
+        font-size: 1.4rem
+    }
+    .home .homeReal button {
+        width: 4rem;
+    }
+
+    /* Slider Avis */
+    .opinionSlider h2 {
+        font-size: 1.8rem;
+    }
+    .opinionSlider p:first-of-type {
+        font-size: 1.8rem;
+        margin-top:1rem
+    }
+    .opinionSlider p:last-of-type {
+        font-size: 1.4rem;
+        margin-top:1rem
+    }
+    .home .homeOpinion button {
+        width: 4rem;
+    }
+    .opinionCSS {
+        width: 50rem;
+        height: 50rem;
+        padding: 2rem;
+    }
+/* prestas */
+    .homePrestaQuestions p {
+        font-size : 2.2rem
+    }
+
+    /* *****************************************************************
+    REALISATIONS.HTML.TWIG
+    ***************************************************************** */
+    .realPage {
+        display: grid;
+        grid-template-rows: repeat(auto-fill, 1fr);
+        grid-gap: 4rem;
+    }
+    .realSection:nth-of-type(odd) {
+        display: grid;
+        grid-template-columns: 0.7fr 0.3fr;
+        grid-template-rows: 1fr;
+        grid-gap: 1rem;
+    }
+    .realSection:nth-of-type(even) {
+        display: grid;
+        grid-template-columns: 0.3fr 0.7fr;
+        grid-template-rows: 1fr;
+        grid-gap: 1rem;
+    }
+
+    .sliderNBtn {
+        display: grid;
+        grid-template-columns: 5% 90% 5%;
+        text-align: center;
+    }
+    .realSection:nth-of-type(odd) .sliderNBtn {
+        grid-column: 1;
+    }
+    .realSection:nth-of-type(even) .sliderNBtn {
+        grid-column: 2;
+    }
+
+    .realSection:nth-of-type(odd) .text-content {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2
+    }
+
+    .realSection:nth-of-type(even) .text-content {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2
+    }
+
+    .realSection button {
+        width: 4rem;
+    }
+    .realPage .realSliderImg {
+        text-align: center;
+        width: 100%;
+        height: 50vh;
+        object-fit: cover;
+        object-position: center;
+        margin: 0;
+        border: 3px solid #bf9000;
+    }
+
+    /* Animations */
+    .realSection .sliderNBtn,
+    .realSection .text-content {
+        opacity: 0;
+    }
+
+    .sliderNBtn.animate__slideInLeft,
+    .sliderNBtn.animate__slideInRight {
+        animation-name: opacity;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+    }
+
+    .text-content.animate__slideInLeft,
+    .text-content.animate__slideInRight {
+        animation-name: opacity;
+        animation-duration: 1s;
+        animation-delay: 1s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes opacity {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+/* *****************************************************************
+SERVICES.HTML.TWIG
+***************************************************************** */
+    .servicesPage { /**** DESKTOP - A CHANGER ****/
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr  1fr 1fr;
+    }
+/* *****************************************************************
+SERVICE.HTML.TWIG
+***************************************************************** */
+    .modal-content {
+        width: 80%;
+        max-height: 50%;
+    }
+/* *****************************************************************
+OPINIONS.HTML.TWIG
+***************************************************************** */
+    .opinionsGallery {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: repeat(auto-fill, 1fr);
+        grid-gap: 2rem;
+    }
+    .opinionForm {
+        width: 60%;
+    }
+/* *****************************************************************
+CONTACT.HTML.TWIG
+***************************************************************** */
+    .contactForm {
+        width: 60%;
+    }
+/* *****************************************************************
+PRICING.HTML.TWIG
+***************************************************************** */
+    .pricingForm {
+        width: 60%;
+    }
+
+
+}

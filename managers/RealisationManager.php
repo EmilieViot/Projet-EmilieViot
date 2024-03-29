@@ -21,6 +21,24 @@ class RealisationManager extends AbstractManager
         return $realisations;
     }
 
+    public function findLatest() : array
+    {
+        $query = $this->db->prepare('SELECT * FROM realisations LIMIT 3');
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $realisations = [];
+
+        foreach($result as $item)
+        {
+            $pm = new PictureManager();
+            $pictures = $pm->findByRealId($item['id']);
+            $realisation = new Realisation($item["title"], $item["description"], $pictures);
+            $realisation->setId($item["id"]);
+            $realisations[] = $realisation;
+        }
+        return $realisations;
+    }
+
     public function findById(int $id) : ? Realisation
     {
         $query = $this->db->prepare('SELECT * FROM realisations WHERE id=:id');

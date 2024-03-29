@@ -8,27 +8,22 @@
 {% block main %}
 <main id="content" class="home">
     <section class="homeReal">
-
-            <button class = "homePrevButtonReal">
-                <img src="assets/img/flecheSliderGauche.png" alt="flecheSliderGauche">
-            </button>
-
-            {%  for realisation in realisations %}
+        <button class = "homePrevButtonReal">
+            <img src="assets/img/flecheSliderGauche.png" alt="flecheSliderGauche">
+        </button>
+        {%  for realisation in realisations %}
             <figure class = "homeRealSlider">
-                <img class = "homeSliderImg" src="{{ realisation.pictures[0].url }}" alt="{{ realisation.pictures[0].alt }}">
+                <a href="index.php?route=realisation&id={{ realisation.id }}"><img class = "homeSliderImg" src="{{ realisation.pictures[0].url }}" alt="{{ realisation.pictures[0].alt }}"></a>
                 <figcaption class = "sliderLegend">
                     <h2>Zoom sur quelques réalisations</h2>
                     <h3>{{ realisation.title }}</h3>
                     <p><a href="index.php?route=realisation&id={{ realisation.id }}">Cliquez ici pour en découvrir +</a></p>
                 </figcaption>
             </figure>
-            {% endfor %}
-
-            <button class = "homeNextButtonReal" >
-                <img src="assets/img/flecheSliderDroite.png" alt="flecheSliderDroite">
-            </button>
-
-
+        {% endfor %}
+        <button class = "homeNextButtonReal" >
+            <img src="assets/img/flecheSliderDroite.png" alt="flecheSliderDroite">
+        </button>
     </section>
 
     <div class="vertical-line"></div>
@@ -79,9 +74,7 @@
     <section class="homePresta">
         <article class="homePrestaQuestions">
             <p>Et si vous créiez <br>une salle d’eau <br>dans votre chambre <br>?</p>
-            <p>/</p>
             <p>Votre pièce de vie <br>manque de <br>convivialité <br>?</p>
-            <p>/</p>
             <p>Chez vous, <br>il fait trop froid l’hiver <br>et trop chaud l’été <br>?</p>
         </article>
         <nav class="homePrestaTitle">
