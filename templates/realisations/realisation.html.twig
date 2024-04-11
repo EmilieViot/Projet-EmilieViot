@@ -5,13 +5,25 @@
 {% endblock %}
 
 {% block main %}
-    <card>
-        <h3>{{ realisation.title }}</h3>
-        {% for picture in realisation.pictures %}
-            <figure>
-                <img src="{{ picture.url }}" alt="{{ picture.alt }}">
-            </figure>
-        {% endfor %}
-        <p>{{ realisation.description }}</p>
-    </card>
+    <main id = "oneRealPage">
+        <article>
+            <h3>{{ realisation.title }}</h3>
+            <div class="vertical-line"></div>
+            <p>{{ realisation.description }}</p>
+            <div class="vertical-line"></div>
+            <article class="gallery">
+
+                {% for picture in realisation.pictures %}
+                    <img class="thumbnails" src="{{ picture.url }}" alt="{{ picture.alt }}">
+                {% endfor %}
+
+                <div class="modal">
+                    <span class="close">&times;</span>
+                    <img class="modal-content" id="modal-image">
+                </div>
+            </article>
+
+        </article>
+    </main>
 {% endblock %}
+

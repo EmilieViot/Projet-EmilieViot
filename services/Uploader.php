@@ -30,13 +30,14 @@ class Uploader {
                 $newFileName = $this->gen->generate(8);
 
                 if($filesize > $maxsize){
-                    throw new Exception("Erreur : La taille du fichier est supérieure à la limite autorisée.");
+                    throw new Exception("Erreur : Le fichier est trop lourd.");
                 } else if(in_array($file_ext, $this->extensions) === false){
-                    throw new Exception("Mauvaise extension. Nous acceptons les formats suivants : JPG, JPEG, PDF or PNG file.");
+                    throw new Exception("Mauvaise extension. Les formats suivants sont acceptés : JPG, JPEG, PDF or PNG file.");
                 } else
                 {
                     $url = $this->uploadFolder."/".$newFileName.".".$file_ext;
                     move_uploaded_file($file_tmp, $url);
+                    $this->compressImage($url, $file_ext);
                     return new Picture($url, $file_name);
                 }
             }
@@ -48,6 +49,26 @@ class Uploader {
         }
 
         return null;
+    }
+
+    private function compressImage(string $filePath, string $fileExtension)
+    {
+        // Vérifie le type de fichier
+        switch ($fileExtension) {
+            case 'jpeg':
+            case 'jpg':
+                $image = imagecreatefromjpeg($filePath);
+                imagejpeg($image, $filePath, 75); // Qualité de compression de 75%
+                break;
+            case 'png':
+                $image = imagecreatefrompng($filePath);
+                imagepng($image, $filePath, 6); // Compression de 6 (0 étant la compression la plus élevée et 9 étant la plus faible)
+                break;
+            // Vous pouvez ajouter d'autres cas selon les besoins
+            default:
+                // Ne rien faire pour les autres types de fichiers
+                break;
+        }
     }
 
     public function uploadPictures(array $files, string $uploadField) : ?Picture
@@ -64,9 +85,9 @@ class Uploader {
                 $newFileName = $this->gen->generate(8);
 
                 if($filesize > $maxsize){
-                    throw new Exception("Erreur : La taille du fichier est supérieure à la limite autorisée.");
+                    throw new Exception("Erreur : Le fichier est trop lourd.");
                 } else if(in_array($file_ext, $this->extensions) === false){
-                    throw new Exception("Mauvaise extension. Nous acceptons les formats suivants : JPG, JPEG, PDF or PNG file.");
+                    throw new Exception("Mauvaise extension. Les formats suivants sont acceptés : JPG, JPEG, PDF or PNG file.");
                 } else
                 {
                     $url = $this->picturesFolder."/".$newFileName.".".$file_ext;

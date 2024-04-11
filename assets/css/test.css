@@ -1,0 +1,257 @@
+/* *****************************************************************
+RESET
+***************************************************************** */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+body * {
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+    font-family: 'Signika';
+}
+img, video {
+    max-width: 100%;
+}
+/* *****************************************************************
+GENERAL
+***************************************************************** */
+body {
+    width : 100%;
+    height : 100%;
+    margin : 0;
+    font-weight:100;
+    line-height: 1.5;
+    font-family: 'Signika';
+    font-size: 1.8rem;
+    background-color: #000;
+    color:#fff;
+}
+.scrolled header, header {
+    height : 8rem;
+    display : grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color : rgba(0, 0, 0, 0.85);
+    border-bottom: 1px solid #bf9000;
+}
+main {
+    margin : auto
+}
+.vertical-line {
+    border-left: 1px solid #bf9000;
+    height: 5vh;
+    width : 0;
+    margin: 2rem auto;
+    display : block;
+    text-align: center;
+}
+button {
+    cursor: pointer;
+}
+
+/* *****************************************************************
+BASE.HTML.TWIG
+***************************************************************** */
+
+/* Header - Grid du header mobile */
+
+/* Header - contact menu */
+#nav {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    text-align : left;
+}
+
+#contactNav {
+    grid-column: 3/4;
+    grid-row: 1/2;
+    text-align : right;
+}
+.slash {
+    display : none
+}
+.contactBurgerMenu{
+    border : 1px solid #bf9000;
+    background-color: transparent;
+    width: 4rem;
+    height : 4rem;
+    margin: 2rem;
+    position : relative;
+}
+.contactBurgerMenu span {
+    color : #bf9000;
+    font-size : 2rem;
+}
+.modalContactBurger {
+    background-color: #bf9000;
+    display : none;
+    position: absolute;
+    top: 6rem;
+    right:2rem;
+    width: auto;
+    margin : auto;
+    transition: all 1s;
+    z-index: 1000;
+    opacity: 0;
+}
+.modalContactBurger_visible {
+    background-color: #bf9000;
+    position: absolute;
+    top: 6rem;
+    right:2rem;
+    width: auto;
+    margin : auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    align-content: end;
+    transition: all 1s;
+    z-index: 1000;
+    opacity: 1;
+}
+.close-contactModal {
+    position: absolute;
+    color : #000;
+    top: 0;
+    right: 2%;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+.contact_list {
+    list-style: none;
+    padding: 1rem;
+    text-align: right;
+}
+.contact_list li {
+    font-size: 1.2rem;
+    text-align: left;
+}
+.contact_list a {
+    text-decoration : underline;
+    color : #fff;
+    cursor: pointer;
+    text-align: left;
+}
+.contact_list i {
+    color : #000;
+    margin: 0 1rem 0 0;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Header - logos */
+.logoHeaderScroll {
+    height : 4rem;
+    text-align :center;
+}
+.lienLogoScroll {
+    margin : 2rem ;
+    text-align:center ;
+}
+.lienLogoScroll img {
+    width : auto;
+    margin : 2rem auto
+}
+
+.lienLogoScroll {
+    text-align: right;
+    margin : 0;
+    padding : 0
+}
+
+/* Header - nav */
+.navBurgerMenu{
+    border : 1px solid #bf9000;
+    background-color: transparent;
+    width: 4rem;
+    height : 4rem;
+    margin: 2rem;
+}
+.navBurgerMenu span {
+    color : #bf9000;
+    font-size : 2rem;
+}
+.modalNavBurger {
+    background-color: #bf9000;
+    position: absolute;
+    top: 6rem;
+    left:2rem;
+    width: auto;
+    margin : auto;
+    display: none;
+    transition: all 1s;
+    z-index: 1000;
+    opacity: 0;
+}
+.modalNavBurger_visible {
+    background-color: #bf9000;
+    position: absolute;
+    top: 6rem;
+    left:2rem;
+    width: auto;
+    margin : auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-content: start;
+    transition: all 1s;
+    z-index: 1000;
+    opacity: 1;
+}
+.close-navModal {
+    position: absolute;
+    color : #000;
+    top: 0;
+    right: 2%;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+.navList {
+    list-style: none;
+    padding: 1rem;
+    text-align: left;
+}
+.navList li {
+    font-size: 1.2rem;
+}
+.navList li:not(:last-of-type) a {
+    text-decoration : none;
+    color : #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-align: left;
+}
+.navList li:not(:last-of-type) a:hover {
+    color : #000;
+}
+.navList li:last-of-type a {
+    color : #000;
+    text-decoration: underline;
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-align: left;
+}
+.navList li:last-of-type a:hover {
+    color : #fff;
+}

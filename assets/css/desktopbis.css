@@ -1,414 +1,538 @@
-
+@media only screen and (min-width: 1200px) {
+    /* HEADER */
     header {
-        height: 10rem;
-        position: sticky;
-        top: 0;
-        z-index: 999;
-        background-color: rgba(0, 0, 0, 0.85);
-        border-bottom: 1px solid #bf9000;
-        margin: 0 auto 2rem auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        border-bottom: none;
     }
 
-    /* *****************************************************************
-    BASE.HTML.TWIG
-    ***************************************************************** */
-
-    /* Header - Grid du header mobile et desktop scrollé */
-    .mobile {
-        grid-template-rows: 10rem;
+    #logoNoScroll {
+        margin: 4rem auto;
+        text-align: center;
+        height: 20vh !important;
     }
 
+    #contactNav,
     #nav {
-        grid-column: 1/2;
-        grid-row: 1/2;
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
     }
 
-    #contactNav {
-        grid-column: 3/4;
-        grid-row: 1/2;
-        text-align: right;
-    }
-
-    /* Header - contact menu */
     .slash {
         display: block
     }
-    .contactBurgerMenu {
+
+    .contactBurgerMenu, .navBurgerMenu {
+        display: none;
+    }
+
+    .modalContactBurger {
+        display: block;
+        opacity: 1;
+        position: static;
+        background-color: #bf9000;
+        margin: 0
+    }
+
+    .modalNavBurger {
+        display: block;
+        opacity: 1;
+        position: static;
+        background-color: transparent;
+    }
+
+    .contact_list, .navList {
+        display: flex;
+        visibility: visible;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        align-content: center;
+    }
+
+    .contact_list {
+        background-color: #bf9000;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .contactDetails li {
+        padding: 0;
+        margin: 1rem;
+        text-align: center;
+        font-size: 1.4rem;
+        font-weight: lighter;
+        align-items: center;
+        color: #fff
+    }
+
+    .contactDetails li i {
+        color: #000;
+        padding: 0 1rem 0 0;
+        font-size: 1.8rem
+    }
+
+    .contactDetails li a {
+        align-items: center;
+        text-decoration: none;
+        color: #fff
+    }
+
+    .navList {
+        margin: auto;
+        background-color: transparent;
+        margin: 2rem auto;
+        justify-content: center;
+        border-bottom: 1px solid #bf9000;
+    }
+
+    .navList li {
+        font-size: 1.6rem;
+        margin: 0 4rem;
+        padding: 0 0 2rem 0
+    }
+
+    .navList .nav-link {
+        text-decoration: none;
+        margin: 0;
+        padding: 1rem
+    }
+
+    .navList li:not(:last-of-type) a {
+        font-size: 1.6rem;
+        text-align: center;
+    }
+
+    .navList li:not(:last-of-type) a:hover {
+        color: #bf9000;
+    }
+
+    .navList li:last-of-type a {
+        color: #bf9000;
+        text-decoration: none;
+        font-size: 1.6rem;
+        text-align: center;
+        border: 1px solid #bf9000;
+    }
+
+    .navList li:last-of-type a:hover {
+        color: #fff;
+        border: 1px solid #fff
+    }
+
+    .navList .nav-item a:hover {
+        color: #bf9000;
+    }
+
+    .navList .nav-item:not(:last-child).active a {
+        color: #bf9000;
+        border-bottom: 2px solid !important;
+        padding-bottom: 0.2px !important;
+    }
+
+    .navList .nav-item:last-child.active a {
+        color: #bf9000 !important;
+    }
+
+    /* scrolled */
+    .scrolled {
+        height: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background-color: rgba(0, 0, 0, 0.85);
+        border-bottom: 1px solid #bf9000;
+    }
+
+    .scrolled .logoHeaderScroll {
+        height: 6rem;
+        text-align: center;
+    }
+
+    .scrolled #nav {
+        grid-column: 1/2;
+        grid-row: 1/2;
+        text-align: left;
+    }
+
+    .scrolled #contactNav {
+        grid-column: 3/4;
+        grid-row: 1/2;
+        text-align: right;
+        justify-self: right;
+    }
+
+    .scrolled .modalContactBurger {
+        display: none;
+        opacity: 0;
+    }
+
+    .scrolled .modalNavBurger {
+        display: none;
+        opacity: 0;
+    }
+
+    .scrolled .slash {
+        display: none
+    }
+
+    .scrolled #contactNav,
+    .scrolled #nav {
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
+    }
+
+    .scrolled .contact_list, .scrolled .navList {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        align-content: center;
+    }
+
+    .scrolled .contactBurgerMenu {
+        border: 1px solid #bf9000;
+        background-color: transparent;
         width: 6rem;
-        height : 6rem;
-        display : none
+        height: 6rem;
+        margin: 2rem;
+        position: relative;
     }
-    .mobile .contactBurgerMenu {
-        display : block
-    }
-    .contactBurgerMenu span {
+
+    .scrolled .contactBurgerMenu span {
+        color: #bf9000;
         font-size: 3rem;
     }
-    .modalContactBurger {
-        top: 8rem;
-        right: 4rem;
+
+    .scrolled .modalContactBurger {
+        background-color: #bf9000;
+        display: none;
+        position: absolute;
+        top: 6rem;
+        right: 2rem;
+        width: auto;
+        margin: auto;
+        transition: all 0s;
+        z-index: 1000;
+        opacity: 0;
     }
 
-    .modalContactBurger_visible {
-        top: 8rem;
-        right: 3.1rem;
-    }
-    .contact_list li {
-        font-size: 2rem;
+    .scrolled .modalContactBurger_visible {
+        background-color: #bf9000;
+        position: absolute;
+        top: 6rem;
+        right: 2rem;
+        width: auto;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: right;
+        align-content: end;
+        transition: all 0s;
+        z-index: 1000;
+        opacity: 1;
     }
 
-    .contact_list a {
+    .scrolled .close-contactModal {
+        position: absolute;
+        color: #000;
+        top: 0;
+        right: 2%;
+        font-size: 1.4rem;
+        cursor: pointer;
+    }
+
+    .scrolled .contact_list {
+        list-style: none;
+        padding: 1rem;
+        text-align: right;
+    }
+
+    .scrolled .contact_list li {
+        font-size: 1.6rem;
+        text-align: left;
+    }
+
+    .scrolled .contact_list a {
         text-decoration: underline;
         color: #fff;
         cursor: pointer;
         text-align: left;
     }
 
-    .contact_list i {
+    .scrolled .contact_list i {
         color: #000;
         margin: 0 1rem 0 0;
         font-size: 1rem;
         cursor: pointer;
     }
 
-    /* Header - logos */
-    .logoHeaderScroll {
-        height: 4rem
-    }
-
-    .lienLogoScroll {
+    .scrolled .navBurgerMenu {
+        width: 6rem;
+        height: 6rem;
         margin: 2rem;
-        text-align: center;
     }
 
-    .lienLogoScroll img {
-        width: auto;
-        margin: 2rem auto
+    .scrolled .navBurgerMenu span {
+        font-size: 3rem;
     }
 
-    .scrolled #logoHeaderScroll {
-        text-align: center;
-    }
-
-    .lienLogoScroll {
-        text-align: right;
-        margin: 0;
-        padding: 0
-    }
-
-    /* Header - nav */
-
-    /* version non scrollée */
-
-    .contactBurgerMenu {display : none;}
-    .contactBurgerMenu span {display : none;}
-    .modalContactBurger_visible {display : none}
-    .close-contactModal {display : none}
-    .navBurgerMenu {display : none}
-    .navBurgerMenu span {display : none}
-    .close-navModal {display : none}
-
-    .slash {
-        display: block;
-        color : #000
-    }
-
-    .contact_list {
-        display : flex;
-        justify-content: space-evenly;
-        text-align: center;
-        padding : 1rem;
-        margin : auto;
+    .scrolled .modalNavBurger {
         background-color: #bf9000;
+        position: absolute;
+        top: 8rem;
+        left: 2rem;
+        width: auto;
+        margin: auto;
+        display: none;
+        transition: all 0s;
+        z-index: 1000;
+        opacity: 0;
     }
-    .contact_list li {
-        font-size: 1.8rem;
-        text-align: center;
+
+    .scrolled .modalNavBurger_visible {
+        background-color: #bf9000;
+        position: absolute;
+        top: 8rem;
+        left: 2rem;
+        width: auto;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        align-content: start;
+        transition: all 0s;
+        z-index: 1000;
+        opacity: 1;
     }
-    .contact_list a {
-        text-decoration : none;
-        color : #fff;
+
+    .scrolled .close-navModal {
+        position: absolute;
+        color: #000;
+        top: 0;
+        right: 2%;
+        font-size: 1.4rem;
+        cursor: pointer;
+    }
+
+    .scrolled .navList {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+    }
+
+    .scrolled .navList li {
+        font-size: 1.6rem;
+    }
+
+    .scrolled .navList li:not(:last-of-type) a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 1.6rem;
         cursor: pointer;
         text-align: left;
     }
-    .contact_list a:hover {
-        text-decoration : underline;
+
+    .scrolled .navList li:not(:last-of-type) a:hover {
+        color: #000;
     }
 
-    .navbar {
-        position: relative;
-        font-family: 'Signika';
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        align-content: center;
-        margin-bottom: 2rem;
-        z-index: 999;
-    }
-    .navbar ul {
-        margin: auto;
-    }
-    .nav-link {
+    .scrolled .navList li:last-of-type a {
+        color: #000;
+        text-decoration: underline;
         font-size: 1.6rem;
+        cursor: pointer;
+        text-align: left;
+    }
+
+    .scrolled .navList li:last-of-type a:hover {
         color: #fff;
-        text-decoration: none;
-        margin: 2rem;
     }
-    .navbar ul li.nav-item {
-        margin: 0;
-        padding: 0
+    .scrolled .navList .nav-item:last-child.active a {
+        color: #000 !important;
     }
-
-    .navbar-nav li:last-child a {
-        border: 1px solid #bf9000;
-        color: #fff;
-        font-weight: 200;
+    .scrolled .navList .nav-item:not(:last-child).active a {
+        color: #000;
     }
-
-    .nav-item a:hover {
-        color: #bf9000;
-    }
-
-    .nav-item.active a {
-        text-decoration: none;
-        color: #bf9000;
-        border-bottom: 2px solid !important;
-        padding-bottom: 0.2px !important;
-    }
-
-    .nav-item:last-child.active {
-        background-color: #bf9000;
-    }
-
-    .nav-item:last-child.active a {
-        color: #fff !important;
-        border-bottom: 2px solid !important;
-        padding-bottom: 0.2px !important;
-    }
-
-    .nav-item {
-        list-style: none;
-        padding: 0
-    }
-
-    /* version scroll (.mobile) */
-
-    .mobile .navBurgerMenu {
-        width: 6rem;
-        height : 6rem;
-        display : block
-    }
-    .mobile .navBurgerMenu span {
-        font-size: 3rem;
-    }
-    .mobile .modalContactBurger {
-        top: 8rem;
-        right: 4rem;
-    }
-    .mobile .modalContactBurger_visible {
-        top: 8rem;
-        right: 3.1rem;
-    }
-
-    .mobile .navList li:not(:last-of-type) a {
-        font-size: 2rem;
-    }
-
-    .mobile .navList li:last-of-type a {
-        font-size: 2rem;
-    }
-
-    .mobile .nav-item a:hover {
-        color: #bf9000;
-    }
-
     /* Footer */
+
     footer p {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
 
-    /* *****************************************************************
-    HOME.HTML.TWIG
-    ***************************************************************** */
-    /* Slider réalisations */
+    /* HOME REAL */
+    .home .homeReal {
+        display: grid;
+        grid-template-columns: 1fr 8fr 1fr;
+        grid-template-rows: 1fr;
+    }
 
     .home .homeReal .homeSliderImg {
-        height: 30%;
+        height : 50vh;
     }
 
+    .home .homeReal .homePrevButtonReal {
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+    .home .homeReal .homeRealSlider {
+        grid-column: 2/3;
+        grid-row: 1/2;
+    }
+    .home .homeReal .homeNextButtonReal {
+        grid-column: 3/4;
+        grid-row: 1/2;
+    }
+    .home .homeReal .homeSliderImg {
+        width : 100%;
+        height : 50vh;
+        object-fit : cover;
+        object-position : center;
+        display: block;
+        margin : 0 auto 1rem auto;
+        border : 3px solid #bf9000;
+    }
     .homeReal .sliderLegend {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width : 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        padding: 8rem;
-        font-size: 2.4rem;
+        font-size : 1.6rem;
+        padding: 2rem;
     }
-
     .sliderLegend h2 {
-        font-size: 1.4rem;
+        font-size : 1.6rem;
     }
-
-    .sliderLegend h3 {
-        font-size : 2rem;
+    .sliderLegend p {
+        padding-bottom : 2rem;
     }
     .home .homeReal .sliderLegend a {
-        font-size: 1.4rem
+       font-size : 1.4rem
     }
     .home .homeReal button {
-        width: 4rem;
+        width : 4rem;
     }
 
-    /* Slider Avis */
-    .opinionSlider h2 {
-        font-size: 1.8rem;
-    }
-    .opinionSlider p:first-of-type {
-        font-size: 1.8rem;
-        margin-top:1rem
-    }
-    .opinionSlider p:last-of-type {
-        font-size: 1.4rem;
-        margin-top:1rem
-    }
-    .home .homeOpinion button {
-        width: 4rem;
+
+    /* HOME OPINION */
+    .homeOpinion {
+        flex-direction: row;
     }
     .opinionCSS {
         width: 50rem;
         height: 50rem;
         padding: 2rem;
     }
-/* prestas */
-    .homePrestaQuestions p {
-        font-size : 2.2rem
+    .opinionSlider h2 {
+        font-size: 1.6rem;
+        padding : 1rem;
+    }
+    .opinionSlider p:first-of-type {
+         font-size: 1.6rem;
+        padding : 2rem;
+    }
+    .opinionSlider p:last-of-type {
+        font-size: 1.6rem;
+    }
+    .home .homeOpinion button {
+        width : 4rem;
     }
 
-    /* *****************************************************************
-    REALISATIONS.HTML.TWIG
-    ***************************************************************** */
-    .realPage {
-        display: grid;
-        grid-template-rows: repeat(auto-fill, 1fr);
-        grid-gap: 4rem;
-    }
-    .realSection:nth-of-type(odd) {
-        display: grid;
-        grid-template-columns: 0.7fr 0.3fr;
-        grid-template-rows: 1fr;
-        grid-gap: 1rem;
-    }
-    .realSection:nth-of-type(even) {
-        display: grid;
-        grid-template-columns: 0.3fr 0.7fr;
-        grid-template-rows: 1fr;
-        grid-gap: 1rem;
+    /* HOME PRESTA */
+    .home .homePrestaQuestions p {
+        font-size : 2rem;
     }
 
-    .sliderNBtn {
-        display: grid;
-        grid-template-columns: 5% 90% 5%;
-        text-align: center;
-    }
-    .realSection:nth-of-type(odd) .sliderNBtn {
-        grid-column: 1;
-    }
-    .realSection:nth-of-type(even) .sliderNBtn {
-        grid-column: 2;
+    .home .homePrestaTitle {
+        font-size : 2.4rem;
     }
 
-    .realSection:nth-of-type(odd) .text-content {
-        grid-column: 2 / 3;
-        grid-row: 1 / 2
+    /* HOME MAP */
+    .homeMap h2 {
+        font-size : 3rem;
+        font-weight : lighter;
+        text-align : center;
+        color : #bf9000;
+        padding : 0 0 2rem 0
     }
 
-    .realSection:nth-of-type(even) .text-content {
-        grid-column: 1 / 2;
-        grid-row: 1 / 2
+    /* Realisations */
+    .text-content {
+        margin : 4rem
+    }
+    .text-content h3{
+        font-size: 3rem;
+    }
+    .text-content p {
+        font-size : 1.4rem;
     }
 
-    .realSection button {
-        width: 4rem;
-    }
-    .realPage .realSliderImg {
-        text-align: center;
-        width: 100%;
-        height: 50vh;
-        object-fit: cover;
-        object-position: center;
-        margin: 0;
-        border: 3px solid #bf9000;
+    /* One Real */
+    #oneRealPage h3 {
+        width : 80%;
+        border : none;
+        color : #bf9000;
+        font-size : 3rem;
     }
 
-    /* Animations */
-    .realSection .sliderNBtn,
-    .realSection .text-content {
-        opacity: 0;
-    }
-
-    .sliderNBtn.animate__slideInLeft,
-    .sliderNBtn.animate__slideInRight {
-        animation-name: opacity;
-        animation-duration: 1s;
-        animation-fill-mode: forwards;
-    }
-
-    .text-content.animate__slideInLeft,
-    .text-content.animate__slideInRight {
-        animation-name: opacity;
-        animation-duration: 1s;
-        animation-delay: 1s;
-        animation-fill-mode: forwards;
-    }
-
-    @keyframes opacity {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-/* *****************************************************************
-SERVICES.HTML.TWIG
-***************************************************************** */
-    .servicesPage { /**** DESKTOP - A CHANGER ****/
-        grid-template-rows: 1fr;
-        grid-template-columns: 1fr  1fr 1fr;
-    }
-/* *****************************************************************
-SERVICE.HTML.TWIG
-***************************************************************** */
-    .modal-content {
-        width: 80%;
-        max-height: 50%;
-    }
-/* *****************************************************************
-OPINIONS.HTML.TWIG
-***************************************************************** */
-    .opinionsGallery {
+    /* Services */
+    .servicesPage {
+        grid-template-rows : 1fr;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: repeat(auto-fill, 1fr);
-        grid-gap: 2rem;
-    }
-    .opinionForm {
-        width: 60%;
-    }
-/* *****************************************************************
-CONTACT.HTML.TWIG
-***************************************************************** */
-    .contactForm {
-        width: 60%;
-    }
-/* *****************************************************************
-PRICING.HTML.TWIG
-***************************************************************** */
-    .pricingForm {
-        width: 60%;
+        grid-gap: 1rem;
+        margin : 2rem auto;
     }
 
+    /* One Service */
+    .oneServicePage .gallery {
+        grid-template-columns: repeat(3,30%);
+    }
+    .oneServicePage .thumbnails {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Opinions */
+    .opinionFormSection legend {
+        font-size: 2rem;
+    }
+    .opinionForm label {
+        font-size : 1.6rem;
+    }
+    .opinionForm select option {
+        font-size : 1.4rem;
+    }
+    .realChoice option {
+        font-size : 1.4rem;
+    }
+    .opinionFormOKMessage {
+        font-size : 1.6rem;
+    }
+
+    /* contact */
+    .contactForm legend {
+        font-size: 2rem;
+    }
+    .contactForm label {
+        font-size : 1.6rem;
+    }
+    .contactFormOKMessage {
+        font-size : 1.6rem
+    }
+    .pricingForm legend {
+        font-size: 2rem;
+    }
+    .pricingForm label {
+        font-size : 1.6rem;
+    }
+    .pricingForm select option {
+        font-size : 1.4rem;
+    }
+    .pricingFormOKMessage {
+        font-size : 1.6rem
+    }
 
 }

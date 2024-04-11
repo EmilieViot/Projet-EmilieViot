@@ -8,7 +8,7 @@
 {% block main %}
 <main id="content" class="home">
     <section class="homeReal">
-        <button class = "homePrevButtonReal">
+        <button class = "homePrevButtonReal" aria-label="Précédent">
             <img src="assets/img/flecheSliderGauche.png" alt="flecheSliderGauche">
         </button>
         {%  for realisation in realisations %}
@@ -30,7 +30,7 @@
 
     <section class="homeOpinion">
 
-            <button class = "prevButtonOpinion" >
+            <button class = "prevButtonOpinion" aria-label="Suivant">
                 <img  src="assets/img/flecheSliderGauche.png" alt="flecheSliderGauche">
             </button>
 
@@ -90,5 +90,6 @@
         <h2>Rencontrons-nous</h2>
         <div id="map"></div>
     </article>
+</main>
 
 {% endblock %}

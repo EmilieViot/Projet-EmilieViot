@@ -1,5 +1,17 @@
 /* ** MENU ** */
 document.addEventListener("DOMContentLoaded", () => {
+    const logoNoScroll = document.getElementById("logoNoScroll");
+    const logoHeaderScroll = document.querySelector(".logoHeaderScroll");
+    const contactBurgerMenu = document.querySelector(".contactBurgerMenu");
+    const navBurgerMenu = document.querySelector(".navBurgerMenu");
+    const contactModal = document.querySelector('.modalContactBurger');
+    const closeContactModalButton = document.querySelector(".close-contactModal");
+    const navModal = document.querySelector('.modalNavBurger');
+    const closeNavModalButton = document.querySelector(".close-navModal");
+    let header = document.querySelector('header');
+
+    updateLogos();
+
     function getRoute()
     {
         const queryString = window.location.search;
@@ -9,85 +21,115 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     const route = getRoute();
 
-/* ** BASCULE DE LOGO DANS LE HEADER ** */
-    const logoNoScroll = document.getElementById("logoNoScroll");
-    const logoHeaderScroll = document.querySelector(".logoHeaderScroll");
-    let header = document.querySelector('header');
-        if (window.innerWidth >= 1200) {
-            window.addEventListener('scroll', function () {
+/* ** BACK-TO-TOP-BUTTON ** */
+    window.onscroll = function() {scrollFunction()};
 
-                if (window.scrollY > 0) {
-                    header.classList.add('mobile');
-                    logoNoScroll.style.display = "none";
-                    logoHeaderScroll.style.display = "block";
-                } else {
-                    header.classList.remove('mobile');
-                    logoNoScroll.style.display = "block";
-                    logoHeaderScroll.style.display = "none";
-                }
-            });
+    document.getElementById("scrollToTopButton").addEventListener("click", scrollToTop);
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("scrollToTopButton").style.display = "block";
         } else {
-            header.classList.add('mobile');
+            document.getElementById("scrollToTopButton").style.display = "none";
+        }
+    }
+    function scrollToTop() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+
+/* ** BASCULE DE LOGO DANS LE HEADER ** */
+
+
+    // Fonction pour mettre à jour les logos en fonction de la taille de la fenêtre
+    function updateLogos() {
+        if (window.innerWidth >= 1200) {
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+                logoNoScroll.style.display = "none";
+                contactModal.style.display = "block";
+                navModal.style.display = "block";
+                closeContactModalButton.style.display = "block";
+                closeNavModalButton.style.display = "block";
+                logoHeaderScroll.style.display = "block";
+                contactBurgerMenu.style.display = "block";
+                navBurgerMenu.style.display = "block";
+            } else {
+                header.classList.remove('scrolled');
+                logoNoScroll.style.display = "block";
+                contactModal.style.display = "block";
+                closeContactModalButton.style.display = "none";
+                closeNavModalButton.style.display = "none";
+                logoHeaderScroll.style.display = "none";
+                contactBurgerMenu.style.display = "none";
+                navBurgerMenu.style.display = "none";
+            }
+        } else {
             logoHeaderScroll.style.display = "block";
             logoNoScroll.style.display = "none";
+            contactBurgerMenu.style.display = "block";
+            navBurgerMenu.style.display = "block";
         }
+    }
+
+    let isScrolling = false;
+
+    window.addEventListener('scroll', function() {
+        if (!isScrolling) {
+            window.requestAnimationFrame(function() {
+                updateLogos();
+                isScrolling = false;
+            });
+            isScrolling = true;
+        }
+    });
+
+// Déclenche la mise à jour des logos lors du redimensionnement de la fenêtre
+    window.addEventListener('resize', function() {
+        updateLogos();
+    });
+
+// Exécuter la fonction une fois au chargement de la page pour initialiser les logos
+    updateLogos();
 
 /* ** BURGER MENU POUR LES INFOS DE CONTACT ** */
-
-        const contactBurgerMenu = document.querySelector('.contactBurgerMenu');
-        const contactModal = document.querySelector('.modalContactBurger');
-        const closeContactModalButton = document.querySelector(".close-contactModal");
-
         contactBurgerMenu.addEventListener('click', (e) => {
             contactModal.classList.toggle('modalContactBurger');
             contactModal.classList.toggle('modalContactBurger_visible');
         });
-
         closeContactModalButton.addEventListener('click', (e) => {
             contactModal.classList.toggle('modalContactBurger');
             contactModal.classList.toggle('modalContactBurger_visible');
         });
-
         function closeContactFromEverywhere() {
             contactModal.classList.remove('modalContactBurger_visible');
             contactModal.classList.add('modalContactBurger');
         }
-
         document.addEventListener('click', (e) => {
             if (!contactModal.contains(e.target) && !contactBurgerMenu.contains(e.target)) {
                 closeContactFromEverywhere();
             }
         });
-
 /* ** BURGER MENU POUR LA NAV ** */
-
-    const navBurgerMenu = document.querySelector('.navBurgerMenu');
-    const navModal = document.querySelector('.modalNavBurger');
-    const closeNavModalButton = document.querySelector(".close-navModal");
 
     navBurgerMenu.addEventListener('click', (e) => {
         navModal.classList.toggle('modalNavBurger');
         navModal.classList.toggle('modalNavBurger_visible');
     });
-
     closeNavModalButton.addEventListener('click', (e) => {
         navModal.classList.toggle('modalNavBurger');
         navModal.classList.toggle('modalNavBurger_visible');
     });
-
     function closeNavFromEverywhere() {
         navModal.classList.remove('modalNavBurger_visible');
         navModal.classList.add('modalNavBurger');
     }
-
     document.addEventListener('click', (e) => {
         if (!navModal.contains(e.target) && !navBurgerMenu.contains(e.target)) {
             closeNavFromEverywhere();
         }
     });
-
 /* ** SLIDERS ** */
-
     /* SLIDER REALS - HOME */
     if(route === 'home' || route === null) {
         const homePrevButtonReal = document.querySelector(".homePrevButtonReal");
@@ -178,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 /* MODALE - PAGE ONE SERVICE */
-    if(route === 'service') {
+    if(route === 'service' || route === 'realisation') {
         const thumbnails = document.querySelectorAll('.thumbnails');
         const modal = document.querySelector('.modal');
         const modalImage = document.getElementById('modal-image');
@@ -213,9 +255,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+/* FORMULAIRE CONTACT */
+
+    if(route === 'contact') {
+        document.getElementsByClassName("send-contactInfos").addEventListener("click", function () {
+            // Récupérer les données du formulaire
+            const formData = new FormData(document.getElementById("contactForm"));
+            // Envoyer les données au serveur avec Fetch
+            fetch("index.php?route=messageRegister", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    console.log('message bien envoyé')
+                })
+        });
+    }
+
 /* ** FORMULAIRE DEMANDE DE DEVIS * **/
     if(route === 'pricing') {
         let contactMode = document.getElementById("contactMode");
+        let firstname = document.getElementById("firstname");
+        let lastname = document.getElementById("lastname");
         let telField = document.getElementById("tel");
         let emailField = document.getElementById("email");
         let btn = document.querySelector("button[type='submit']");
@@ -244,4 +307,22 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-});
+
+    /* ACCESSIBILITE - POLICES */
+    const increaseFontButton = document.getElementById('increase-font');
+    const decreaseFontButton = document.getElementById('decrease-font');
+
+    const changeFontSize = (amount) => {
+        const currentFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+        const newFontSize = currentFontSize + amount;
+        document.documentElement.style.fontSize = newFontSize + 'px';
+    };
+
+    increaseFontButton.addEventListener('click', function() {
+        changeFontSize(2); // Augmente la taille de 2 pixels
+    });
+
+    decreaseFontButton.addEventListener('click', function() {
+        changeFontSize(-2); // Diminue la taille de 2 pixels
+    });
+})

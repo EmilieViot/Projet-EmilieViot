@@ -28,7 +28,7 @@
         </button>
         <div class="modalContactBurger">
             <p class="close-contactModal">&#9747;</p>
-            <ul class="contactDetails contact_list reveal-1">
+            <ul class="contactDetails contact_list">
                 <li><a href="tel:+33298108916"><i class="fa-solid fa-phone"></i>02 98 10 89 16</a></li>
                 <li class="slash">/</li>
                 <li><i class="fa-solid fa-location-dot"></i>11 ZA de Dioulan - 29140 Rosporden</li>
@@ -76,8 +76,14 @@
 
 {% block javascript %}
 {% endblock %}
-
+<button id="scrollToTopButton" title="Remonter en haut de la page">&#8593;</button>
 <footer>
+    <div class="controls">
+        <div><i class="contrast fa-regular fa-circle-half-stroke"></i></div>
+        <button id="increase-font">A+</button>
+        <button id="decrease-font">A-</button>
+    </div>
+
     <div class="vertical-line"></div>
     <p><a href="http://www.linkedin.com" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>&nbsp;&nbsp;<a href="http://www.facebook.com" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>&nbsp;&nbsp;<a href="http://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a></p>
     <p><a href="index.php?route=legal">Mentions Légales</a> - Site créé par EV</p>

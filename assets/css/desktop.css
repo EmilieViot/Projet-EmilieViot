@@ -354,7 +354,7 @@
     /* Home Prestas */
     .home .homePresta {
         display: grid;
-        grid-template-rows: 60% 40%;
+        grid-template-rows: 80% 20%;
         background-color: #bf9000;
         width: 100%;
         height: auto;

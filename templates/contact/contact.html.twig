@@ -18,7 +18,7 @@
 
         <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
         {%  if  message is defined %}
-            <p class="OpinionFormOKMessage">{{ message }}</p>
+            <p class="contactFormOKMessage">{{ message }}</p>
         {% endif %}
 
         <form class="contactForm" action="index.php?route=messageRegister" method="post">
@@ -40,7 +40,7 @@
             <label for="content">Votre message (max 1024 caractères) * :</label>
             <textarea id="content" name="content" rows="4" required="required"></textarea>
 
-            <button type="submit">Envoyer</button>
+            <button class="send-contactInfos" type="submit">Envoyer</button>
         </form>
 </main>
 {% endblock %}
