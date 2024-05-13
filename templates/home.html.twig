@@ -35,33 +35,37 @@
             </button>
 
             {% for opinion in opinions %}
-            <article class="opinionSlider">
-                <div class="opinionCSS">
-                    {% if opinion.notation == 1 %}
-                    <h2>
-                        <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i>
-                    </h2>
-                    {% elseif opinion.notation == 2 %}
-                    <h2>
-                        <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i>
-                    </h2>
-                    {% elseif opinion.notation == 3 %}
-                    <h2>
-                        <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i>
-                    </h2>
-                    {% elseif opinion.notation == 4 %}
-                    <h2>
-                        <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i>
-                    </h2>
-                    {% elseif opinion.notation == 5 %}
-                    <h2>
-                        <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i>
-                    </h2>
-                    {% endif %}
-                <p class="content">{{ opinion.content }}</p>
-                <p class="opinionUsername">Merci à <strong><em>{{ opinion.username }}</em></strong> pour cet avis.</p>
-                </div>
-            </article>
+                {% if opinion.status == "OK" %}
+                    <article class="opinionSlider">
+
+                    <div class="opinionCSS">
+                        {% if opinion.notation == 1 %}
+                        <h2>
+                            <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i>
+                        </h2>
+                        {% elseif opinion.notation == 2 %}
+                        <h2>
+                            <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i>
+                        </h2>
+                        {% elseif opinion.notation == 3 %}
+                        <h2>
+                            <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i>
+                        </h2>
+                        {% elseif opinion.notation == 4 %}
+                        <h2>
+                            <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp far fa-star" style="color: #FFD43B;"></i>
+                        </h2>
+                        {% elseif opinion.notation == 5 %}
+                        <h2>
+                            <i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i>
+                        </h2>
+                        {% endif %}
+                        <p class="content">{{ opinion.content }}</p>
+                        <p class="opinionUsername">Merci à <strong><em>{{ opinion.username }}</em></strong> pour cet avis.</p>
+                    </div>
+
+                    </article>
+                {% endif %}
             {% endfor %}
 
             <button class = "nextButtonOpinion">

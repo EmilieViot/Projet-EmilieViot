@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("scrollToTopButton").addEventListener("click", scrollToTop);
 
     function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        if (/*document.body.scrollTop > 20 || */document.documentElement.scrollTop > 20) {
             document.getElementById("scrollToTopButton").style.display = "block";
         } else {
             document.getElementById("scrollToTopButton").style.display = "none";
@@ -274,6 +274,25 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    if(route === 'contact') {
+        const contactForm = document.querySelector('.contactForm');
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêche le formulaire de se soumettre normalement
+
+            let formulaireData = new FormData(contactForm); // Utilisation de la variable 'form' au lieu de 'this'
+
+            fetch('index.php?route=messageRegister', {
+                method: 'POST',
+                body: formulaireData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // Affiche la réponse du script PHP
+                    console.log('message bien envoyé en back office')
+                })
+        });
+    }
+
 /* ** FORMULAIRE DEMANDE DE DEVIS * **/
     if(route === 'pricing') {
         let contactMode = document.getElementById("contactMode");
@@ -325,4 +344,58 @@ document.addEventListener("DOMContentLoaded", () => {
     decreaseFontButton.addEventListener('click', function() {
         changeFontSize(-2); // Diminue la taille de 2 pixels
     });
+
+
+    /* ACCESSIBILITE - CONTRASTE */
+    const contrastButton = document.getElementById('contrast');
+
+    // Fonction pour inverser les couleurs
+    const toggleContrastElement = () => {
+        const body = document.body;
+        const elements = document.querySelectorAll('*'); // Sélectionne tous les éléments de la page
+
+        const currentBackgroundColor = computedStyles.backgroundColor;
+        const currentColor = computedStyles.color;
+
+        // Vérifier la couleur actuelle du fond
+        if (currentBackgroundColor === 'rgb(0, 0, 0)' || currentBackgroundColor === '#000') {
+            body.style.backgroundColor = 'white';
+        } else {
+            body.style.backgroundColor = 'black';
+        }
+
+        // Vérifier la couleur actuelle du texte
+        if (currentColor === 'rgb(255, 255, 255)' || currentColor === '#fff') {
+            body.style.color = 'black';
+        } else {
+            body.style.color = 'white';
+        }
+    };
+
+    const toggleContrastBody = () => {
+        const body = document.body;
+        const computedStyles = window.getComputedStyle(body);
+
+        const currentBackgroundColor = computedStyles.backgroundColor;
+        const currentColor = computedStyles.color;
+
+        // Vérifier la couleur actuelle du fond
+        if (currentBackgroundColor === 'rgb(0, 0, 0)' || currentBackgroundColor === '#000') {
+            body.style.backgroundColor = 'white';
+        } else {
+            body.style.backgroundColor = 'black';
+        }
+
+        // Vérifier la couleur actuelle du texte
+        if (currentColor === 'rgb(255, 255, 255)' || currentColor === '#fff') {
+            body.style.color = 'black';
+        } else {
+            body.style.color = 'white';
+        }
+    }
+
+    // Écouter le clic sur le bouton contrast
+    contrastButton.addEventListener('click', toggleContrastElement);
+    contrastButton.addEventListener('click', toggleContrastBody);
 })
+

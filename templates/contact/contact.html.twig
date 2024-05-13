@@ -21,7 +21,7 @@
             <p class="contactFormOKMessage">{{ message }}</p>
         {% endif %}
 
-        <form class="contactForm" action="index.php?route=messageRegister" method="post">
+        <form class="contactForm" {#action="index.php?route=messageRegister"#} method="post">
             <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
             <legend>Comment pouvons-nous vous aider ?</legend>
             <div class="vertical-line"></div>

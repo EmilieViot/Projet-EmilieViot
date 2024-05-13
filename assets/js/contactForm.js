@@ -1,5 +1,6 @@
-function sendContactInfos(product_id) {
-    console.log(`Add product ${product_id} to cart.`);
+document.querySelector('.contactForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Empêche le formulaire de se soumettre normalement
+
 
     let formData = new FormData();
     formData.append('product_id', product_id);
@@ -12,7 +13,5 @@ function sendContactInfos(product_id) {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-        });
-}
-
-export {addToCart};
+        })
+})

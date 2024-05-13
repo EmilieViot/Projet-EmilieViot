@@ -4,7 +4,7 @@ class Opinion
 {
     private ?int $id = null;
 
-    public function __construct(private string $username,private string $content, private int $notation, private ?int $realisationId)
+    public function __construct(private string $username,private string $content, private int $notation, private ?int $realisationId, private string $status = "en attente")
     {
     }
 
@@ -52,6 +52,15 @@ class Opinion
     public function setRealisationId(?int $realisationId): void
     {
         $this->realisationId = $realisationId;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
     }
 }
 

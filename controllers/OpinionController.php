@@ -33,6 +33,8 @@ class OpinionController extends AbstractController
                 unset($_SESSION["error-message"]);
                 $om->createOpinion($opinion);
 
+                $_SESSION['new-opinion'] = true;
+
                 $errorMessage = "Merci d'avoir pris le temps de laisser un avis. Nous restons à votre disposition pour toute demande.";
                 $this->render("opinions/opinion.html.twig", ['message' => $errorMessage]);
             } else {
@@ -42,13 +44,20 @@ class OpinionController extends AbstractController
         }
         else {
             $_SESSION["error-message"] = "Missing fields";
-            $this->redirect('pricing');
+            $this->redirect('opinion');
         }
     }
 
-    public function opinionConfirmation(): void
+    public function readOpinion(): void
     {
-        $this->render("opinions/opinionConfirmation.html.twig", []);
+        if (isset($_POST['readMessage'])) {
+            // Display a sample message
+            echo '<p id="messageContent">This is the displayed message.</p>';
+
+            // Clear the session variable to indicate no new elements
+            unset($_SESSION['new_table_element']);
+        }
+        $this->render("opinions/opinion.html.twig", []);
     }
 }
 

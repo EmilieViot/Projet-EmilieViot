@@ -15,7 +15,7 @@ class OpinionManager extends AbstractManager
             if (!empty($item['realisation_id'])) {
                 $realisationId = $item['realisation_id'];
             }
-            $opinion = new Opinion($item["username"], $item["content"], $item["notation"], $realisationId);
+            $opinion = new Opinion($item["username"], $item["content"], $item["notation"], $realisationId, $item["status"]);
             $opinion->setId($item["id"]);
             $opinions[] = $opinion;
         }
@@ -35,8 +35,8 @@ class OpinionManager extends AbstractManager
             if (!empty($result['realisation_id'])) {
                 $realisationId = $result['realisation_id'];
             }
-            $opinion = new Opinion($item["username"], $item["content"], $item["notation"], $realisationId);
-            $opinion->setId($item["id"]);
+            $opinion = new Opinion($result["username"], $result["content"], $result["notation"], $realisationId, $result["status"]);
+            $opinion->setId($result["id"]);
             return $opinion;
         }
         return null;
@@ -45,19 +45,19 @@ class OpinionManager extends AbstractManager
     public function createOpinion(Opinion $opinion): void
     {
         if ($opinion->getRealisationId() === null) {
-            $query = $this->db->prepare('INSERT INTO opinions (id, username, content, notation, realisation_id) VALUES (NULL, :username, :content, :notation, NULL)');
+            $query = $this->db->prepare('INSERT INTO opinions (id, username, content, notation, realisation_id, status) VALUES (NULL, :username, :content, :notation, NULL, "en attente")');
             $parameters = [
                 "username" => $opinion->getUsername(),
                 "content" => $opinion->getContent(),
-                "notation" => $opinion->getNotation(),
+                "notation" => $opinion->getNotation()
             ];
         } else {
-            $query = $this->db->prepare('INSERT INTO opinions (id, username, content, notation, realisation_id) VALUES (NULL, :username, :content, :notation, :realisationId)');
+            $query = $this->db->prepare('INSERT INTO opinions (id, username, content, notation, realisation_id, status) VALUES (NULL, :username, :content, :notation, :realisationId, "en attente")');
             $parameters = [
                 "username" => $opinion->getUsername(),
                 "content" => $opinion->getContent(),
                 "notation" => $opinion->getNotation(),
-                "realisationId" => $opinion->getRealisationId(),
+                "realisationId" => $opinion->getRealisationId()
             ];
         }
         $query->execute($parameters);
