@@ -6,7 +6,6 @@ class Picture
     public function __construct(private string $url,private string $alt)
     {
     }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -15,7 +14,6 @@ class Picture
     {
         $this->id = $id;
     }
-
     public function getUrl(): string
     {
         return $this->url;
@@ -24,7 +22,6 @@ class Picture
     {
         $this->url = $url;
     }
-
     public function getAlt(): string
     {
         return $this->alt;

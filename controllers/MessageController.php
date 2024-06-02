@@ -20,22 +20,34 @@ class MessageController extends AbstractController
                 $city = htmlspecialchars($_POST["city"]);
                 $email = htmlspecialchars($_POST["email"]);
                 $content = htmlspecialchars($_POST["content"]);
+                var_dump($firstname, $lastname, $city, $email, $content);
 
                 $message = new Message($firstname, $lastname, $city, $email, $content);
+                var_dump($message);
+
                 $mm->createMessage($message);
 
-                $message = "Votre demande a bien été transmise. Nous revenons vers vous dans les plus brefs délais.";
-                $this->render("contact/contact.html.twig", ['message' => $message]);
+                $response = [
+                    'status' => 'OK',
+                    'message' => "Merci $firstname $lastname pour votre demande. Nous revenons vers vous dans les plus brefs délais."
+                ];
+                echo json_encode($response);
             } else {
-                $_SESSION["error-message"] = "CSRF token invalide";
-                $this->redirect("contact");
+                http_response_code(405);
+                echo json_encode(['status' => 'error', 'message' => 'Méthode non autorisée']);
             }
-        }
-        else {
-            $_SESSION["error-message"] = "Merci de compléter les champs obligatoires";
+        } else {
+            $response = [
+                'status' => 'pas OK',
+                'message' => "Merci de compléter les champs obligatoires"
+            ];
             $this->redirect('contact');
+
+            var_dump($response);
         }
     }
+
+
 
     public function messageConfirmation(): void
     {

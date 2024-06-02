@@ -4,7 +4,7 @@ class Pricing
 {
     private ?int $id = null;
 
-    public function __construct(private string $contactMode,private string $firstname,private string $lastname, private string $email, private string $tel, private ?string $city, private ?string $message, private ?array $details, private ?string $photoPath)
+    public function __construct(private string $contact_mode,private string $firstname,private string $lastname, private string $email, private string $tel, private ?string $city, private ?string $message, private ?array $details, private ?string $photo_path)
     {
     }
 
@@ -17,13 +17,13 @@ class Pricing
         $this->id = $id;
     }
 
-    public function getContactMode(): string
+    public function getcontact_mode(): string
     {
-        return $this->contactMode;
+        return $this->contact_mode;
     }
-    public function setContactMode(string $contactMode): void
+    public function setcontact_mode(string $contact_mode): void
     {
-        $this->contactMode = $contactMode;
+        $this->contact_mode = $contact_mode;
     }
 
     public function getFirstname(): string
@@ -80,7 +80,7 @@ class Pricing
         $this->message = $message;
     }
 
-    public function getDetails(): array
+    public function getDetails(): ?array
     {
         return $this->details;
     }
@@ -89,13 +89,13 @@ class Pricing
         $this->details = $details;
     }
 
-    public function getPhotoPath(): string
+    public function getphoto_path(): ?string
     {
-        return $this->photoPath;
+        return $this->photo_path;
     }
-    public function setPhotoPath(string $photoPath): void
+    public function setphoto_path(string $photo_path): void
     {
-        $this->photoPath = $photoPath;
+        $this->photo_path = $photo_path;
     }
 
 }

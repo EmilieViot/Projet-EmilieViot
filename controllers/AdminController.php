@@ -48,7 +48,7 @@ class AdminController extends AbstractController
 
     public function checkEditOpinion(): void
     {
-        if (isset($_POST['title']) && isset($_POST['intro']) && isset($_POST['description']) /*&& $_POST['photoPath']*/) {
+        if (isset($_POST['title']) && isset($_POST['intro']) && isset($_POST['description']) /*&& $_POST['photo_path']*/) {
 
             $tokenManager = new CSRFTokenManager();
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
@@ -56,7 +56,7 @@ class AdminController extends AbstractController
                 $dm = new DetailManager();
                 $pm = new PricingManager();
 
-                $contactMode = htmlspecialchars($_POST["contactMode"]);
+                $contact_mode = htmlspecialchars($_POST["contact_mode"]);
                 $firstname = htmlspecialchars($_POST["firstname"]);
                 $lastname = htmlspecialchars($_POST["lastname"]);
                 $email = htmlspecialchars($_POST["email"]);
@@ -64,7 +64,7 @@ class AdminController extends AbstractController
                 $city = htmlspecialchars($_POST["city"]);
                 $message = htmlspecialchars($_POST["message"]);
 
-                $pricing = new Pricing($contactMode, $firstname, $lastname, $email, $tel, $city, $message);
+                $pricing = new Pricing($contact_mode, $firstname, $lastname, $email, $tel, $city, $message);
                 unset($_SESSION["error-message"]);
                 $sm->updateOpinion($service);
 
@@ -207,7 +207,7 @@ class AdminController extends AbstractController
 
     public function checkEditReal(): void
     {
-        if (isset($_POST['title']) && isset($_POST['description']) /*&& $_POST['photoPath']*/) {
+        if (isset($_POST['title']) && isset($_POST['description']) /*&& $_POST['photo_path']*/) {
 
             $tokenManager = new CSRFTokenManager();
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
@@ -247,7 +247,7 @@ class AdminController extends AbstractController
 
     public function checkServiceCreation(): void
     {
-        if (isset($_POST['title']) && isset($_POST['intro']) && isset($_POST['description']) /*&& $_POST['photoPath']*/) {
+        if (isset($_POST['title']) && isset($_POST['intro']) && isset($_POST['description']) /*&& $_POST['photo_path']*/) {
             $tokenManager = new CSRFTokenManager();
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
 
@@ -289,7 +289,7 @@ class AdminController extends AbstractController
 
     public function checkEditService(): void
     {
-        if (isset($_POST['title']) && isset($_POST['intro']) && isset($_POST['description']) /*&& $_POST['photoPath']*/) {
+        if (isset($_POST['title']) && isset($_POST['intro']) && isset($_POST['description']) /*&& $_POST['photo_path']*/) {
 
             $tokenManager = new CSRFTokenManager();
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {

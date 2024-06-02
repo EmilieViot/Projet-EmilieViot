@@ -2,88 +2,120 @@
 
 class PricingManager extends AbstractManager
 {
-    public function findOne(int $id) : ? Pricing
+    // Finds and returns a Pricing object by its ID
+    public function findOne(int $id) : ?Pricing
     {
+        // Prepare a SQL query to select a pricing by its ID
         $query = $this->db->prepare('SELECT * FROM pricings WHERE id=:id');
         $parameters = [
             "id" => $id
         ];
+        // Execute the query with the provided parameters
         $query->execute($parameters);
+        // Fetch the result as an associative array
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
+        // If a result is found, create a Pricing object
         if($result)
         {
+            // Create a DetailManager instance to fetch associated details
             $dm = new DetailManager();
+            // Fetch details associated with the pricing
             $details = $dm->findByPricing($result['id']);
-            $pricing = new Pricing($result["contactMode"], $result["firstname"], $result["lastname"], $result["email"], $result["tel"], $result["city"], $result["message"], $details, $result["photoPath"]);
+            // Create a Pricing object with fetched data
+            $pricing = new Pricing($result["contact_mode"], $result["firstname"], $result["lastname"], $result["email"], $result["tel"], $result["city"], $result["message"], $details, $result["photo_path"]);
+            // Set the ID of the Pricing object
             $pricing->setId($result["id"]);
+            // Return the Pricing object
             return $pricing;
         }
+        // Return null if no result is found
         return null;
     }
 
+    // Creates a new Pricing entry in the database
     public function createPricing(Pricing $pricing): void
     {
-            $query = $this->db->prepare('INSERT INTO pricings (id, contactMode, firstname, lastname, email, tel, city, message, photoPath) VALUES (NULL, :contactMode, :firstname, :lastname, :email, :tel, :city, :message, :photoPath)');
-            $parameters = [
-                "contactMode" => $pricing->getContactMode(),
-                "firstname" => $pricing->getFirstname(),
-                "lastname" => $pricing->getLastname(),
-                "email" => $pricing->getEmail(),
-                "tel" => $pricing->getTel(),
-                "city" => $pricing->getCity(),
-                "message" => $pricing->getMessage(),
-                "photoPath" => $pricing->getPhotoPath()
-            ];
+        // Prepare a SQL query to insert a new pricing entry
+        $query = $this->db->prepare('INSERT INTO pricings (id, contact_mode, firstname, lastname, email, tel, city, message, photo_path) VALUES (NULL, :contact_mode, :firstname, :lastname, :email, :tel, :city, :message, :photo_path)');
+        $parameters = [
+            // Bind parameters from the Pricing object to the query
+            "contact_mode" => $pricing->getcontact_mode(),
+            "firstname" => $pricing->getFirstname(),
+            "lastname" => $pricing->getLastname(),
+            "email" => $pricing->getEmail(),
+            "tel" => $pricing->getTel(),
+            "city" => $pricing->getCity(),
+            "message" => $pricing->getMessage(),
+            "photo_path" => $pricing->getphoto_path()
+        ];
 
-            if ($query->errorCode() !== '00000')
-            {
-                $errorInfo = $query->errorInfo();
-//                dump($errorInfo);
-            }
-            $query->execute($parameters);
-            $pricing->setId($this->db->lastInsertId());
+        // Execute the query with the provided parameters
+        $query->execute($parameters);
+
+        // Set the ID of the Pricing object to the last inserted ID in the database
+        $pricing->setId($this->db->lastInsertId());
     }
 
+    // Fetches all Pricing entries from the database
     public function findAll(): array
     {
+        // Prepare a SQL query to select all pricings
         $query = $this->db->prepare('SELECT * FROM pricings');
+        // Execute the query
         $query->execute();
+        // Fetch all results as an associative array
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $pricings = [];
 
+        // Loop through each result and create Pricing objects
         foreach ($result as $item) {
+            // Create a DetailManager instance to fetch associated details
             $dm = new DetailManager();
+            // Fetch details associated with each pricing
             $details = $dm->findByPricing($item['id']);
-            $pricing = new Pricing($item["contactMode"], $item["firstname"], $item["lastname"], $item["email"], $item["tel"], $item["city"], $item["message"], $details, $item["photoPath"]);
-
+            // Create a Pricing object with fetched data
+            $pricing = new Pricing($item["contact_mode"], $item["firstname"], $item["lastname"], $item["email"], $item["tel"], $item["city"], $item["message"], $details, $item["photo_path"]);
+            // Add the Pricing object to the array
             $pricings[] = $pricing;
         }
+        // Return the array of Pricing objects
         return $pricings;
     }
 
+    // Fetches a Pricing entry by its ID
     public function getPricingById(int $id): ?Pricing
     {
+        // Prepare a SQL query to select a pricing by its ID
         $query = $this->db->prepare('SELECT * FROM pricings WHERE id = :id');
+        // Execute the query with the provided ID parameter
         $query->execute(["id" => $id]);
+        // Fetch the result as an associative array
         $result = $query->fetch(PDO::FETCH_ASSOC);
-        dump($result);
 
+        // If a result is found, create a Pricing object
         if ($result) {
+            // Create a DetailManager instance to fetch associated details
             $dm = new DetailManager();
+            // Fetch details associated with the pricing
             $details = $dm->findByPricing($result['id']);
-            $pricing = new Pricing($result["contactMode"], $result["firstname"], $result["lastname"], $result["email"], $result["tel"], $result["city"], $result["message"], $result["photoPath"]);
+            // Create a Pricing object with fetched data
+            $pricing = new Pricing($result["contact_mode"], $result["firstname"], $result["lastname"], $result["email"], $result["tel"], $result["city"], $result["message"], $result["photo_path"]);
+            // Set the ID of the Pricing object
             $pricing->setId($result["id"]);
+            // Return the Pricing object
             return $pricing;
         }
+        // Return null if no result is found
         return null;
     }
 
+    // Deletes a Pricing entry from the database by its ID
     public function deletePricing(int $id): void
     {
+        // Prepare a SQL query to delete a pricing by its ID
         $query = $this->db->prepare('DELETE FROM pricings WHERE id = :id');
+        // Execute the query with the provided ID parameter
         $query->execute(["id" => $id]);
     }
 }
-
-

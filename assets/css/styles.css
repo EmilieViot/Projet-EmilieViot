@@ -2,74 +2,82 @@
 RESET
 ***************************************************************** */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, section, summary, time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
+margin: 0;
+padding: 0;
+border: 0;
 }
 ol, ul {
-    list-style: none;
+list-style: none;
 }
 blockquote, q {
-    quotes: none;
+quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-    content: '';
+content: '';
 }
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+border-collapse: collapse;
+border-spacing: 0;
 }
 body * {
-    box-sizing: border-box;
+box-sizing: border-box;
 }
 html {
-    font-size: 62.5%;
-    font-family: 'Signika';
+font-size: 62.5%;
+font-family: 'Signika';
 }
 img, video {
-    max-width: 100%;
+max-width: 100%;
 }
 /* *****************************************************************
 GENERAL
 ***************************************************************** */
 body {
-    width : 100%;
-    height : 100%;
-    margin : 0;
-    font-weight:100;
-    line-height: 1.5;
-    font-family: 'Signika';
-    font-size: 1.8rem;
-    background-color: #000;
-    color:#fff;
+width : 100%;
+height : 100%;
+margin : 0;
+font-weight:100;
+line-height: 1.5;
+font-family: 'Signika';
+font-size: 1.8rem;
+background-color: #000;
+color:#fff;
 }
 .scrolled header, header {
-    height : 8rem;
-    display : grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color : rgba(0, 0, 0, 0.85);
-    border-bottom: 1px solid #bf9000;
+height : 8rem;
+display : grid;
+grid-template-columns: 1fr 1fr 1fr;
+grid-template-rows: 1fr;
+position: sticky;
+top: 0;
+z-index: 1000;
+background-color : rgba(0, 0, 0, 0.85);
+border-bottom: 1px solid #bf9000;
 }
 main {
-    margin : auto
+margin : auto
 }
 .vertical-line {
-    border-left: 1px solid #bf9000;
-    height: 5vh;
-    width : 0;
-    margin: 2rem auto;
-    display : block;
-    text-align: center;
+border-left: 1px solid #bf9000;
+height: 5vh;
+width : 0;
+margin: 2rem auto;
+display : block;
+text-align: center;
 }
 button {
-    cursor: pointer;
+cursor: pointer;
 }
-
+.visually-hidden {
+clip: rect(0 0 0 0);
+clip-path: inset(50%);
+height: 1px;
+overflow: hidden;
+position: absolute;
+white-space: nowrap;
+width: 1px;
+}
 /* *****************************************************************
 BASE.HTML.TWIG
 ***************************************************************** */
@@ -78,1041 +86,1080 @@ BASE.HTML.TWIG
 
 /* Header - contact menu */
 #nav {
-    grid-column: 1/2;
-    grid-row: 1/2;
-    text-align : left;
+grid-column: 1/2;
+grid-row: 1/2;
+text-align : left;
 }
 
 #contactNav {
-    grid-column: 3/4;
-    grid-row: 1/2;
-    justify-self: right;
+grid-column: 3/4;
+grid-row: 1/2;
+justify-self: right;
 }
 .slash {
-    display : none
+display : none
 }
 .contactBurgerMenu{
-    border : 1px solid #bf9000;
-    background-color: transparent;
-    width: 4rem;
-    height : 4rem;
-    margin: 2rem;
-    position : relative;
+border : 1px solid #bf9000;
+background-color: transparent;
+width: 4rem;
+height : 4rem;
+margin: 2rem;
+position : relative;
 }
 .contactBurgerMenu span {
-    color : #bf9000;
-    font-size : 2rem;
+color : #bf9000;
+font-size : 2rem;
 }
 .modalContactBurger {
-    background-color: #bf9000;
-    display : none;
-    position: absolute;
-    top: 6rem;
-    right:2rem;
-    width: auto;
-    margin : auto;
-    z-index: 1000;
-    opacity: 0;
-    transition : all 0s;
+background-color: #000;
+display : none;
+position: absolute;
+top: 6rem;
+right:2rem;
+width: auto;
+margin : auto;
+z-index: 1000;
+opacity: 0;
+transition : all 0s;
 }
 .modalContactBurger_visible {
-    background-color: #bf9000;
-    position: absolute;
-    top: 6rem;
-    right:2rem;
-    width: auto;
-    margin : auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: right;
-    align-content: end;
-    z-index: 1000;
-    opacity: 1;
-    transition : all 0s ease-out;
+background-color: #000;
+position: absolute;
+top: 6rem;
+right:2rem;
+width: auto;
+margin : auto;
+display: flex;
+flex-direction: column;
+justify-content: right;
+align-content: end;
+z-index: 1000;
+opacity: 1;
+transition : all 0s ease-out;
 }
 .close-contactModal {
-    position: absolute;
-    color : #000;
-    top: 0;
-    right: 2%;
-    font-size: 1.4rem;
-    cursor: pointer;
+position: absolute;
+color : #000;
+top: 0;
+right: 2%;
+font-size: 1.4rem;
+cursor: pointer;
 }
 .contact_list {
-    list-style: none;
-    padding: 1rem;
-    text-align: right;
+list-style: none;
+padding: 1rem;
+text-align: right;
 }
 .contact_list li {
-    font-size: 1.2rem;
-    text-align: left;
+font-size: 1.2rem;
+text-align: left;
+color : #000;
 }
 .contact_list a {
-    text-decoration : underline;
-    color : #fff;
-    cursor: pointer;
-    text-align: left;
+text-decoration : underline;
+color : #000;
+cursor: pointer;
+text-align: left;
 }
 .contact_list i {
-    color : #000;
-    margin: 0 1rem 0 0;
-    font-size: 1rem;
-    cursor: pointer;
+color : #000;
+margin: 0 1rem 0 0;
+font-size: 1rem;
+cursor: pointer;
 }
 
 /* Header - logos */
 .logoHeaderScroll {
-    height : 4rem;
-    text-align :center;
+height : 4rem;
+text-align :center;
 }
 .lienLogoScroll {
-    margin : 2rem ;
-    text-align:center ;
+margin : 2rem ;
+text-align:center ;
 }
 .lienLogoScroll img {
-    width : auto;
-    margin : 2rem auto
+width : auto;
+margin : 2rem auto
 }
 
 .lienLogoScroll {
-    text-align: right;
-    margin : 0;
-    padding : 0
+text-align: right;
+margin : 0;
+padding : 0
 }
 
 /* Header - nav */
 .navBurgerMenu{
-    border : 1px solid #bf9000;
-    background-color: transparent;
-    width: 4rem;
-    height : 4rem;
-    margin: 2rem;
+border : 1px solid #bf9000;
+background-color: transparent;
+width: 4rem;
+height : 4rem;
+margin: 2rem;
 }
 .navBurgerMenu span {
-    color : #bf9000;
-    font-size : 2rem;
+color : #bf9000;
+font-size : 2rem;
 }
 .modalNavBurger {
-    background-color: #bf9000;
-    position: absolute;
-    top: 6rem;
-    left:2rem;
-    width: auto;
-    margin : auto;
-    display: none;
-    transition: all 1s;
-    z-index: 1000;
-    opacity: 0;
-    transition : all 0s;
+background-color: #bf9000;
+position: absolute;
+top: 6rem;
+left:2rem;
+width: auto;
+margin : auto;
+display: none;
+transition: all 1s;
+z-index: 1000;
+opacity: 0;
+transition : all 0s;
 }
 .modalNavBurger_visible {
-    background-color: #bf9000;
-    position: absolute;
-    top: 6rem;
-    left:2rem;
-    width: auto;
-    margin : auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    align-content: start;
-    transition: all 1s;
-    z-index: 1000;
-    opacity: 1;
-    transition : all 0s;
+background-color: #bf9000;
+position: absolute;
+top: 6rem;
+left:2rem;
+width: auto;
+margin : auto;
+display: flex;
+flex-direction: column;
+justify-content: left;
+align-content: start;
+transition: all 1s;
+z-index: 1000;
+opacity: 1;
+transition : all 0s;
 }
 .close-navModal {
-    position: absolute;
-    color : #000;
-    top: 0;
-    right: 2%;
-    font-size: 1.4rem;
-    cursor: pointer;
+position: absolute;
+color : #000;
+top: 0;
+right: 2%;
+font-size: 1.4rem;
+cursor: pointer;
 }
 .navList {
-    list-style: none;
-    padding: 1rem;
-    text-align: left;
+list-style: none;
+padding: 1rem;
+text-align: left;
 }
 .navList li {
-    font-size: 1.2rem;
+font-size: 1.2rem;
 }
-.navList li:not(:last-of-type) a {
-    text-decoration : none;
-    color : #fff;
-    font-size: 1.2rem;
-    cursor: pointer;
-    text-align: left;
-}
-.navList li:not(:last-of-type) a:hover {
-    color : #000;
+.navList li a {
+text-decoration : none;
+color : #000;
+font-size: 1.2rem;
+cursor: pointer;
+text-align: left;
 }
 .navList li:last-of-type a {
-    color : #000;
-    text-decoration: underline;
-    font-size: 1.2rem;
+text-decoration: underline!important;
+}
+.navList li a:hover {
+font-weight: bold;
+}
+
+
+/* Page-top button */
+#scrollToTopButton {
+    display: none; /* Masquer le bouton par défaut */
+    position: fixed;
+    bottom: 50%;
+    right: 2rem;
+    z-index: 1000;
+    font-size: 18px;
+    background-color: rgba(191, 144, 0, 0.7);
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
     cursor: pointer;
+    transition: opacity 0.3s;
+}
+#scrollToTopButton:hover {
+    opacity: 1;
+}
+
+/* Footer */
+
+footer {
+    display : flex;
+    flex-direction : column;
+    align-content : center;
+    align-items: center;
+    justify-content: center;
+    margin : auto;
+}
+.controls {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    border : none;
+    display : flex;
+    background-color: transparent;
+    align-content: center;
+    justify-content: center;
+}
+.controls button {
+    margin : 0.4rem;
+    padding : 0;
+    align-content: center;
+    justify-content: center;
+}
+.controls #contrast {
+    font-size: 2rem;
+    font-weight : lighter;
+    color : #bf9000;
+    background-color: transparent;
+    border : none;
+    align-content: center;
+}
+.controls #increase-font,.controls #decrease-font {
+    font-size: 0.8rem;
+    width : 2rem;
+    height : 2rem;
+    border-radius: 50%;
+    background-color: #000;
+    color : #bf9000;
+    font-weight : lighter;
+    border : 1px solid #bf9000;
+}
+footer p {
+    font-size: 1.4rem;
+}
+footer p:first-of-type {
+    text-align : center;
+    padding : 0 0 2rem 0;
+}
+footer p:first-of-type a {
+    text-decoration: none;
+    color : white;
+    padding : 0 1rem
+}
+footer p:last-of-type {
+    background-color: #fff;
+    color : #000;
+    width : 100%;
+    text-align: center;
+    padding : 1rem;
+}
+footer p:last-of-type a {
+    text-decoration: underline;
+    color : #000;
+}
+
+/* *****************************************************************
+HOME.HTML.TWIG
+***************************************************************** */
+
+/* Slider réalisations
+     grid*/
+.home .homeReal {
+    display: grid;
+    grid-template-rows: 1fr 8fr 1fr;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: flex-start; /* Ajouter cette ligne */
+    margin : 0 auto
+}
+.home .homeReal .homePrevButtonReal {
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+.home .homeReal .homeRealSlider {
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+.home .homeReal .homeNextButtonReal {
+    grid-column: 1/2;
+    grid-row: 3/4;
+}
+/* mise en forme */
+.homeRealSlider {
+    display: none; /* par défaut */
+    text-align: center;
+}
+.homeRealSlider.active {
+    display: flex; /* diapo active */
+    flex-direction: column;
+}
+.home .homeReal .homeSliderImg {
+    width : 90%;
+    height : 60vh;
+    object-fit : cover;
+    object-position : center;
+    display: block;
+    margin : 0 auto 1rem auto;
+    border : 3px solid #bf9000;
+}
+.homeReal .sliderLegend {
+    width : 60%;
+    text-align : center;
+    background-color: #000;
+    padding: 0;
+    margin : auto;
+    font-size : 1.2rem;
+    color: #fff;
+}
+.sliderLegend h2 {
+    font-weight : 100;
+    color : #bf9000;
+    margin : 0;
+    font-size : 1rem;
+}
+.sliderLegend h3 {
+    text-transform: uppercase;
+    color : #fff;
+    margin : 0 0 0 0;
+    font-weight: lighter;
+}
+.sliderLegend p {
+    margin : 0 0 0 0;
+    font-style : italic;
+    border-bottom: 0.5px solid #bf9000;
+    padding-bottom : 1rem;
+}
+.home .homeReal .sliderLegend a {
+    text-decoration: none;
+    color : #bf9000;
+    font-size : 1rem
+}
+.home .homeReal button {
+    width : 2.4rem;
+    margin : 0.5rem auto;
+    background-color: transparent;
+    border : none;
+    justify-items : center;
+    align-self : center
+}
+
+/* Slider Avis */
+
+.opinionSlider {
+    display: none; /* par défaut */
+}
+.opinionSlider.active {
+    display: flex; /* diapo active */
+}
+.homeOpinion {
+    display : flex;
+    flex-direction: column;
+    justify-items : center;
+    position: relative;
+}
+.opinionCSS {
+    margin: auto;
+    width: 30rem;
+    height: 30rem;
+    border-radius: 50%;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    background-color : rgba(191, 144, 0, 0.3) ;
+}
+.opinionSlider h2 {
+    font-size: 1rem;
+    padding : 0;
+    margin : 0
+}
+.opinionSlider h2 i {
+    padding : 0;
+    margin : 0
+}
+.opinionSlider p:first-of-type {
+    padding : 1rem;
+    font-size: 1.2rem;
+}
+.opinionSlider p:last-of-type {
+    font-weight : 100;
+    font-size: 1.2rem;
+    color : rgba(191, 144, 0, 0.3)
+}
+.opinionSlider h2 p {
+    margin : auto;
+}
+.home .homeOpinion button {
+    width : 2.4rem;
+    margin : auto;
+    height : auto;
+    background-color: transparent;
+    border : none;
+    justify-items : center;
+    text-align : center;
+    align-self: center;
+}
+.home .homeOpinion .prevButtonOpinion img {
+    padding : 0 0 1rem 0;
+}
+.home .homeOpinion .nextButtonOpinion img {
+    padding : 1rem 0 0 0;
+}
+
+/* Home Prestas */
+.home .homePresta {
+    display : grid;
+    grid-template-rows: 80% 20%;
+    background-color : rgba(191, 144, 0, 0.3);
+    width : 100%;
+    height : 30%;
+    margin : 0 !important;
+    padding : 0;
+    text-align : center;
+}
+.home .homePrestaQuestions {
+    display : grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin : 0;
+    text-align : center;
+}
+
+.home .homePrestaQuestions p {
+    padding : 1rem;
+    text-align : center;
+    font-size : 1.4rem;
+    align-self: center;
+    color : #fff
+}
+
+.home .homePrestaTitle {
+    display : grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width : 100%;
+    margin : 0 0 2rem 0;
+    padding : 1rem;
+    text-align : center;
+    font-size : 2rem;
+}
+.home .homePrestaTitle a {
+    text-decoration: none;
+    color : #bf9000;
+    background-color: #000;
+    border : 1px solid #bf9000;
+    padding : 2rem;
+}
+
+.vertical-line.presta {
+    margin-top : 6rem;
+}
+
+/* Carte */
+#map {
+    height: 300px;
+    width : 80%;
+    margin : auto;
+    border : 1px solid #bf9000;
+}
+
+.homeMap h2 {
+    font-size : 2rem;
+    font-weight : lighter;
+    text-align : center;
+    color : #bf9000;
+    padding : 0 0 2rem 0
+}
+
+/* *****************************************************************
+REALISATIONS.HTML.TWIG
+***************************************************************** */
+/* Grids */
+.realSection {
+    display : grid;
+    grid-template-rows: repeat(2,auto);
+    margin-bottom : 2rem
+}
+.text-content {
+    grid-row : 1/2;
+    grid-column : 1/2
+}
+.realSliderImg {
+    grid-row : 2/3;
+}
+.realDescription {
+    grid-row : 3/4;
+}
+.sliderNBtn {
+    display: grid;
+    grid-template-columns: 5% 90% 5%;
+    grid-template-rows: 1fr;
+    text-align: center;
+}
+.prevButtonReal {
+    grid-column : 1/2;
+    grid-row : 1 / 2
+}
+.realSliderImg {
+    grid-column : 2/3;
+    grid-row : 1 / 2
+}
+.nextButtonReal {
+    grid-column : 3/4;
+    grid-row : 1 / 2
+}
+
+/* Mise en forme */
+.realSection {
+    margin : auto
+}
+.realSection button {
+    width : 2rem;
+    margin : auto;
+    height : auto;
+    background-color: transparent;
+    border : none;
+    justify-items : center;
+    text-align : center
+}
+.realSection .prevButtonReal {
+    text-align: right;
+}
+.realSection .nextButtonReal {
     text-align: left;
 }
-.navList li:last-of-type a:hover {
-    color : #fff;
+.sliderNBtn {
+    margin : auto;
+    justify-content: center;
+}
+.realSliderImg {
+    width : 90vw;
+    height : 60vh;
+    object-fit : cover;
+    object-position : center;
+    display: none;
+    margin : 1rem auto;
+    border : 1px solid #bf9000;
+}
+.realSliderImg.active {
+    width : 90vw;
+    height : 60vh;
+    object-fit : cover;
+    object-position : center;
+    display: block;
+    margin : 1rem auto;
+    border : 1px solid #bf9000;
+}
+.text-content {
+    margin : 2rem
+}
+.text-content h3{
+    color : #bf9000;
+    font-size: 2rem;
+    font-weight: lighter;
+    text-align: center;
+}
+.text-content p {
+    font-size : 1.2rem;
+    font-weight: lighter;
+    text-align: justify;
 }
 
-    /* Page-top button */
-    #scrollToTopButton {
-        display: none; /* Masquer le bouton par défaut */
-        position: fixed;
-        bottom: 50%;
-        right: 2rem;
-        z-index: 1000;
-        font-size: 18px;
-        background-color: rgba(191, 144, 0, 0.7);
-        color: #000;
-        border: none;
-        border-radius: 50%;
-        width: 4rem;
-        height: 4rem;
-        cursor: pointer;
-        transition: opacity 0.3s;
-    }
-    #scrollToTopButton:hover {
-        opacity: 1;
-    }
+/* *****************************************************************
+REALISATION.HTML.TWIG
+***************************************************************** */
+/* Gallery */
+#oneRealPage .gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(autofill, 1fr);
+    grid-gap : 1rem;
+    padding : 0;
+    margin : auto;
+    justify-self: center;
+    text-align: center;
+}
+#oneRealPage .thumbnails {
+    width: 80%;
+    object-fit : cover;
+    object-position : center;
+    margin: 1rem;
+    justify-self: center;
+    text-align: center;
+    border : 1px solid #bf9000;
+    border-radius: 10px;
+    cursor: pointer;
+}
+/* Modale */ /**** DESKTOP - UTILE EN MOBILE ? ****/
+#oneRealPage .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000; /* Pour être au-dessus du header */
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-top: 5rem; /* Pour éviter que la modal soit coupée par le header */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+#oneRealPage .modal-content {
+    margin: auto;
+    display: block;
+    width: 100%;
+    max-height: 100%;
+    border : 1px solid #bf9000;
+    border-radius: 10px;
+}
+#oneRealPage .close {
+    position: absolute;
+    top: -1rem;
+    right: 1rem;
+    color: #fff;
+    font-size: 4rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+/* Page */
+#oneRealPage {
+    margin : 2rem
+}
+#oneRealPage h3 {
+    text-align : center;;
+    display: block;
+    width : 80%;
+    font-weight : 100;
+    margin : 2rem auto;
+    padding : 2rem;
+    border : 1px solid #bf9000;
+    border-radius : 10px;
+}
+#oneRealPage h3 span {
+    text-transform: uppercase;
+    color : #bf9000;
+    line-height : 2.5;
+}
+#oneRealPage p {
+    font-weight : lighter;
+    font-size: 1.4rem;
+    margin : 1rem;
+    text-align: justify;
+}
+/* *****************************************************************
+SERVICES.HTML.TWIG
+***************************************************************** */
+/* Grids */
+.servicesPage {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+    margin : 2rem 2rem;
+}
 
-    /* Footer */
+/* Mise en page */
+.serviceArticle {
+    display : grid;
+    grid-template-rows : 20% 50% 20% 10%;
+    grid-template-columns: 1fr;
+    border : 1px solid #bf9000;
+    border-radius: 10px;
+    padding : 1rem;
+    margin : 2rem
+}
 
-    footer {
-        display : flex;
-        flex-direction : column;
-        align-content : center;
-        align-items: center;
-        justify-content: center;
-        margin : auto;
-    }
-    .controls {
-        position: fixed;
-        bottom: 1rem;
-        right: 1rem;
-        border : none;
-        display : flex;
-        background-color: transparent;
-        align-content: center;
-        justify-content: center;
-    }
-    .controls button {
-        margin : 0.4rem;
-        padding : 0;
-        align-content: center;
-        justify-content: center;
-    }
-    .controls #contrast {
-        font-size: 2rem;
-        font-weight : lighter;
-        color : #bf9000;
-        background-color: transparent;
-        border : none;
-        align-content: center;
-    }
-    .controls #increase-font,.controls #decrease-font {
-        font-size: 0.8rem;
-        width : 2rem;
-        height : 2rem;
-        border-radius: 50%;
-        background-color: #000;
-        color : #bf9000;
-        font-weight : lighter;
-        border : 1px solid #bf9000;
-    }
-    footer p {
-        font-size: 1.4rem;
-    }
-    footer p:first-of-type {
-        text-align : center;
-        padding : 0 0 2rem 0;
-    }
-    footer p:first-of-type a {
-        text-decoration: none;
-        color : white;
-        padding : 0 1rem
-    }
-    footer p:last-of-type {
-        background-color: #fff;
-        color : #bf9000;
-        width : 100%;
-        text-align: center;
-        padding : 1rem;
-    }
-    footer p:last-of-type a {
-        text-decoration: underline;
-        color : #bf9000;
-    }
+.serviceArticle h3 {
+    color : #bf9000;
+    font-size : 3rem;
+    text-transform: uppercase;
+    font-weight: 100;
+    text-align: center;
+    align-self: center;
+    margin : 1rem
+}
+.serviceArticle img {
+    text-align: center;
+    height : 80%;
+    object-fit : cover;
+    object-position : center;
+    margin : 2rem auto;
+}
+.serviceArticle p:first-of-type {
+    color : #fff;
+    text-align: center;
+    margin : 1rem auto 0 auto;
+}
+.serviceArticle p:last-of-type {
+    color : #fff;
+    margin : 2rem auto;
+    text-align: center;
+}
+.serviceArticle p:last-of-type a {
+    text-decoration: none;
+    color : #bf9000;
+}
 
-    /* *****************************************************************
-    HOME.HTML.TWIG
-    ***************************************************************** */
+/* *****************************************************************
+SERVICE.HTML.TWIG
+***************************************************************** */
 
-    /* Slider réalisations
-         grid*/
-    .home .homeReal {
-        display: grid;
-        grid-template-rows: 1fr 8fr 1fr;
-        grid-template-columns: 1fr;
-        justify-content: center;
-        align-items: flex-start; /* Ajouter cette ligne */
-        margin : 0 auto
-    }
-    .home .homeReal .homePrevButtonReal {
-        grid-column: 1/2;
-        grid-row: 1/2;
-    }
-    .home .homeReal .homeRealSlider {
-        grid-column: 1/2;
-        grid-row: 2/3;
-    }
-    .home .homeReal .homeNextButtonReal {
-        grid-column: 1/2;
-        grid-row: 3/4;
-    }
-    /* mise en forme */
-    .homeRealSlider {
-        display: none; /* par défaut */
-        text-align: center;
-    }
-    .homeRealSlider.active {
-        display: flex; /* diapo active */
-        flex-direction: column;
-    }
-    .home .homeReal .homeSliderImg {
-        width : 90%;
-        height : 20vh;
-        object-fit : cover;
-        object-position : center;
-        display: block;
-        margin : 0 auto 1rem auto;
-        border : 3px solid #bf9000;
-    }
-    .homeReal .sliderLegend {
-        width : 60%;
-        text-align : center;
-        background-color: #000;
-        padding: 0;
-        margin : auto;
-        font-size : 1.2rem;
-        color: #fff;
-    }
-    .sliderLegend h2 {
-        font-weight : 100;
-        color : #bf9000;
-        margin : 0;
-        font-size : 1rem;
-    }
-    .sliderLegend h3 {
-        text-transform: uppercase;
-        color : #fff;
-        margin : 0 0 0 0;
-        font-weight: lighter;
-    }
-    .sliderLegend p {
-        margin : 0 0 0 0;
-        font-style : italic;
-        border-bottom: 0.5px solid #bf9000;
-        padding-bottom : 1rem;
-    }
-    .home .homeReal .sliderLegend a {
-        text-decoration: none;
-        color : #bf9000;
-        font-size : 1rem
-    }
-    .home .homeReal button {
-        width : 2.4rem;
-        margin : 0.5rem auto;
-        background-color: transparent;
-        border : none;
-        justify-items : center;
-        align-self : center
-    }
+/* Gallery */
+.gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(auto, 1fr);
+    grid-gap : 1rem;
+    padding : 0;
+    margin : auto;
+    justify-self: center;
+    text-align: center;
+}
+.thumbnails {
+    width: 80%;
+    height : 60vh;
+    object-fit : cover;
+    object-position : center;
+    margin: 1rem;
+    justify-self: center;
+    text-align: center;
+    border : 1px solid #bf9000;
+    border-radius: 10px;
+    cursor: pointer;
+}
+/* Modale */ /**** DESKTOP - UTILE EN MOBILE ? ****/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000; /* Pour être au-dessus du header */
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-top: 5rem; /* Pour éviter que la modal soit coupée par le header */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 100%;
+    max-height: 100%;
+    border : 1px solid #bf9000;
+    border-radius: 10px;
+}
+.close {
+    position: absolute;
+    top: -1rem;
+    right: 1rem;
+    color: #fff;
+    font-size: 4rem;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-    /* Slider Avis */
+/* Page */
+.oneServicePage {
+    margin : 2rem
+}
+.oneServicePage h3 {
+    text-align : center;;
+    display: block;
+    width : 50%;
+    font-weight : 100;
+    margin : 2rem auto;
+    padding : 2rem;
+    border : 1px solid #bf9000;
+    border-radius : 10px;
+}
+.oneServicePage h3 span {
+    text-transform: uppercase;
+    color : #bf9000;
+    line-height : 2.5;
+}
+.oneServicePage p {
+    font-weight : 50;
+    text-align: center;
+    margin : 1.4rem;
+    text-align: justify;
+}
 
-    .opinionSlider {
-        display: none; /* par défaut */
-    }
-    .opinionSlider.active {
-        display: flex; /* diapo active */
-    }
-    .homeOpinion {
-        display : flex;
-        flex-direction: column;
-        justify-items : center;
-        position: relative;
-    }
-    .opinionCSS {
-        margin: auto;
-        width: 30rem;
-        height: 30rem;
-        border-radius: 50%;
-        text-align: center;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-content: center;
-        align-items: center;
-        justify-content: center;
-        background-color : rgba(191, 144, 0, 0.3) ;
-    }
-    .opinionSlider h2 {
-        font-size: 1rem;
-        padding : 0;
-        margin : 0
-    }
-    .opinionSlider h2 i {
-        padding : 0;
-        margin : 0
-    }
-    .opinionSlider p:first-of-type {
-        padding : 1rem;
-        font-size: 1.2rem;
-    }
-    .opinionSlider p:last-of-type {
-        font-weight : 100;
-        font-size: 1.2rem;
-        color : rgba(191, 144, 0, 0.7)
-    }
-    .opinionSlider h2 p {
-        margin : auto;
-    }
-    .home .homeOpinion button {
-        width : 2.4rem;
-        margin : auto;
-        height : auto;
-        background-color: transparent;
-        border : none;
-        justify-items : center;
-        text-align : center;
-        align-self: center;
-    }
-    .home .homeOpinion .prevButtonOpinion img {
-        padding : 0 0 1rem 0;
-    }
-    .home .homeOpinion .nextButtonOpinion img {
-        padding : 1rem 0 0 0;
-    }
+/* *****************************************************************
+OPINION.HTML.TWIG
+***************************************************************** */
+/* Page */
+#opinionPage {
+    margin : 0 auto;
+    padding : 0 2rem
+}
 
-    /* Home Prestas */
-    .home .homePresta {
-        display : grid;
-        grid-template-rows: 80% 20%;
-        background-color : #bf9000;
-        width : 100%;
-        height : 30%;
-        margin : 0 !important;
-        padding : 0;
-        text-align : center;
-    }
-    .home .homePrestaQuestions {
-        display : grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        margin : 0;
-        text-align : center;
-    }
+/* Gallery */
+.opinionsGallery { /**** DESKTOP - A CHANGER EN 1 COLONNE ET AUTOFILL DE LIGNES ****/
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    grid-template-rows: repeat(auto-fill, 1fr);
+    grid-gap : 2rem;
+    padding : 2rem;
+}
+.opinion {
+    width: 100%;
+    height: 100%;
+    object-fit : cover;
+    object-position : center;
+    text-align : center;
+    align-self: center;
+    font-size : 1.4rem;
+    border : 1px solid #bf9000;
+    padding : 1rem;
+    border-radius: 10px;
+}
+.fa-sharp {
+    margin : 0 0 2rem 0
+}
+.opinionContent {
+    margin : 0 0 2rem 0;
+}
+.opinionRealisation {
+    color : #bf9000;
+}
+.opinionRealisation a {
+    color : #bf9000;
+    text-decoration: underline;
+}
+.opinionAuthor {
+    font-size : 1.2rem;
+    color : #bf9000;
+}
+.opinionFormSection legend {
+    text-align: center;
+    color : #fff;
+    margin-bottom : 1rem;
+    font-size: 1.8rem;
+}
+.opinionForm {
+    display: flex;
+    flex-direction: column;
+    width : 90%;
+    margin : auto;
+}
+.opinionForm fieldset {
+    margin-top : 2rem;
+    padding : 2rem;
+    border : 1px solid #404040;
+}
+.opinionForm input,
+.opinionForm select,
+.opinionForm textarea {
+    background-color : #000;
+    color : #fff;
+    border : 1px solid #404040;
+    border-radius: 10px;
+    font-weight : lighter
+}
+.opinionForm label {
+    color : #bf9000;
+    font-size : 1.4rem;
+    text-align : center;
+    margin-top : 2rem;
+    margin-bottom : 1rem;
+    font-weight : lighter;
+}
+.notationOptions {
+    width : 100%;
+    margin : auto
+}
+.opinionForm select option {
+    text-align: center;
+    font-size : 1.2rem;
+}
+.realChoice option {
+    font-size : 1.2rem;
+    font-weight : lighter;
+}
+.opinionForm button {
+    background-color: #bf9000;
+    color : black;
+    font-size: 1.4rem;
+    border-radius: 10px;
+    margin : 2rem 0 2rem 0
+}
+.opinionFormOKMessage {
+    color : #bf9000;
+    font-weight : lighter;
+    font-style: italic;
+    font-size : 1.2rem;
+    text-align : center;
+    margin-bottom : 2rem;
+    margin-top : 2rem;
+}
 
-    .home .homePrestaQuestions p {
-        padding : 1rem;
-        text-align : center;
-        font-size : 1.4rem;
-        align-self: center;
-    }
+/* *****************************************************************
+CONTACT.HTML.TWIG
+***************************************************************** */
+/* Page */
+#contactPage {
+    margin : 0 auto;
+    padding : 0 2rem
+}
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    width : 80%;
+    margin : auto
+}
+.contactForm fieldset {
+    margin-top : 2rem;
+    padding : 2rem;
+    border : 1px solid #404040;
+}
+.contactForm legend {
+    text-align: center;
+    color : #fff;
+    margin-top : 4rem!important;
+    margin-bottom : 1rem;
+    padding : 0 1rem 0 1rem;
+    font-size: 1.8rem;
+}
+.contactForm input,
+.contactForm textarea {
+    background-color : #000;
+    color : #fff;
+    border : 1px solid #404040;
+    border-radius: 10px;
+    font-weight : lighter
+}
+.contactForm label {
+    color : #bf9000;
+    font-size : 1.4rem;
+    text-align : center;
+    margin-top : 2rem;
+    margin-bottom : 1rem;
+    font-weight : lighter;
+}
+.contactForm button {
+    background-color: #bf9000;
+    color : black;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    margin : 2rem 0 2rem 0
+}
+.contactFormOKMessage {
+    color : #bf9000;
+    font-weight : lighter;
+    font-style: italic;
+    font-size : 1.2rem;
+    text-align : center;
+    margin-bottom : 2rem;
+    margin-top : 2rem;
+}
 
-    .home .homePrestaTitle {
-        display : grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        width : 100%;
-        margin : 0 0 2rem 0;
-        padding : 1rem;
-        text-align : center;
-        font-size : 2rem;
-    }
-    .home .homePrestaTitle a {
-        text-decoration: none;
-        color : #bf9000;
-        background-color: #000;
-        border : 1px solid #bf9000;
-        padding : 2rem;
-    }
+/* *****************************************************************
+PRICING.HTML.TWIG
+***************************************************************** */
+/* Page */
+#pricingPage {
+    margin : 0 auto;
+    padding : 0 2rem
+}
+.pricingForm {
+    width : 80%;
+    margin : auto;
+    padding : 0;
+    text-align : center;
+}
+.pricingForm>fieldset:first-of-type {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    border : 1px solid #404040;
+    padding : 0 1rem
+}
+.pricingForm legend {
+    text-align: center;
+    color : #fff;
+    margin-top : 4rem!important;
+    margin-bottom : 1rem;
+    padding : 0 1rem 0 1rem;
+    font-size: 1.8rem;
+}
+.pricingForm input,
+.pricingForm select,
+.pricingForm textarea {
+    background-color : #000;
+    color : #fff;
+    border : 1px solid #404040;
+    border-radius: 10px;
+    font-weight : lighter
+}
+.pricingForm label {
+    color : #bf9000;
+    font-size : 1.4rem;
+    text-align : center;
+    margin-top : 2rem;
+    margin-bottom : 1rem;
+    font-weight : lighter;
+}
+.pricingForm select option {
+    text-align: center;
+    font-size : 1.2rem;
+}
+.formDetails {
+    display : grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: 1fr 1fr;
+    margin-top : 2rem;
+}
+.formDetails fieldset {
+    width : 100%;
+    display : flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .vertical-line.presta {
-        margin-top : 6rem;
-    }
+.pricingForm button {
+    background-color: #bf9000;
+    color : black;
+    border-radius: 10px;
+    width : 30%;
+    font-size: 1.4rem;
+    margin : 2rem auto
+}
+.pricingForm .pricingFormOKMessage {
+    color : #bf9000;
+    font-weight : lighter;
+    font-style: italic;
+    font-size : 1.2rem;
+    text-align : center;
+    margin-bottom : 2rem;
+    margin-top : 2rem;
+}
 
-    /* Carte */
-    #map {
-        height: 300px;
-        width : 80%;
-        margin : auto;
-        border : 1px solid #bf9000;
-    }
-
-    .homeMap h2 {
-        font-size : 2rem;
-        font-weight : lighter;
-        text-align : center;
-        color : #bf9000;
-        padding : 0 0 2rem 0
-    }
-
-    /* *****************************************************************
-    REALISATIONS.HTML.TWIG
-    ***************************************************************** */
-    /* Grids */
-    .realSection {
-        display : grid;
-        grid-template-rows: repeat(3,auto);
-        margin-bottom : 2rem
-    }
-    .text-content {
-        grid-row : 1/2;
-        grid-column : 1/2
-    }
-    .realSliderImg {
-        grid-row : 2/3;
-    }
-    .realDescription {
-        grid-row : 3/4;
-    }
-    .sliderNBtn {
-        display: grid;
-        grid-template-columns: 5% 90% 5%;
-        grid-template-rows: 1fr;
-        text-align: center;
-    }
-    .prevButtonReal {
-        grid-column : 1/2;
-        grid-row : 1 / 2
-    }
-    .realSliderImg {
-        grid-column : 2/3;
-        grid-row : 1 / 2
-    }
-    .nextButtonReal {
-        grid-column : 3/4;
-        grid-row : 1 / 2
-    }
-
-    /* Mise en forme */
-    .realSection {
-        margin : auto
-    }
-    .realSection button {
-        width : 2rem;
-        margin : auto;
-        height : auto;
-        background-color: transparent;
-        border : none;
-        justify-items : center;
-        text-align : center
-    }
-    .realSection .prevButtonReal {
-        text-align: right;
-    }
-    .realSection .nextButtonReal {
-        text-align: left;
-    }
-    .sliderNBtn {
-        margin : auto;
-        justify-content: center;
-    }
-    .realSliderImg {
-        width : 90vw;
-        height : 30vh;
-        object-fit : cover;
-        object-position : center;
-        display: none;
-        margin : 1rem auto;
-        border : 1px solid #bf9000;
-    }
-    .realSliderImg.active {
-        width : 90vw;
-        height : 30vh;
-        object-fit : cover;
-        object-position : center;
-        display: block;
-        margin : 1rem auto;
-        border : 1px solid #bf9000;
-    }
-    .text-content {
-        margin : 2rem
-    }
-    .text-content h3{
-        color : #bf9000;
-        font-size: 2rem;
-        font-weight: lighter;
-        text-align: center;
-    }
-    .text-content p {
-        font-size : 1.2rem;
-        font-weight: lighter;
-        text-align: justify;
-    }
-
-    /* *****************************************************************
-    REALISATION.HTML.TWIG
-    ***************************************************************** */
-    /* Gallery */
-    #oneRealPage .gallery {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(autofill, 1fr);
-        grid-gap : 1rem;
-        padding : 0;
-        margin : auto;
-        justify-self: center;
-        text-align: center;
-    }
-    #oneRealPage .thumbnails {
-        width: 80%;
-        object-fit : cover;
-        object-position : center;
-        margin: 1rem;
-        justify-self: center;
-        text-align: center;
-        border : 1px solid #bf9000;
-        border-radius: 10px;
-        cursor: pointer;
-    }
-    /* Modale */ /**** DESKTOP - UTILE EN MOBILE ? ****/
-    #oneRealPage .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000; /* Pour être au-dessus du header */
-        top: 80%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding-top: 5rem; /* Pour éviter que la modal soit coupée par le header */
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.9);
-    }
-    #oneRealPage .modal-content {
-        margin: auto;
-        display: block;
-        width: 100%;
-        max-height: 100%;
-        border : 1px solid #bf9000;
-        border-radius: 10px;
-    }
-    #oneRealPage .close {
-        position: absolute;
-        top: -1rem;
-        right: 1rem;
-        color: #fff;
-        font-size: 4rem;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    /* Page */
-    #oneRealPage {
-        margin : 2rem
-    }
-    #oneRealPage h3 {
-        text-align : center;;
-        display: block;
-        width : 80%;
-        font-weight : 100;
-        margin : 2rem auto;
-        padding : 2rem;
-        border : 1px solid #bf9000;
-        border-radius : 10px;
-    }
-    #oneRealPage h3 span {
-        text-transform: uppercase;
-        color : #bf9000;
-        line-height : 2.5;
-    }
-    #oneRealPage p {
-        font-weight : lighter;
-        font-size: 1.4rem;
-        margin : 1rem;
-        text-align: justify;
-    }
-    /* *****************************************************************
-    SERVICES.HTML.TWIG
-    ***************************************************************** */
-    /* Grids */
-    .servicesPage {
-        display: grid;
-        grid-template-rows: 1fr 1fr 1fr;
-        grid-template-columns: 1fr;
-        grid-gap: 2rem;
-        margin : 2rem 2rem;
-    }
-
-    /* Mise en page */
-    .serviceArticle {
-        display : grid;
-        grid-template-rows : 20% 50% 20% 10%;
-        grid-template-columns: 1fr;
-        border : 1px solid #bf9000;
-        border-radius: 10px;
-        padding : 1rem;
-        margin : 2rem
-    }
-
-    .serviceArticle h3 {
-        color : #bf9000;
-        font-size : 2rem;
-        text-transform: uppercase;
-        font-weight: 100;
-        text-align: center;
-        align-self: center;
-        margin : 1rem
-    }
-    .serviceArticle img {
-        text-align: center;
-        height : 80%;
-        object-fit : cover;
-        object-position : center;
-        margin : 2rem auto;
-    }
-    .serviceArticle p:first-of-type {
-        color : #fff;
-        text-align: center;
-        margin : 1rem auto 0 auto;
-    }
-    .serviceArticle p:last-of-type {
-        color : #fff;
-        margin : 2rem auto;
-        text-align: center;
-    }
-    .serviceArticle p:last-of-type a {
-        text-decoration: none;
-        color : #bf9000;
-    }
-
-    /* *****************************************************************
-    SERVICE.HTML.TWIG
-    ***************************************************************** */
-
-    /* Gallery */
-    .gallery {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(autofill, 1fr);
-        grid-gap : 1rem;
-        padding : 0;
-        margin : auto;
-        justify-self: center;
-        text-align: center;
-    }
-    .thumbnails {
-        width: 80%;
-        object-fit : cover;
-        object-position : center;
-        margin: 1rem;
-        justify-self: center;
-        text-align: center;
-        border : 1px solid #bf9000;
-        border-radius: 10px;
-        cursor: pointer;
-    }
-    /* Modale */ /**** DESKTOP - UTILE EN MOBILE ? ****/
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000; /* Pour être au-dessus du header */
-        top: 80%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding-top: 5rem; /* Pour éviter que la modal soit coupée par le header */
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.9);
-    }
-    .modal-content {
-        margin: auto;
-        display: block;
-        width: 100%;
-        max-height: 100%;
-        border : 1px solid #bf9000;
-        border-radius: 10px;
-    }
-    .close {
-        position: absolute;
-        top: -1rem;
-        right: 1rem;
-        color: #fff;
-        font-size: 4rem;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    /* Page */
-    .oneServicePage {
-        margin : 2rem
-    }
-    .oneServicePage h3 {
-        text-align : center;;
-        display: block;
-        width : 50%;
-        font-weight : 100;
-        margin : 2rem auto;
-        padding : 2rem;
-        border : 1px solid #bf9000;
-        border-radius : 10px;
-    }
-    .oneServicePage h3 span {
-        text-transform: uppercase;
-        color : #bf9000;
-        line-height : 2.5;
-    }
-    .oneServicePage p {
-        font-weight : 50;
-        text-align: center;
-        margin : 1.4rem;
-        text-align: justify;
-    }
-
-    /* *****************************************************************
-    OPINION.HTML.TWIG
-    ***************************************************************** */
-    /* Page */
-    #opinionPage {
-        margin : 0 auto;
-        padding : 0 2rem
-    }
-
-    /* Gallery */
-    .opinionsGallery { /**** DESKTOP - A CHANGER EN 1 COLONNE ET AUTOFILL DE LIGNES ****/
-        display: grid;
-        grid-template-columns: 1fr 1fr ;
-        grid-template-rows: repeat(auto-fill, 1fr);
-        grid-gap : 2rem;
-        padding : 2rem;
-    }
-    .opinion {
-        width: 100%;
-        height: 100%;
-        object-fit : cover;
-        object-position : center;
-        text-align : center;
-        align-self: center;
-        font-size : 1.4rem;
-        border : 1px solid #bf9000;
-        padding : 1rem;
-        border-radius: 10px;
-    }
-    .fa-sharp {
-        margin : 0 0 2rem 0
-    }
-    .opinionContent {
-        margin : 0 0 2rem 0;
-    }
-    .opinionRealisation {
-        color : #bf9000;
-    }
-    .opinionRealisation a {
-        color : #bf9000;
-        text-decoration: underline;
-    }
-    .opinionAuthor {
-        font-size : 1.2rem;
-        color : #bf9000;
-    }
-    .opinionFormSection legend {
-        text-align: center;
-        color : #fff;
-        margin-bottom : 1rem;
-        font-size: 1.8rem;
-    }
-    .opinionForm {
-        display: flex;
-        flex-direction: column;
-        width : 100%;
-        margin : auto;
-    }
-    .opinionForm input,
-    .opinionForm select,
-    .opinionForm textarea {
-        background-color : #000;
-        color : #fff;
-        border : 1px solid #404040;
-        border-radius: 10px;
-        font-weight : lighter
-    }
-    .opinionForm label {
-        color : #bf9000;
-        font-size : 1.4rem;
-        text-align : center;
-        margin-top : 2rem;
-        margin-bottom : 1rem;
-        font-weight : lighter;
-    }
-    .notationOptions {
-        width : 10%;
-        margin : auto
-    }
-    .opinionForm select option {
-        text-align: center;
-        font-size : 1.2rem;
-    }
-    .realChoice option {
-        font-size : 1.2rem;
-        font-weight : lighter;
-    }
-    .opinionForm button {
-        background-color: #bf9000;
-        color : black;
-        font-size: 1.4rem;
-        border-radius: 10px;
-        margin : 2rem 0 2rem 0
-    }
-    .opinionFormOKMessage {
-        color : #bf9000;
-        font-weight : lighter;
-        font-style: italic;
-        font-size : 1.2rem;
-        text-align : center;
-        margin-bottom : 2rem;
-        margin-top : 2rem;
-    }
-
-    /* *****************************************************************
-    CONTACT.HTML.TWIG
-    ***************************************************************** */
-    /* Page */
-    #contactPage {
-        margin : 0 auto;
-        padding : 0 2rem
-    }
-    .contactForm {
-        display: flex;
-        flex-direction: column;
-        width : 100%;
-        margin : auto
-    }
-    .contactForm legend {
-        text-align: center;
-        color : #fff;
-        margin-bottom : 1rem;
-        font-size: 1.8rem;
-    }
-    .contactForm input,
-    .contactForm textarea {
-        background-color : #000;
-        color : #fff;
-        border : 1px solid #404040;
-        border-radius: 10px;
-        font-weight : lighter
-    }
-    .contactForm label {
-        color : #bf9000;
-        font-size : 1.4rem;
-        text-align : center;
-        margin-top : 2rem;
-        margin-bottom : 1rem;
-        font-weight : lighter;
-    }
-    .contactForm button {
-        background-color: #bf9000;
-        color : black;
-        border-radius: 10px;
-        font-size: 1.4rem;
-        margin : 2rem 0 2rem 0
-    }
-    .contactFormOKMessage {
-        color : #bf9000;
-        font-weight : lighter;
-        font-style: italic;
-        font-size : 1.2rem;
-        text-align : center;
-        margin-bottom : 2rem;
-        margin-top : 2rem;
-    }
-
-    /* *****************************************************************
-    PRICING.HTML.TWIG
-    ***************************************************************** */
-    /* Page */
-    #pricingPage {
-        margin : 0 auto;
-    }
-    .pricingForm {
-        width : 90%;
-        margin : auto;
-        padding : 0;
-        text-align : center;
-    }
-    .pricingForm>fieldset:first-of-type {
-        display: flex;
-        flex-direction: column;
-        align-content: center;
-        align-items: center;
-        justify-content: center;
-        border : 1px solid #404040;
-        padding : 0 1rem
-    }
-    .pricingForm legend {
-        text-align: center;
-        color : #fff;
-        margin-bottom : 1rem;
-        paggind : 0 1rem 0 1rem;
-        font-size: 1.8rem;
-    }
-    .pricingForm input,
-    .pricingForm select,
-    .pricingForm textarea {
-        background-color : #000;
-        color : #fff;
-        border : 1px solid #404040;
-        border-radius: 10px;
-        font-weight : lighter
-    }
-    .pricingForm label {
-        color : #bf9000;
-        font-size : 1.4rem;
-        text-align : center;
-        margin-top : 2rem;
-        margin-bottom : 1rem;
-        font-weight : lighter;
-    }
-    .pricingForm select option {
-        text-align: center;
-        font-size : 1.2rem;
-    }
-    .formDetails {    /**** DESKTOP - A CHANGER ****/
-        display : grid;
-        grid-template-columns: repeat(3,1fr);
-        grid-template-rows: 1fr 1fr;
-        margin-top : 2rem;
-    }
-    .formDetails fieldset {    /**** DESKTOP - A CHANGER ****/
-        width : 100%;
-        display : flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .pricingForm button {
-        background-color: #bf9000;
-        color : black;
-        border-radius: 10px;
-        width : 30%;
-        font-size: 1.4rem;
-        margin : 2rem auto
-    }
-    .pricingForm .pricingFormOKMessage {
-        color : #bf9000;
-        font-weight : lighter;
-        font-style: italic;
-        font-size : 1.2rem;
-        text-align : center;
-        margin-bottom : 2rem;
-        margin-top : 2rem;
-    }
+#legal {
+    display : grid;
+    grid-template-columns: 1fr;
+    margin : 0 auto;
+    padding : 2rem
+}
+#legal h3 {
+    color : #bf9000;
+    font-size: 2rem;
+    font-weight: lighter;
+    text-align: center;
+}
+#legal h2 {
+    color : #bf9000;
+    font-size: 1.6rem;
+    font-weight: lighter;
+    text-align: center;
+}
+#legal p {
+    font-size : 1.2rem;
+    font-weight: lighter;
+    text-align: justify;
+}
+#legal a {
+    color : #fff
+}
 
 @media only screen and (min-width: 1200px) {
-    /* HEADER */
+/* HEADER */
     header {
         height: auto;
         display: flex;
@@ -1184,7 +1231,7 @@ BASE.HTML.TWIG
         font-size: 1.4rem;
         font-weight: lighter;
         align-items: center;
-        color: #fff
+        color: #000
     }
 
     .contactDetails li i {
@@ -1196,7 +1243,7 @@ BASE.HTML.TWIG
     .contactDetails li a {
         align-items: center;
         text-decoration: none;
-        color: #fff
+        color: #000
     }
 
     .navList {
@@ -1210,13 +1257,14 @@ BASE.HTML.TWIG
     .navList li {
         font-size: 1.6rem;
         margin: 0 4rem;
-        padding: 0 0 2rem 0
+        padding: 0 0 2rem 0;
     }
 
     .navList .nav-link {
         text-decoration: none;
         margin: 0;
-        padding: 1rem
+        padding: 1rem;
+        color : #bf9000;
     }
 
     .navList li:not(:last-of-type) a {
@@ -1230,20 +1278,20 @@ BASE.HTML.TWIG
 
     .navList li:last-of-type a {
         color: #bf9000;
-        text-decoration: none;
+        text-decoration: none!important;
         font-size: 1.6rem;
         text-align: center;
         border: 1px solid #bf9000;
     }
 
     .navList li:last-of-type a:hover {
-        color: #fff;
+        color: #fff!important;
         border: 1px solid #fff
     }
 
-    .navList .nav-item a:hover {
+    /*.navList .nav-item a:hover {
         color: #bf9000;
-    }
+    }*/
 
     .navList .nav-item:not(:last-child).active a {
         color: #bf9000;
@@ -1383,7 +1431,7 @@ BASE.HTML.TWIG
 
     .scrolled .contact_list a {
         text-decoration: underline;
-        color: #fff;
+        color: #000;
         cursor: pointer;
         text-align: left;
     }
@@ -1454,35 +1502,34 @@ BASE.HTML.TWIG
         font-size: 1.6rem;
     }
 
-    .scrolled .navList li:not(:last-of-type) a {
+    .scrolled .navList li a {
         text-decoration: none;
-        color: #fff;
+        color: #000;
         font-size: 1.6rem;
         cursor: pointer;
         text-align: left;
-    }
-
-    .scrolled .navList li:not(:last-of-type) a:hover {
-        color: #000;
     }
 
     .scrolled .navList li:last-of-type a {
-        color: #000;
+        text-decoration: underline!important;
+    }
+    .scrolled .navList li:last-of-type a:hover {
         text-decoration: underline;
-        font-size: 1.6rem;
-        cursor: pointer;
-        text-align: left;
+        border : none!important;
     }
 
-    .scrolled .navList li:last-of-type a:hover {
-        color: #fff;
+    .scrolled .navList li a:hover {
+        color : #000!important;
+        font-weight : bold;
     }
-    .scrolled .navList .nav-item:last-child.active a {
-        color: #000 !important;
+    .scrolled .navList .nav-item.active a {
+        color : #000!important;
+        text-decoration-line: none!important;
+        font-weight : bold;
     }
-    .scrolled .navList .nav-item:not(:last-child).active a {
+    /*.scrolled .navList .nav-item:not(:last-child).active a {
         color: #000;
-    }
+    }*/
     /* Footer */
 
     footer p {
@@ -1583,7 +1630,7 @@ BASE.HTML.TWIG
 
     /* Realisations */
     .text-content {
-        margin : 4rem
+        margin : 10rem;
     }
     .text-content h3{
         font-size: 3rem;
@@ -1611,15 +1658,26 @@ BASE.HTML.TWIG
     /* One Service */
     .oneServicePage .gallery {
         grid-template-columns: repeat(3,30%);
+        grid-template-rows: 1fr;
+        margin : auto
     }
     .oneServicePage .thumbnails {
         width: 100%;
-        height: 100%;
+        height: 60vh;
     }
 
     /* Opinions */
+    .opinionForm {
+        width : 80%;
+        margin : auto
+    }
     .opinionFormSection legend {
-        font-size: 2rem;
+        text-align: center;
+        color : #fff;
+        margin-top : 4rem!important;
+        margin-bottom : 1rem;
+        padding : 0 1rem 0 1rem;
+        font-size: 3rem;
     }
     .opinionForm label {
         font-size : 1.6rem;
@@ -1635,8 +1693,12 @@ BASE.HTML.TWIG
     }
 
     /* contact */
+
+    .contactForm {
+        margin : auto
+    }
     .contactForm legend {
-        font-size: 2rem;
+        font-size: 3rem;
     }
     .contactForm label {
         font-size : 1.6rem;
@@ -1644,8 +1706,9 @@ BASE.HTML.TWIG
     .contactFormOKMessage {
         font-size : 1.6rem
     }
+    /* devis */
     .pricingForm legend {
-        font-size: 2rem;
+        font-size: 3rem;
     }
     .pricingForm label {
         font-size : 1.6rem;
@@ -1656,5 +1719,11 @@ BASE.HTML.TWIG
     .pricingFormOKMessage {
         font-size : 1.6rem
     }
+    /* mentions légales */
+    #legal {
+        margin : 0 10rem
+    }
+    #legal h3 {
+        font-size : 3rem
+    }
 }
-

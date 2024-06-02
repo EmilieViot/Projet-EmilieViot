@@ -9,8 +9,8 @@
 
     {% for realisation in realisations %}
         <section class ="realSection">
-
-            <div class="sliderNBtn {% if loop.index is even %}animate__slideInLeft{% else %}animate__slideInRight{% endif %}">
+            <h2 class="visually-hidden">realisation</h2>
+            <div class="sliderNBtn">
                 <button class = "prevButtonReal">
                     <img src="assets/img/flecheSliderGauche.png" alt="flecheSliderGauche">
                 </button>
@@ -24,7 +24,7 @@
                 </button>
             </div>
 
-            <div class="text-content" {% if loop.index is even %}animate__slideInRight{% else %}animate__slideInLeft{% endif %}">
+            <div class="text-content">
                 <h3 >{{ realisation.title }}</h3><br>
                 <p class="realDescription">{{ realisation.description }}</p>
             </div>

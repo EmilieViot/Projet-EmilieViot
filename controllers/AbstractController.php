@@ -11,7 +11,7 @@ abstract class AbstractController
 
         $twig->addExtension(new \Twig\Extension\DebugExtension());
         $twig->addGlobal('sessionToken', $_SESSION["csrf-token"]);
-/*        $twig->addGlobal('errorMessage', $_SESSION["error-message"]);*/
+        /*$twig->addGlobal('errorMessage', $_SESSION["error-message"]);*/
 
         $twig->addGlobal('url', $_SERVER['REQUEST_URI']);
         $uri = $_SERVER['REQUEST_URI'];
@@ -29,5 +29,10 @@ abstract class AbstractController
     protected function redirect(string $route) : void
     {
         header("Location: index.php?route=$route");
+    }
+
+    protected function renderJson(array $data) : void
+    {
+        echo json_encode($data);
     }
 }
