@@ -7,7 +7,7 @@ class MessageController extends AbstractController
         $this->render("contact/contact.html.twig", []);
     }
 
-    public function messageRegister() : void
+    public function messageRegister(): void
     {
         if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["city"]) && isset($_POST["email"]) && isset($_POST["content"])) {
             $tokenManager = new CSRFTokenManager();
@@ -20,10 +20,8 @@ class MessageController extends AbstractController
                 $city = htmlspecialchars($_POST["city"]);
                 $email = htmlspecialchars($_POST["email"]);
                 $content = htmlspecialchars($_POST["content"]);
-                var_dump($firstname, $lastname, $city, $email, $content);
 
                 $message = new Message($firstname, $lastname, $city, $email, $content);
-                var_dump($message);
 
                 $mm->createMessage($message);
 
@@ -31,22 +29,16 @@ class MessageController extends AbstractController
                     'status' => 'OK',
                     'message' => "Merci $firstname $lastname pour votre demande. Nous revenons vers vous dans les plus brefs délais."
                 ];
-                echo json_encode($response);
             } else {
                 http_response_code(405);
-                echo json_encode(['status' => 'error', 'message' => 'Méthode non autorisée']);
+                $response = ['status' => 'error', 'message' => 'Méthode non autorisée'];
             }
         } else {
-            $response = [
-                'status' => 'pas OK',
-                'message' => "Merci de compléter les champs obligatoires"
-            ];
-            $this->redirect('contact');
-
-            var_dump($response);
+            $response = ['status' => 'error', 'message' => 'Merci de compléter les champs obligatoires'];
         }
-    }
 
+        $this->renderJson($response);
+    }
 
 
     public function messageConfirmation(): void

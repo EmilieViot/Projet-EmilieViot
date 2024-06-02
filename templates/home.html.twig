@@ -15,10 +15,10 @@
         {%  for realisation in realisations %}
             <figure class = "homeRealSlider">
                 <a href="index.php?route=realisation&id={{ realisation.id }}"><img class = "homeSliderImg" src="{{ realisation.pictures[0].url }}" alt="{{ realisation.pictures[0].alt }}"></a>
-                <figcaption class = "sliderLegend">
-                    <h2>Zoom sur quelques réalisations</h2>
-                    <h3>{{ realisation.title }}</h3>
-                    <p><a href="index.php?route=realisation&id={{ realisation.id }}">Cliquez ici pour en découvrir +</a></p>
+                <figcaption class = "sliderLegend dark-mode">
+                    <h2 class="dark-mode golden-text">Zoom sur quelques réalisations</h2>
+                    <h3 class="dark-mode white-text" >{{ realisation.title }}</h3>
+                    <p><a href="index.php?route=realisation&id={{ realisation.id }} class="dark-mode golden-text"">Cliquez ici pour en découvrir +</a></p>
                 </figcaption>
             </figure>
         {% endfor %}
@@ -86,7 +86,7 @@
         </article>
         <nav class="homePrestaTitle">
             {% for service in services %}
-                <a href="index.php?route=service&id={{ service.id }}">{{ service.title }}</a>
+                <a class="dark-mode" href="index.php?route=service&id={{ service.id }}">{{ service.title }}</a>
             {% endfor %}
         </nav>
     </section>

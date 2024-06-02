@@ -17,7 +17,7 @@
 
     <form class = "pricingForm" action="index.php?route=pricingRegister" method="post" enctype="multipart/form-data">
         <fieldset>
-            <legend> Ciblons ensemble vos besoins </legend>
+            <legend class="dark-mode white-text"> Ciblons ensemble vos besoins </legend>
             <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
 
             {%  if  message is defined %}

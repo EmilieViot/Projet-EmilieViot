@@ -274,44 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
     /* FORMULAIRE CONTACT */
 
     if (route === 'contact') {
-        document.getElementsByClassName("send-contactInfos").addEventListener("click", function () {
-            // Récupérer les données du formulaire
-            const formData = new FormData(document.getElementById("contactForm"));
-            // Envoyer les données au serveur avec Fetch
-            fetch("index.php?route=messageRegister", {
-                method: "POST",
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    console.log('message bien envoyé')
-                })
-        });
-    }
-
-    if (route === 'contact') {
-        const contactForm = document.querySelector('.contactForm');
-        contactForm.addEventListener('submit', function (event) {
-            event.preventDefault(); // Empêche le formulaire de se soumettre normalement
-
-            let formulaireData = new FormData(contactForm); // Utilisation de la variable 'form' au lieu de 'this'
-
-            fetch('index.php?route=contact', {
-                method: 'POST',
-                body: formulaireData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data); // Affiche la réponse du script PHP
-                    console.log('message bien envoyé en back office')
-                })
-
-        });
-    }
-
-    if (route === 'contact') {
-           const contactForm = document.getElementsByClassName('contactForm');
+           const contactForm = document.getElementById('contactForm');
 
             contactForm.addEventListener('submit', function (event) {
                 event.preventDefault(); // Empêche le comportement par défaut du formulaire
@@ -325,11 +288,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 .then(response => response.json()) // Traite la réponse JSON
                 .then(data => {
-                    document.getElementsByClassName('contactFormOKMessage').textContent = data.message;
+                    document.querySelector('#contactFormOKMessage').textContent = data.message;
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    document.getElementById('contactFormOKMessage').textContent = 'Une erreur est survenue.';
+                    document.querySelector('#contactFormOKMessage').textContent = 'Une erreur est survenue.';
                 });
             });
     }
@@ -389,7 +352,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ACCESSIBILITE - CONTRASTE */
-    const contrastButton = document.getElementById('contrast');
+
+    // Récupérez les éléments bouton et le body
+    const darkModeButton = document.getElementById('dark-mode-button');
+    const lightModeButton = document.getElementById('light-mode-button');
+    const body = document.body;
+
+    // Ajoutez un écouteur d'événements pour le mode sombre
+        darkModeButton.addEventListener('click', function() {
+            body.classList.add('dark-mode');
+            body.classList.remove('light-mode');
+        });
+
+    // Ajoutez un écouteur d'événements pour le mode clair
+        lightModeButton.addEventListener('click', function() {
+            body.classList.add('light-mode');
+            body.classList.remove('dark-mode');
+        });
+
 
 
 })

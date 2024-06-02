@@ -32,7 +32,7 @@
                     {% elseif opinion.notation == 5 %}
                         <p><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i></p>
                     {% endif %}
-                    <p class = "opinionContent">{{ opinion.content }}</p>
+                    <p class = "opinionContent dark-mode white-text">{{ opinion.content }}</p>
                     <p class = "opinionAuthor">Avis laissé par :<br> {{ opinion.username }}</p>
                     {% if opinion.getRealisation() %}
                         <p class="opinionRealisation">
@@ -52,7 +52,7 @@
         <h2 class="visually-hidden">formulaire avis</h2>
         <form class="opinionForm" action="index.php?route=opinionRegister" method="post">
             <fieldset class="opinionForm">
-                <legend> Votre avis compte </legend>
+                <legend class="dark-mode white-text"> Votre avis compte </legend>
                 <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
                 {%  if  message is defined %}
                     <p class="opinionFormOKMessage">{{ message }}</p>
@@ -64,7 +64,7 @@
                 <textarea id="content" name="content" rows="4" required="required"></textarea>
 
                 <label for="notation">Note sur 5 * :</label>
-                <select class="notationOptions" id="notation" name="notation" required="required">
+                <select class="notationOptions dark-mode white-text" id="notation" name="notation" required="required">
                     <option value="">Donnez une note sur 5</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -74,7 +74,7 @@
                 </select>
 
                 <label for="realisation">Une réalisation est-elle ciblée par votre avis ? </label>
-                <select class="realChoice" name="realisation" id="realisation">
+                <select class="realChoice dark-mode white-text" name="realisation" id="realisation">
                     <option value="">Sélectionnez une réalisation</option>
                     {% for realisation in realisations %}
                     <option  value="{{ realisation.id }}">{{ realisation.title }}</option>
