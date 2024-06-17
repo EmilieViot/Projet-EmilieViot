@@ -47,18 +47,6 @@ class OpinionController extends AbstractController
             $this->redirect('opinion');
         }
     }
-
-    public function readOpinion(): void
-    {
-        if (isset($_POST['readMessage'])) {
-            // Display a sample message
-            echo '<p id="messageContent">This is the displayed message.</p>';
-
-            // Clear the session variable to indicate no new elements
-            unset($_SESSION['new_table_element']);
-        }
-        $this->render("opinions/opinion.html.twig", []);
-    }
 }
 
 

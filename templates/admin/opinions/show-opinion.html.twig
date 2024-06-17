@@ -1,0 +1,29 @@
+{% extends "admin/base-admin.html.twig" %}
+
+{% block title %}
+    Avis N°{{ opinion.id }}
+    {{ parent() }}
+{% endblock %}
+
+
+    {% block main %}
+        <main id="opinion_show">
+            <a href="index.php?route=list-opinions"><i class="fa-solid fa-arrow-left"></i></a>
+            <h2 class="opinion">Avis N°{{ opinion.id }}</h2>
+
+            <p>Pseudonyme : {{ opinion.username }}</p>
+            <p>Message : {{ opinion.content }}</p>
+            <p>Note : {{ opinion.notation  }} / 5</p>
+            {% if opinion.realisation_id is defined and opinion.realisation_id is not null %}
+                <p>Realisation associée : {{ opinion.realisation_id }}</p>
+            {% endif %}
+            <p>Status : {{ opinion.status }}</p>
+
+            <ul class="edit_btns">
+                <li><a href="index.php?route=delete-opinion&id={{ opinion.id }}"><i class="fa-solid fa-trash"></i></a></li>
+            </ul>
+            <a href="index.php?route=list-opinions"><i class="fa-solid fa-arrow-left"></i></a>
+
+
+        </main>
+    {% endblock %}

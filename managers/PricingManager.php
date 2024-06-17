@@ -21,7 +21,7 @@ class PricingManager extends AbstractManager
             // Create a DetailManager instance to fetch associated details
             $dm = new DetailManager();
             // Fetch details associated with the pricing
-            $details = $dm->findByPricing($result['id']);
+            $details = $dm->findByPricing((int)$result['id']);
             // Create a Pricing object with fetched data
             $pricing = new Pricing($result["contact_mode"], $result["firstname"], $result["lastname"], $result["email"], $result["tel"], $result["city"], $result["message"], $details, $result["photo_path"]);
             // Set the ID of the Pricing object
@@ -76,6 +76,7 @@ class PricingManager extends AbstractManager
             $details = $dm->findByPricing($item['id']);
             // Create a Pricing object with fetched data
             $pricing = new Pricing($item["contact_mode"], $item["firstname"], $item["lastname"], $item["email"], $item["tel"], $item["city"], $item["message"], $details, $item["photo_path"]);
+            $pricing->setId($item["id"]);
             // Add the Pricing object to the array
             $pricings[] = $pricing;
         }
@@ -83,39 +84,16 @@ class PricingManager extends AbstractManager
         return $pricings;
     }
 
-    // Fetches a Pricing entry by its ID
-    public function getPricingById(int $id): ?Pricing
-    {
-        // Prepare a SQL query to select a pricing by its ID
-        $query = $this->db->prepare('SELECT * FROM pricings WHERE id = :id');
-        // Execute the query with the provided ID parameter
-        $query->execute(["id" => $id]);
-        // Fetch the result as an associative array
-        $result = $query->fetch(PDO::FETCH_ASSOC);
-
-        // If a result is found, create a Pricing object
-        if ($result) {
-            // Create a DetailManager instance to fetch associated details
-            $dm = new DetailManager();
-            // Fetch details associated with the pricing
-            $details = $dm->findByPricing($result['id']);
-            // Create a Pricing object with fetched data
-            $pricing = new Pricing($result["contact_mode"], $result["firstname"], $result["lastname"], $result["email"], $result["tel"], $result["city"], $result["message"], $result["photo_path"]);
-            // Set the ID of the Pricing object
-            $pricing->setId($result["id"]);
-            // Return the Pricing object
-            return $pricing;
-        }
-        // Return null if no result is found
-        return null;
-    }
 
     // Deletes a Pricing entry from the database by its ID
     public function deletePricing(int $id): void
     {
-        // Prepare a SQL query to delete a pricing by its ID
+        // Delete entries from the linking table
+        $query = $this->db->prepare('DELETE FROM pricing_detail WHERE pricing_id = :id');
+        $query->execute(['id' => $id]);
+
+        // Delete the entry from the main table
         $query = $this->db->prepare('DELETE FROM pricings WHERE id = :id');
-        // Execute the query with the provided ID parameter
-        $query->execute(["id" => $id]);
+        $query->execute(['id' => $id]);
     }
 }

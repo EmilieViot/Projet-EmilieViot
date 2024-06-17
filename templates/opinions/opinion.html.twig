@@ -32,9 +32,9 @@
                     {% elseif opinion.notation == 5 %}
                         <p><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i><i class="fa-sharp fa-solid fa-star" style="color: #FFD43B;"></i></p>
                     {% endif %}
-                    <p class = "opinionContent dark-mode white-text">{{ opinion.content }}</p>
+                    <p class = "opinionContent dark-mode-white-text">{{ opinion.content }}</p>
                     <p class = "opinionAuthor">Avis laissé par :<br> {{ opinion.username }}</p>
-                    {% if opinion.getRealisation() %}
+                    {% if opinion.getRealisation() is defined and opinion.getRealisation() is not null %}
                         <p class="opinionRealisation">
                             Avis en lien avec la réalisation suivante :<br>
                                 <a href="index.php?route=realisation&id={{ opinion.getRealisation().getId()}}">
@@ -52,7 +52,7 @@
         <h2 class="visually-hidden">formulaire avis</h2>
         <form class="opinionForm" action="index.php?route=opinionRegister" method="post">
             <fieldset class="opinionForm">
-                <legend class="dark-mode white-text"> Votre avis compte </legend>
+                <legend class="dark-mode-white-text"> Votre avis compte </legend>
                 <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />
                 {%  if  message is defined %}
                     <p class="opinionFormOKMessage">{{ message }}</p>

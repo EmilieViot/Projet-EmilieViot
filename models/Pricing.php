@@ -17,7 +17,7 @@ class Pricing
         $this->id = $id;
     }
 
-    public function getcontact_mode(): string
+    public function getContact_mode(): string
     {
         return $this->contact_mode;
     }
@@ -89,7 +89,7 @@ class Pricing
         $this->details = $details;
     }
 
-    public function getphoto_path(): ?string
+    public function getPhoto_path(): ?string
     {
         return $this->photo_path;
     }

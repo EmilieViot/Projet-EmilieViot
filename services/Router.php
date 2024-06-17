@@ -14,6 +14,7 @@ class Router extends AbstractController
         $adc = new AdminController();
         $PC = new PageController();
 
+    /******* PUBLIC WEBSITE *******/
     /*HOME*/
         if (!isset($get["route"])) {
             $hc->home();
@@ -73,7 +74,7 @@ class Router extends AbstractController
             $pc->pricingRegister();
         }
 
-    /*ADMIN*/
+    /******* ADMIN *******/
         /*login */
         else if(isset($get["route"]) && $get["route"] === "login")
         {
@@ -93,103 +94,120 @@ class Router extends AbstractController
             $adc->admin();
         }
 
-            /*messages*/
-            else if(isset($get["route"]) && $get["route"] === "list-messages")
-            {
-                $adc->messagesList();
-            }
-            else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "show-message")
-            {
-                $adc->showMessage();
-            }
-            /*opinions*/
-            else if(isset($get["route"]) && $get["route"] === "list-opinions")
-            {
-                $adc->opinionsList();
-            }
-            else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "show-opinion")
-            {
-                $adc->showOpinion();
-            }
-            else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "edit-opinion")
-            {
-                $adc->editOpinion();
-            }
-            else if(isset($get["route"]) && $get["route"] === "check-opinion-edition")
-            {
-                $adc->checkEditOpinion();
-            }
-            /*pricings*/
-            else if(isset($get["route"]) && $get["route"] === "list-pricings")
-            {
-                $adc->pricingsList();
-            }
-            else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "show-pricing")
-            {
-                $adc->showPricing();
-            }
-            /*reals*/
-            else if(isset($get["route"]) && $get["route"] === "list-reals")
-            {
-                $adc->realsList();
-            }
-            else if(isset($get["route"]) && $get["route"] === "create-real")
-            {
-                $adc->createReal();
-            }
-            else if(isset($get["route"]) && $get["route"] === "check-real-creation")
-            {
-                $adc->checkRealCreation();
-            }
-            else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "show-real")
-            {
-                $adc->showReal();
-            }
-            else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "edit-real")
-            {
-                $adc->editReal();
-            }
-            else if(isset($get["route"]) && $get["route"] === "check-real-edition")
-            {
-                $adc->checkEditReal();
-            }
-            /*services*/
-            else if(isset($get["route"]) && $get["route"] === "list-services")
-            {
-                $adc->servicesList();
-            }
-            else if(isset($get["route"]) && $get["route"] === "create-service")
-            {
-                $adc->createService();
-            }
-            else if(isset($get["route"]) && $get["route"] === "check-service-creation")
-            {
-                $adc->checkServiceCreation();
-            }
-            else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "show-service")
-            {
-                $adc->showService();
-            }
-            else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "edit-service")
-            {
-                $adc->editService();
-            }
-            else if(isset($get["route"]) && $get["route"] === "check-service-edition")
-            {
-                $adc->checkEditService();
-            }
-
-
-    /*MENTIONS LEGALES*/
-        else if(isset($get["route"]) && $get["route"] === "legal")
+        /*messages*/
+        else if(isset($get["route"]) && $get["route"] === "list-messages")
         {
-            $PC->legal();
+            $adc->messagesList();
+        }
+        else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "show-message")
+        {
+            $adc->showMessage((int)$get["id"]);
+        }
+        else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "delete-message")
+        {
+            $adc->deleteMessage((int)$get["id"]);
+        }
+        /*opinions*/
+        else if(isset($get["route"]) && $get["route"] === "list-opinions")
+        {
+            $adc->opinionsList();
+        }
+        else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "show-opinion")
+        {
+            $adc->showOpinion((int)$get["id"]);
+        }
+        else if(isset($get["route"]) && $get["route"] === "status-register")
+        {
+            $adc->statusRegister();
+        }
+        else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "edit-opinion")
+        {
+            $adc->editOpinion();
+        }
+        else if(isset($get["route"]) && $get["route"] === "check-opinion-edition")
+        {
+            $adc->checkEditOpinion();
+        }
+        else if (isset($get["route"]) && isset($get["id"]) && $get["route"] === "delete-opinion") {
+            $adc->deleteOpinion((int)$get["id"]);
+        }
+        /*pricings*/
+        else if(isset($get["route"]) && $get["route"] === "list-pricings")
+        {
+            $adc->pricingsList();
+        }
+        else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "show-pricing")
+        {
+            $adc->showPricing((int)$get["id"]);
+        }
+        else if (isset($get["route"]) && isset($get["id"]) && $get["route"] === "delete-pricing") {
+            $adc->deletePricing((int)$get["id"]);
+        }
+        else if (isset($get["route"]) && isset($get["id"]) && $get["route"] === "edit-pricing") {
+            $adc->updatePricing((int)$get["id"]);
+        }
+        /*reals*/
+        else if(isset($get["route"]) && $get["route"] === "list-reals")
+        {
+            $adc->realsList();
+        }
+        else if(isset($get["route"]) && $get["route"] === "create-real")
+        {
+            $adc->createReal();
+        }
+        else if(isset($get["route"]) && $get["route"] === "check-real-creation")
+        {
+            $adc->checkRealCreation();
+        }
+        else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "show-real")
+        {
+            $adc->showReal();
+        }
+        else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "edit-real")
+        {
+            $adc->editReal();
+        }
+        else if(isset($get["route"]) && $get["route"] === "check-real-edition")
+        {
+            $adc->checkEditReal();
+        }
+        /*services*/
+        else if(isset($get["route"]) && $get["route"] === "list-services")
+        {
+            $adc->servicesList();
+        }
+        else if(isset($get["route"]) && $get["route"] === "create-service")
+        {
+            $adc->createService();
+        }
+        else if(isset($get["route"]) && $get["route"] === "check-service-creation")
+        {
+            $adc->checkServiceCreation();
+        }
+        else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "show-service")
+        {
+            $adc->showService();
+        }
+        else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "edit-service")
+        {
+            $adc->editService();
+        }
+        else if(isset($get["route"]) && $get["route"] === "check-service-edition")
+        {
+            $adc->checkEditService();
         }
 
-    /*ERROR 404*/
-        else
-        {
-            $PC -> error404();
-        }
+
+/*MENTIONS LEGALES*/
+    else if(isset($get["route"]) && $get["route"] === "legal")
+    {
+        $PC->legal();
     }
+
+/*ERROR 404*/
+    else
+    {
+        $PC -> error404();
+    }
+}
 }

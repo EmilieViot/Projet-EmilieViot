@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <!--responsive-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="color-scheme" content="light dark">
     <title>  {% block title %} {% endblock %} | AVEN Plaquiste</title>
     <!--SEO-->
     <meta name="description" content="Plaquiste cloisons sèches faux plafonds isolation décoration rénovation Bretagne Finistère sud"/>
@@ -21,7 +22,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 </head>
 
-<body class="dark-mode">
+<body class="dark-mode-black">
 <header>
     <!-- Bandeau coordonnées -->
     <section id="contactNav">
@@ -29,9 +30,9 @@
         <button class="contactBurgerMenu">
             <span>&#9993;</span>
         </button>
-        <div class="modalContactBurger">
+        <div class="modalContactBurger ">
             <p class="close-contactModal">&#9747;</p>
-            <ul class="contactDetails contact_list">
+            <ul class="contactDetails contact_list dark-mode-golden">
                 <li><a href="tel:+33298108916"><i class="fa-solid fa-phone"></i>02 98 10 89 16</a></li>
                 <li class="slash">/</li>
                 <li><i class="fa-solid fa-location-dot"></i>11 ZA de Dioulan - 29140 Rosporden</li>
@@ -40,11 +41,13 @@
             </ul>
         </div>
     </section>
+    <!-- logos -->
     <section id="logos">
         <h2 class="visually-hidden">logo</h2>
         <a href="index.php?route=home"><img src="assets/img/logo-Rond.png" alt="logo-Rond" class='logoHeader' id="logoNoScroll"></a>
         <a class="lienLogoScroll" href="index.php?route=home"><img src="assets/img/logoBlancScroll.png" alt="logoScroll" class="logoHeaderScroll" style="display:none;"></a>
     </section>
+    <!-- nav -->
     <section id="nav">
         <h2 class="visually-hidden">menu</h2>
         <button class="navBurgerMenu">
@@ -92,7 +95,7 @@
     </div>
 
     <div class="vertical-line"></div>
-    <p><a href="http://www.linkedin.com" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>&nbsp;&nbsp;<a href="http://www.facebook.com" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>&nbsp;&nbsp;<a href="http://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a></p>
+    <p><a href="http://www.linkedin.com" target="_blank" class="dark-mode-white-text"><i class="fa-brands fa-linkedin-in"></i></a>&nbsp;&nbsp;<a href="http://www.facebook.com" target="_blank" class="dark-mode-white-text"><i class="fa-brands fa-facebook-f dark-mode-white-text"></i></a>&nbsp;&nbsp;<a href="http://www.instagram.com" target="_blank" class="dark-mode-white-text"><i class="fa-brands fa-instagram"></i></a></p>
     <p><a href="index.php?route=legal">Mentions Légales</a> - Site créé par EV</p>
 </footer>
 

@@ -5,7 +5,9 @@
     {{ parent() }}
 {% endblock %}
 
-{% block logout %} <a href="index.php?route=logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>{% endblock %}
+{% block logout %}
+    <p><a href="index.php?route=logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a></p>
+{% endblock %}
 
     {% block main %}
     <main class="adminHome">

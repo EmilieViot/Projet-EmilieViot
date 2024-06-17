@@ -1,0 +1,51 @@
+{% extends "admin/base-admin.html.twig" %}
+
+{% block title %}
+    Avis
+    {{ parent() }}
+{% endblock %}
+
+
+    {% block main %}
+        <main id="admin_opinion_page">
+            <a href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
+            <h2 class="opinion">Avis</h2>
+
+            <table class="opinion_table">
+                <thead>
+                <tr>
+                    <th scope="col">opinion N°</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">Chantier</th>
+                    <th scope="col">Statut</th>
+                </tr>
+                </thead>
+                <tbody>
+                {%  for opinion in opinions %}
+                    <tr>
+                        <td>{{ opinion.id }}</td>
+                        <td>{{ opinion.username }}</td>
+                        <td>{{ opinion.notation }} / 5</td>
+                        <td>{{ opinion.realisationId }}</td>
+                        <td>
+                            <select name="status" class="status" data-id="{{ opinion.id }}">
+                                <option value="en attente" {% if opinion.status == 'en attente' %}selected{% endif %}>en attente</option>
+                                <option value="OK" {% if opinion.status == 'OK' %}selected{% endif %}>OK</option>
+                            </select>
+                        </td>
+                        <td>
+                            <ul class="pricing_edit_btns">
+                                <li><a href="index.php?route=show-opinion&id={{ opinion.id }}"><i class="fa-regular fa-eye"></i></a></li>
+                                <li><a href="index.php?route=delete-opinion&id={{ opinion.id }}"><i class="fa-solid fa-trash"></i></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
+
+        </main>
+    {% endblock %}

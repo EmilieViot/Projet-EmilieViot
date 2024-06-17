@@ -63,4 +63,21 @@ class OpinionManager extends AbstractManager
         $query->execute($parameters);
         $opinion->setId($this->db->lastInsertId());
     }
+
+    public function updateStatus(int $id, string $status): bool
+    {
+        $query = $this->db->prepare('UPDATE opinions SET status = :status WHERE id = :id');
+        $parameters = [
+            "status" => $status,
+            "id" => $id
+        ];
+        return $query->execute($parameters);
+    }
+
+    public function deleteOpinion(int $id): void
+    {
+        // Delete the entry from the main table
+        $query = $this->db->prepare('DELETE FROM opinions WHERE id = :id');
+        $query->execute(['id' => $id]);
+    }
 }

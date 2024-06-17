@@ -8,9 +8,12 @@
 {% block main %}
     <main id="loginPage" class="container py-5 px-3">
 
-    {% if app.session.get('error-message') is defined %}
-        {{ message }}
-    {% endif %}
+        {% if session['error-message'] is defined %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session['error-message'] }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
 
     <h1 class="mb-5">Connexion</h1>
 

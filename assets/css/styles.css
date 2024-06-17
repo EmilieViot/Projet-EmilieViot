@@ -31,19 +31,28 @@ img, video {
 max-width: 100%;
 }
 
+
+
 /* *****************************************************************
 DARK/LIGHT MODE
 ***************************************************************** */
 
-.dark-mode {
+/* dark-mode colors */
+.dark-mode-black {
     background-color: #000;
 }
-.dark-mode .white-text {
+.dark-mode-golden {
+    background-color: #bf9000;
+}
+.dark-mode-white-text {
     color: #fff;
 }
 
+/* light-mode colors */
 .light-mode {
     background-color: #fff;
+}
+.light-mode-black-text {
     color: #000;
 }
 
@@ -380,7 +389,7 @@ HOME.HTML.TWIG
     grid-template-columns: 1fr;
     justify-content: center;
     align-items: flex-start; /* Ajouter cette ligne */
-    margin : 0 auto
+    margin : 2rem auto 0 auto
 }
 .home .homeReal .homePrevButtonReal {
     grid-column: 1/2;
@@ -405,7 +414,7 @@ HOME.HTML.TWIG
 }
 .home .homeReal .homeSliderImg {
     width : 90%;
-    height : 60vh;
+    height : 50vh;
     object-fit : cover;
     object-position : center;
     display: block;
@@ -646,7 +655,7 @@ REALISATIONS.HTML.TWIG
 }
 .realSliderImg {
     width : 90vw;
-    height : 60vh;
+    height : 50vh;
     object-fit : cover;
     object-position : center;
     display: none;
@@ -655,7 +664,7 @@ REALISATIONS.HTML.TWIG
 }
 .realSliderImg.active {
     width : 90vw;
-    height : 60vh;
+    height : 50vh;
     object-fit : cover;
     object-position : center;
     display: block;
@@ -1562,7 +1571,7 @@ PRICING.HTML.TWIG
     }
 
     .home .homeReal .homeSliderImg {
-        height : 50vh;
+        height : 60vh;
     }
 
     .home .homeReal .homePrevButtonReal {
@@ -1655,6 +1664,14 @@ PRICING.HTML.TWIG
     }
     .text-content p {
         font-size : 1.4rem;
+    }
+
+    /* realisations */
+    .realSliderImg {
+        height : 60vh;
+    }
+    .realSliderImg.active {
+        height : 60vh;
     }
 
     /* One Real */

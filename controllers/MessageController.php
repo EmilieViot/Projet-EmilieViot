@@ -25,16 +25,14 @@ class MessageController extends AbstractController
 
                 $mm->createMessage($message);
 
-                $response = [
-                    'status' => 'OK',
-                    'message' => "Merci $firstname $lastname pour votre demande. Nous revenons vers vous dans les plus brefs délais."
+                $response = [' ' => 'OK', 'message' => "Merci $firstname $lastname pour votre demande. Nous revenons vers vous dans les plus brefs délais."
                 ];
             } else {
                 http_response_code(405);
-                $response = ['status' => 'error', 'message' => 'Méthode non autorisée'];
+                $response = [' ' => 'error', 'message' => 'Méthode non autorisée'];
             }
         } else {
-            $response = ['status' => 'error', 'message' => 'Merci de compléter les champs obligatoires'];
+            $response = [' ' => 'error', 'message' => 'Merci de compléter les champs obligatoires'];
         }
 
         $this->renderJson($response);

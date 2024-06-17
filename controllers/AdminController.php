@@ -14,36 +14,58 @@ class AdminController extends AbstractController
         $this->render("admin/contact/list-messages.html.twig", ["messages" => $messages]);
     }
 
-    public function showMessage(): void
+    public function showMessage(int $id): void
     {
         $mm = new MessageManager();
-        $message = $mm->getMessageById();
-
+        $message = $mm->getMessageById($id);
         $this->render("admin/contact/show-message.html.twig", ["message" => $message]);
+    }
+    public function deleteMessage(int $id): void
+    {
+        $mm = new MessageManager();
+        $mm->deleteMessage($id);
+        $this->redirect('list-messages');
     }
 
     public function opinionsList(): void
     {
         $om = new OpinionManager();
         $opinions = $om->findAll();
-
-        $this->render("admin/opinion/list-opinions.html.twig", ["opinions" => $opinions]);
+        $this->render("admin/opinions/list-opinions.html.twig", ["opinions" => $opinions]);
     }
 
-    public function showOpinion(): void
+    public function statusRegister(): void
+    {
+
+        if (!isset($_POST["status"]) && !isset($_POST["id"])) {
+            $this->renderJson(['success' => false, 'message' => 'No input received']);
+            return;
+        }
+
+        if (isset($_POST["status"]) && isset($_POST["id"])) {
+                $status = htmlspecialchars($_POST["status"]);
+                $id = (int)$_POST["id"];
+                $om = new OpinionManager();
+                $om->updateStatus($id, $status);
+                $response = [' ' => 'status OK'];
+        } else {
+            $response = [' ' => 'error datas'];
+        }
+        $this->renderJson($response);
+    }
+    public function showOpinion(int $id): void
     {
         $om = new OpinionManager();
-        $opinion = $om->getOpinionById();
-
-        $this->render("admin/opinion/show-opinion.html.twig", ["opinion" => $opinion]);
+        $opinion= $om->getOpinionById($id);
+        $this->render("admin/opinions/show-opinion.html.twig", ["opinion" => $opinion]);
     }
 
-    public function editOpinion(): void
+    public function editOpinion(int $id): void
     {
         $om = new OpinionManager();
-        $opinion = $om->getOpinionById();
+        $opinion = $om->getOpinionById($id);
 
-        $this->render("admin/opinion/edit-opinion.html.twig", ["opinion" => $opinion]);
+        $this->render("admin/opinions/edit-opinion.html.twig", ["opinion" => $opinion]);
     }
 
     public function checkEditOpinion(): void
@@ -79,22 +101,31 @@ class AdminController extends AbstractController
             $this->render("admin/opinions/edit-opinion.html.twig", ['message' => $message]);
         }
     }
+    public function deleteOpinion(int $id): void
+    {
+        $om = new OpinionManager();
+        $om->deleteOpinion($id);
+        $this->redirect('list-opinions');
+    }
 
     public function pricingsList(): void
     {
         $pm = new PricingManager();
         $pricings = $pm->findAll();
-        /*dump($pricings[0]);*/
-
         $this->render("admin/pricing/list-pricings.html.twig", ["pricings" => $pricings]);
     }
 
-    public function showPricing(): void
+    public function showPricing(int $id): void
     {
         $pm = new PricingManager();
-        $pricing = $pm->getPricingById();
-
+        $pricing = $pm->findOne($id);
         $this->render("admin/pricing/show-pricing.html.twig", ["pricing" => $pricing]);
+    }
+    public function deletePricing(int $id): void
+    {
+        $pm = new PricingManager();
+        $pm->deletePricing($id);
+        $this->redirect('list-pricings');
     }
 
     public function realsList(): void

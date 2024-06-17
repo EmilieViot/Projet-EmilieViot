@@ -282,7 +282,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const formData = new FormData(contactForm); // Récupère les données du formulaire
 
                 fetch('index.php?route=messageRegister', { // Envoie les données au script PHP
-                method: 'POST',
+                    method: 'POST',
                     body: formData,
             })
 
@@ -332,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    /* ACCESSIBILITE - POLICES */
+    /* ACCESSIBILITY - POLICES SIZES */
     const increaseFontButton = document.getElementById('increase-font');
     const decreaseFontButton = document.getElementById('decrease-font');
 
@@ -351,26 +351,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* ACCESSIBILITE - CONTRASTE */
-
-    // Récupérez les éléments bouton et le body
-    const darkModeButton = document.getElementById('dark-mode-button');
-    const lightModeButton = document.getElementById('light-mode-button');
+    /* ACCESSIBILITY - CONTRASTE */
     const body = document.body;
+    const metaColorScheme = document.querySelector('meta[name="color-scheme"]');
 
-    // Ajoutez un écouteur d'événements pour le mode sombre
-        darkModeButton.addEventListener('click', function() {
+// Initialize mode based on browser preference
+    let isDarkMode = metaColorScheme.content.includes('dark');
+    updateMode();
+
+// Add event listeners for mode toggle buttons
+    const darkModeButton = document.querySelector('#dark-mode-button');
+    const lightModeButton = document.querySelector('#light-mode-button');
+
+    darkModeButton.addEventListener('click', () => {
+        isDarkMode = true;
+        updateMode();
+    });
+
+    lightModeButton.addEventListener('click', () => {
+        isDarkMode = false;
+        updateMode();
+    });
+
+    function updateMode() {
+        if (isDarkMode) {
             body.classList.add('dark-mode');
             body.classList.remove('light-mode');
-        });
-
-    // Ajoutez un écouteur d'événements pour le mode clair
-        lightModeButton.addEventListener('click', function() {
+        } else {
             body.classList.add('light-mode');
             body.classList.remove('dark-mode');
-        });
-
-
-
+        }
+    }
 })
 
