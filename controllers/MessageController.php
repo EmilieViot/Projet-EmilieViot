@@ -25,22 +25,19 @@ class MessageController extends AbstractController
 
                 $mm->createMessage($message);
 
-                $response = [' ' => 'OK', 'message' => "Merci $firstname $lastname pour votre demande. Nous revenons vers vous dans les plus brefs délais."
-                ];
+                // Call the sendMessage method to send an email notification
+                if ($this->sendMessage()) {
+                    $response = ['status' => 'OK', 'message' => "Merci $firstname $lastname pour votre demande. Nous revenons vers vous dans les plus brefs délais."];
+                } else {
+                    $response = ['status' => 'error','message' => 'Message envoyé mais l\'email de notification n\'a pas pu être envoyé.'];
+                }
             } else {
-                http_response_code(405);
-                $response = [' ' => 'error', 'message' => 'Méthode non autorisée'];
+                    http_response_code(405);
+                    $response = ['status' => 'error', 'message' => 'Méthode non autorisée'];
             }
         } else {
-            $response = [' ' => 'error', 'message' => 'Merci de compléter les champs obligatoires'];
+            $response = ['status' => 'error', 'message' => 'Merci de compléter les champs obligatoires'];
         }
-
         $this->renderJson($response);
-    }
-
-
-    public function messageConfirmation(): void
-    {
-        $this->render("contact/messageConfirmation.html.twig", []);
     }
 }

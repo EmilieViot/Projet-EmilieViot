@@ -57,7 +57,7 @@ class PricingController extends AbstractController
 
                 $successMessage = "Votre demande a bien été transmise. Nous revenons vers vous dans les plus brefs délais.";
                 $this->render("pricing/pricing.html.twig", ['message' => $successMessage]);
-
+                $this->sendMessage();
             } else {
                 $_SESSION["error-message"] = "CSRF token invalide";
                 $this->redirect("pricing");

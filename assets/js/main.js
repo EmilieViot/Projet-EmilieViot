@@ -274,29 +274,32 @@ document.addEventListener("DOMContentLoaded", () => {
     /* FORMULAIRE CONTACT */
 
     if (route === 'contact') {
-           const contactForm = document.getElementById('contactForm');
+        const contactForm = document.getElementById('contactForm');
 
-            contactForm.addEventListener('submit', function (event) {
-                event.preventDefault(); // Empêche le comportement par défaut du formulaire
+        contactForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Empêche le comportement par défaut du formulaire
 
-                const formData = new FormData(contactForm); // Récupère les données du formulaire
+            const formData = new FormData(contactForm); // Récupère les données du formulaire
 
-                fetch('index.php?route=messageRegister', { // Envoie les données au script PHP
-                    method: 'POST',
-                    body: formData,
+            fetch('index.php?route=messageRegister', {
+                method: 'POST',
+                body: formData,
             })
-
                 .then(response => response.json()) // Traite la réponse JSON
                 .then(data => {
-                    document.querySelector('#contactFormOKMessage').textContent = data.message;
+                    if (data.status === 'OK') {
+                        document.querySelector('#contactFormOKMessage').textContent = data.message;
+                    } else {
+                        console.error('Erreur côté serveur:', data.message);
+                        document.querySelector('#contactFormOKMessage').textContent = 'Une erreur est survenue.';
+                    }
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     document.querySelector('#contactFormOKMessage').textContent = 'Une erreur est survenue.';
                 });
-            });
-    }
-
+        });
+        }
 
     /* ** FORMULAIRE DEMANDE DE DEVIS * **/
     if (route === 'pricing') {

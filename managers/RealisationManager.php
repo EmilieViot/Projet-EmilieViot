@@ -23,7 +23,7 @@ class RealisationManager extends AbstractManager
 
     public function findLatest() : array
     {
-        $query = $this->db->prepare('SELECT * FROM realisations LIMIT 3');
+        $query = $this->db->prepare('SELECT * FROM realisations LIMIT 4');
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $realisations = [];
@@ -71,7 +71,7 @@ class RealisationManager extends AbstractManager
         $realisation->setId($this->db->lastInsertId());
     }
 
-    public function updateReal(Realisation $realisation): bool
+   /* public function updateReal(Realisation $realisation): bool
     {
         $query = $this->db->prepare('UPDATE realisations SET title = :title, description = :description WHERE id = :id');
         $parameters = [
@@ -80,5 +80,19 @@ class RealisationManager extends AbstractManager
             "description" => $realisation->getDescription()
         ];
         return $query->execute($parameters);
+    }*/
+
+    public function deleteReal(int $id): void
+    {
+        // Delete entries from the linking tables
+        $query = $this->db->prepare('DELETE FROM realisations_pictures WHERE realisation_id = :id');
+        $query->execute(['id' => $id]);
+
+        $query = $this->db->prepare('DELETE FROM realisations_services WHERE realisation_id = :id');
+        $query->execute(['id' => $id]);
+
+        // Delete the entry from the main table
+        $query = $this->db->prepare('DELETE FROM realisations WHERE id = :id');
+        $query->execute(['id' => $id]);
     }
 }

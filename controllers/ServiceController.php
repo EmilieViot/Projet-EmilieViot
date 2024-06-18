@@ -2,8 +2,6 @@
 
 class ServiceController extends AbstractController
 {
-
-
     public function services()
     {
         $sm = new ServiceManager();

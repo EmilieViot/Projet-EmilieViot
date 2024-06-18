@@ -132,7 +132,6 @@ class AdminController extends AbstractController
     {
         $rm = new RealisationManager();
         $realisations = $rm->findAll();
-
         $this->render("admin/realisations/list-reals.html.twig", ["realisations" => $realisations]);
     }
 
@@ -148,75 +147,52 @@ class AdminController extends AbstractController
             $tokenManager = new CSRFTokenManager();
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
 
-                if(!empty($_POST['title'])) {$title = $_POST['title'];}
-                if(!empty($_POST['description'])) {$description = $_POST['description'];}
+                if(!empty($_POST['title'])) {$title = $_POST['title'];} else {$title = null;}
+                if(!empty($_POST['description'])) {$description = $_POST['description'];} else {$description = null;}
                 if(!empty($_FILES['picture1'])) {$picture1 = $_FILES['picture1'];}
                 if(!empty($_FILES['picture2'])) {$picture2 = $_FILES['picture2'];}
                 if(!empty($_FILES['picture3'])) {$picture3 = $_FILES['picture3'];}
                 if(!empty($_FILES['picture4'])) {$picture4 = $_FILES['picture4'];}
 
                 $rm = new RealisationManager();
-                $pm = new PictureManager();
 
                 /*dump($picture1);dump($picture2);dump($picture3);dump($picture4);*/
 
                 $pictures = [];
+                $uploader = new Uploader();
 
-                /*créa de la réal*/
-                    /* image 1 */
-                    $uploader = new Uploader();
-                    $pic1 = $uploader->uploadPictures($_FILES, "picture1");
-                    $url = $pic1->getUrl();
-                    $alt = $pic1->getAlt();
-                    $newPic1 = new Picture($url,$alt);
-                    $pictures[]=$newPic1;
-                    /*dump($newPic1);*/
-                    $pm->createPicture($newPic1);
-                    /* image 2 */
-                    $uploader = new Uploader();
-                    $pic2 = $uploader->uploadPictures($_FILES, "picture2");
-                    $url = $pic2->getUrl();
-                    $alt = $pic2->getAlt();
-                    $newPic2 = new Picture($url,$alt);
-                    $pictures[]=$newPic2;
-                    /*dump($newPic2);*/
-                    $pm->createPicture($newPic2);
-                    /* image 3 */
-                    $uploader = new Uploader();
-                    $pic3 = $uploader->uploadPictures($_FILES, "picture3");
-                    $url = $pic3->getUrl();
-                    $alt = $pic3->getAlt();
-                    $newPic3 = new Picture($url,$alt);
-                    $pictures[]=$newPic3;
-                    /*dump($newPic3);*/
-                    $pm->createPicture($newPic3);
-                    /* image 4 */
-                    $uploader = new Uploader();
-                    $pic4 = $uploader->uploadPictures($_FILES, "picture1");
-                    $url = $pic4->getUrl();
-                    $alt = $pic4->getAlt();
-                    $newPic4 = new Picture($url,$alt);
-                    $pictures[]=$newPic4;
-                    /*dump($newPic1);*/
-                    $pm->createPicture($newPic4);
-
+                for ($i = 1; $i <= 4; $i++) {
+                    if (!empty($_FILES["picture$i"])) {
+                        $pic = $uploader->uploadPictures($_FILES, "picture$i");
+                        if ($pic !== null) {
+                            $url = $pic->getUrl();
+                            $alt = $pic->getAlt();
+                            $newPic = new Picture($url, $alt);
+                            $pictures[] = $newPic;
+                            $pm = new PictureManager();
+                            $pm->createPicture($newPic);
+                        }
+                    }
+                }
                 $realisation = new Realisation($title, $description, $pictures);
                 $rm->createReal($realisation);
-
-                $rm = new RealisationPictureManager();
-                foreach ($pictures as $picture) {
-                    $rm->createOne($realisation, $picture);
+                if(!empty($pictures)){
+                    $rpm = new RealisationPictureManager();
+                    foreach ($pictures as $picture) {
+                        $rpm->createOne($realisation, $picture);
+                    }
                 }
-                $message = "Votre réalisation a bien été ajoutée.";
+                $message = "Votre réalisation a été ajoutée avec succès.";
                 $this->render("admin/realisations/list-reals.html.twig", ['message' => $message]);
-
+                $this->redirect("list-reals");
             } else {
                 $_SESSION["error-message"] = "CSRF token invalide";
-                $this->redirect("edit-real");
+                $this->redirect("create-real");
             }
         } else {
             $message = "Veuillez réessayer.";
-            $this->render("admin/realisations/list-reals.html.twig", ['message' => $message]);
+            $this->render("admin/realisations/create-real.html.twig", ['message' => $message]);
+            $this->redirect("create-real");
         }
     }
 
@@ -228,44 +204,16 @@ class AdminController extends AbstractController
         $this->render("admin/realisations/show-real.html.twig", ["realisation" => $realisation]);
     }
 
-    public function editReal(): void
+    public function deleteReal(int $id): void
     {
         $rm = new RealisationManager();
-        $realisation = $rm->findById();
-
-        $this->render("admin/realisations/edit-real.html.twig", ["realisation" => $realisation]);
-    }
-
-    public function checkEditReal(): void
-    {
-        if (isset($_POST['title']) && isset($_POST['description']) /*&& $_POST['photo_path']*/) {
-
-            $tokenManager = new CSRFTokenManager();
-            if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
-
-                $title = $_POST['title'];
-                $description = $_POST['description'];
-                $realisation = new Realisation($title, $description);
-
-                $rm = new RealisationManager();
-                $rm->updateReal($realisation);
-
-                $message = "La réalisation a bien été mise à jour.";
-                $this->render("admin/realisations/list-reals.html.twig", ['message' => $message]);
-
-                } else {
-                    $_SESSION["error-message"] = "CSRF token invalide";
-                    $this->redirect("edit-real");
-                }
-        } else {
-            $message = "Une erreur s'est produite, veuillez réessayer.";
-            $this->render("admin/realisations/edit-real.html.twig", ['message' => $message]);
-        }
+        $rm->deleteReal($id);
+        $this->redirect('list-reals');
     }
 
     public function servicesList(): void
     {
-        $sm = new ServicesManager();
+        $sm = new ServiceManager();
         $services = $sm->findAll();
 
         $this->render("admin/services/list-services.html.twig", ["services" => $services]);

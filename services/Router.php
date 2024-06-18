@@ -163,14 +163,10 @@ class Router extends AbstractController
         {
             $adc->showReal();
         }
-        else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "edit-real")
-        {
-            $adc->editReal();
+        else if (isset($get["route"]) && isset($get["id"]) && $get["route"] === "delete-real") {
+            $adc->deleteReal((int)$get["id"]);
         }
-        else if(isset($get["route"]) && $get["route"] === "check-real-edition")
-        {
-            $adc->checkEditReal();
-        }
+
         /*services*/
         else if(isset($get["route"]) && $get["route"] === "list-services")
         {

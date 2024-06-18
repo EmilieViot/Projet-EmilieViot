@@ -1,4 +1,10 @@
 <?php
+
+require 'vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 abstract class AbstractController
 {
     private \Twig\Environment $twig;
@@ -34,5 +40,38 @@ abstract class AbstractController
     protected function renderJson(array $data) : void
     {
         echo json_encode($data);
+    }
+
+    protected function sendMessage() : bool
+    {
+    // Create a new PHPMailer instance
+        $mail = new PHPMailer(true);
+        try {
+            // Set up SMTP debugging
+            $mail->SMTPDebug = SMTP::DEBUG_OFF;
+            // Set up SMTP
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->Port       = 587;
+            $mail->SMTPAuth   = true;
+            $mail->Username   = $_ENV["SMTP_MAIL"];
+            $mail->Password   = $_ENV["SMTP_PASSWORD"];
+            // Set character encoding to UTF-8
+            $mail->CharSet    = "utf-8";
+            // Set the sender
+            $mail->setFrom($_ENV["SMTP_MAIL"], 'Site AVEN Plaquiste');
+            // Add recipient
+            $mail->addAddress($_ENV["SMTP_MAIL"], 'Admin');
+            // Enable HTML in the email body
+            $mail->isHTML(true);
+            // Set email subject and body
+            $mail->Subject = "Nouvelle notification - AVEN Plaquiste";
+            $mail->Body    = "Il y a du nouveau sur le site d'AVEN Plaquiste - rendez-vous vite en admin !  ";
+            // Send the email
+            $mail->send();
+            return true;
+        } catch (Exception) {
+            return false;
+        }
     }
 }

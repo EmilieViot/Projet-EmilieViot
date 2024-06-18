@@ -71,4 +71,5 @@ class MessageManager extends AbstractManager
         $query = $this->db->prepare('DELETE FROM messages WHERE id = :id');
         $query->execute(["id" => $id]);
     }
+
 }

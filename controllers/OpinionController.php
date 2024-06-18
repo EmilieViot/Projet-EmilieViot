@@ -37,6 +37,7 @@ class OpinionController extends AbstractController
 
                 $errorMessage = "Merci d'avoir pris le temps de laisser un avis. Nous restons à votre disposition pour toute demande.";
                 $this->render("opinions/opinion.html.twig", ['message' => $errorMessage]);
+                $this->sendMessage();
             } else {
                 $_SESSION["error-message"] = "CSRF token invalide";
                 $this->redirect("opinion");
