@@ -161,7 +161,7 @@ class Router extends AbstractController
         }
         else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "show-real")
         {
-            $adc->showReal();
+            $adc->showReal((int)$get["id"]);
         }
         else if (isset($get["route"]) && isset($get["id"]) && $get["route"] === "delete-real") {
             $adc->deleteReal((int)$get["id"]);
@@ -182,15 +182,10 @@ class Router extends AbstractController
         }
         else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "show-service")
         {
-            $adc->showService();
+            $adc->showService((int)$get["id"]);
         }
-        else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "edit-service")
-        {
-            $adc->editService();
-        }
-        else if(isset($get["route"]) && $get["route"] === "check-service-edition")
-        {
-            $adc->checkEditService();
+        else if (isset($get["route"]) && isset($get["id"]) && $get["route"] === "delete-service") {
+            $adc->deleteService((int)$get["id"]);
         }
 
 

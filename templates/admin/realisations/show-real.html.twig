@@ -1,39 +1,25 @@
 {% extends "admin/base-admin.html.twig" %}
 
 {% block title %}
-    Réalisation N°{{ pricing.id }}
+    Réalisation N°{{ realisation.id }}
     {{ parent() }}
 {% endblock %}
 
 
     {% block main %}
-        <main id="pricing_show">
-            <a href="index.php?route=list-messages"><i class="fa-solid fa-arrow-left"></i></a>
-            <h2 class="pricing">Devis N°{{ pricing.id }}</h2>
+        <main id="realisation_show">
+            <a href="index.php?route=list-reals"><i class="fa-solid fa-arrow-left"></i></a>
+            <h2 class="realisation">Réalisation N°{{ realisation.id }}</h2>
 
-            <p>Recontacter par : {{ pricing.contact_mode }}</p>
-            <p>Prénom : {{ pricing.firstname }}</p>
-            <p>Nom : {{ pricing.lastname }}</p>
-            <p>Email : {{ pricing.email }}</p>
-            <p>Téléphone : {{ pricing.tel }}</p>
-            <p>Ville : {{ pricing.city }}</p>
-            <p>Message : {{ pricing.message }}</p>
-            {% if pricing.details is defined and pricing.details is not null %}
-                <p>Options :</p>
-                <ul>
-                    {%  for detail in pricing.details %}
-                        <li>{{ detail.title }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+            <p>Titre : {{ realisation.title }}</p>
+            <p>Description : {{ realisation.description }}</p>
+            {% for picture in realisation.pictures %}
+                <img class = "realImg " src="{{ picture.url }}" alt="{{ picture.alt }}" width="200px"/>
+            {% endfor %}
 
-
-            {% if pricing.photo_path is defined and pricing.photo_path is not null %}
-                <p>Image à l'appui : <img src="{{ pricing.photo_path }}" alt="image"/></p>
-            {% endif %}
 
             <ul class="edit_btns">
-                <li><a href="index.php?route=delete-pricing&id={{ pricing.id }}"><i class="fa-solid fa-trash"></i></a></li>
+                <li><a href="index.php?route=delete-realisation&id={{ realisation.id }}"><i class="fa-solid fa-trash"></i></a></li>
             </ul>
 
             <a href="index.php?route=list-messages"><i class="fa-solid fa-arrow-left"></i></a>

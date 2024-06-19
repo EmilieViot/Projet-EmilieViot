@@ -22,11 +22,10 @@ class OpinionController extends AbstractController
                 $content = htmlspecialchars($_POST['content']);
                 $notation = $_POST['notation'];
 
-                if($_POST['realisation_id'] === "") {
-                    $realisationId = null;
-                }
-                else {
+                if (isset($_POST['realisation_id']) && $_POST['realisation_id'] !== "") {
                     $realisationId = intval($_POST['realisation_id']);
+                } else {
+                    $realisationId = null;
                 }
 
                 $opinion = new Opinion($username, $content, $notation, $realisationId);
@@ -35,9 +34,14 @@ class OpinionController extends AbstractController
 
                 $_SESSION['new-opinion'] = true;
 
-                $errorMessage = "Merci d'avoir pris le temps de laisser un avis. Nous restons à votre disposition pour toute demande.";
-                $this->render("opinions/opinion.html.twig", ['message' => $errorMessage]);
-                $this->sendMessage();
+                $OKMessage = "Merci d'avoir pris le temps de laisser un avis. Nous restons à votre disposition pour toute demande.";
+                // Fetch any other data needed for your template (assuming $opinions and $realisations are already defined)
+                $opinions = $om->findAll(); // Example function to fetch opinions
+                $rm = new RealisationManager();
+                $realisations = $rm->findAll(); // Example function to fetch realisations
+                $this->render("opinions/opinion.html.twig", ['message' => $OKMessage,"opinions" => $opinions, "realisations" => $realisations]);
+
+                $this->newOpinion();
             } else {
                 $_SESSION["error-message"] = "CSRF token invalide";
                 $this->redirect("opinion");

@@ -54,6 +54,7 @@ class PricingController extends AbstractController
                 foreach ($details_array as $detail) {
                     $pdm->createOne($pricing, $detail);
                 }
+                $this->newPricing();
 
                 $successMessage = "Votre demande a bien été transmise. Nous revenons vers vous dans les plus brefs délais.";
                 $this->render("pricing/pricing.html.twig", ['message' => $successMessage]);

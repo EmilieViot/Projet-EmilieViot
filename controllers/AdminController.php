@@ -196,12 +196,16 @@ class AdminController extends AbstractController
         }
     }
 
-    public function showReal(): void
+    public function showReal(int $id): void
     {
-        $rm = new RealisationManager();
-        $realisation = $rm->findById();
-
-        $this->render("admin/realisations/show-real.html.twig", ["realisation" => $realisation]);
+        $rpm = new RealisationPictureManager();
+        $realisation = $rpm->findByRealisationId($id);
+        if ($realisation) {
+            $this->render("admin/realisations/show-real.html.twig", ["realisation" => $realisation]);
+        } else {
+            // Realisation is not found
+            $this->render("admin/realisations/show-real.html.twig", ["error" => "Réalisation non trouvée"]);
+        }
     }
 
     public function deleteReal(int $id): void
@@ -215,7 +219,6 @@ class AdminController extends AbstractController
     {
         $sm = new ServiceManager();
         $services = $sm->findAll();
-
         $this->render("admin/services/list-services.html.twig", ["services" => $services]);
     }
 
@@ -226,70 +229,74 @@ class AdminController extends AbstractController
 
     public function checkServiceCreation(): void
     {
-        if (isset($_POST['title']) && isset($_POST['intro']) && isset($_POST['description']) /*&& $_POST['photo_path']*/) {
+        if (isset($_POST['title']) && isset($_POST['intro']) && isset($_POST['description']) && (isset($_FILES['picture1']) || isset($_FILES['picture2']) || isset($_FILES['picture3']) || isset($_FILES['picture4']))) {
+
             $tokenManager = new CSRFTokenManager();
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
 
-                $title = $_POST['title'];
-                $intro = $_POST['intro'];
-                $description = $_POST['description'];
-                $service = new Service($title, $intro, $description);
+                if(!empty($_POST['title'])) {$title = $_POST['title'];} else {$title = null;}
+                if(!empty($_POST['intro'])) {$intro = $_POST['intro'];} else {$intro = null;}
+                if(!empty($_POST['description'])) {$description = $_POST['description'];} else {$description = null;}
+                if(!empty($_FILES['picture1'])) {$picture1 = $_FILES['picture1'];}
+                if(!empty($_FILES['picture2'])) {$picture2 = $_FILES['picture2'];}
+                if(!empty($_FILES['picture3'])) {$picture3 = $_FILES['picture3'];}
+                if(!empty($_FILES['picture4'])) {$picture4 = $_FILES['picture4'];}
 
                 $sm = new ServiceManager();
-                $sm->createService($service);
 
-                $message = "Votre réalisation a bien été ajoutée.";
-                $this->render("admin/realisations/list-reals.html.twig", ['message' => $message]);
-                } else {
-                    $_SESSION["error-message"] = "CSRF token invalide";
-                    $this->redirect("edit-opinion");
+                /*dump($picture1);dump($picture2);dump($picture3);dump($picture4);*/
+
+                $pictures = [];
+                $uploader = new Uploader();
+
+                for ($i = 1; $i <= 4; $i++) {
+                    if (!empty($_FILES["picture$i"])) {
+                        $pic = $uploader->uploadPictures($_FILES, "picture$i");
+                        if ($pic !== null) {
+                            $url = $pic->getUrl();
+                            $alt = $pic->getAlt();
+                            $newPic = new Picture($url, $alt);
+                            $pictures[] = $newPic;
+                            $pm = new PictureManager();
+                            $pm->createPicture($newPic);
+                        }
+                    }
                 }
+                $service = new Service($title, $intro, $description, $pictures);
+                $sm->createService($service);
+                if(!empty($pictures)){
+                    $spm = new ServicePictureManager();
+                    foreach ($pictures as $picture) {
+                        $spm->createOne($service, $picture);
+                    }
+                }
+                $message = "Votre réalisation a été ajoutée avec succès.";
+                $this->render("admin/services/list-services.html.twig", ['message' => $message]);
+                $this->redirect("list-services");
+            } else {
+                $_SESSION["error-message"] = "CSRF token invalide";
+                $this->redirect("create-service");
+            }
         } else {
             $message = "Veuillez réessayer.";
-            $this->render("admin/realisations/list-reals.html.twig", ['message' => $message]);
+            $this->render("admin/services/create-service.html.twig", ['message' => $message]);
+            $this->redirect("create-service");
         }
     }
 
-    public function showService(): void
+    public function showService(int $id): void
     {
         $sm = new ServiceManager();
-        $service = $sm->findById();
+        $service = $sm->findById($id);
 
         $this->render("admin/services/show-service.html.twig", ["service" => $service]);
     }
 
-    public function editService(): void
+    public function deleteService(int $id): void
     {
         $sm = new ServiceManager();
-        $service = $sm->findById();
-
-        $this->render("admin/services/edit-service.html.twig", ["service" => $service]);
-    }
-
-    public function checkEditService(): void
-    {
-        if (isset($_POST['title']) && isset($_POST['intro']) && isset($_POST['description']) /*&& $_POST['photo_path']*/) {
-
-            $tokenManager = new CSRFTokenManager();
-            if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
-
-                $title = $_POST['title'];
-                $intro = $_POST['intro'];
-                $description = $_POST['description'];
-
-                $sm = new ServiceManager();
-                $sm->updateService($service);
-
-                $message = "La prestation a bien été mise à jour.";
-                $this->render("admin/realisations/list-services.html.twig", ['message' => $message]);
-            } else {
-                $_SESSION["error-message"] = "CSRF token invalide";
-                $this->redirect("edit-opinion");
-            }
-        } else {
-            $message = "Une erreur s'est produite, veuillez réessayer.";
-            $this->render("admin/services/edit-service.html.twig", ['message' => $message]);
-        }
+        $sm->deleteService($id);
+        $this->redirect('list-services');
     }
 
 }

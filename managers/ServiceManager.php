@@ -44,7 +44,33 @@ class ServiceManager extends AbstractManager
         return null;
     }
 
-    public function updateService(Service $service): bool
+    public function createService(Service $service): void
+    {
+        $query = $this->db->prepare('INSERT INTO services (id, title, intro, description) VALUES (NULL, :title, :intro, :description)');
+        $parameters = [
+            "title" => $service->getTitle(),
+            "intro" => $service->getIntro(),
+            "description" => $service->getDescription()
+        ];
+        $query->execute($parameters);
+
+        $service->setId($this->db->lastInsertId());
+    }
+    public function deleteService(int $id): void
+    {
+        // Delete entries from the linking tables
+        $query = $this->db->prepare('DELETE FROM services_pictures WHERE service_id = :id');
+        $query->execute(['id' => $id]);
+
+        $query = $this->db->prepare('DELETE FROM realisations_services WHERE service_id = :id');
+        $query->execute(['id' => $id]);
+
+        // Delete the entry from the main table
+        $query = $this->db->prepare('DELETE FROM services WHERE id = :id');
+        $query->execute(['id' => $id]);
+    }
+
+   /* public function updateService(Service $service): bool
     {
         $query = $this->db->prepare('UPDATE services SET title = :title, intro = :intro, description = :description WHERE id = :id');
         $parameters = [
@@ -54,5 +80,5 @@ class ServiceManager extends AbstractManager
             "description" => $service->getDescription()
         ];
         return $query->execute($parameters);
-    }
+    }*/
 }

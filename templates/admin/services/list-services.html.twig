@@ -1,0 +1,44 @@
+{% extends "admin/base-admin.html.twig" %}
+
+{% block title %}
+    Prestations
+    {{ parent() }}
+{% endblock %}
+
+
+    {% block main %}
+        <main id="admin_services_page">
+            <a href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
+            <h2 class="reals">Prestations</h2>
+            <a href="index.php?route=create-service"><i class="fa-solid fa-circle-plus"></i>Ajouter une prestation</a>
+
+            <table class="srrvices_table">
+                <thead>
+                <tr>
+                    <th scope="col">Prestation N°</th>
+                    <th scope="col">Edition</th>
+                    <th scope="col">Intitulé</th>
+                    <th scope="col">Aperçu</th>
+                </tr>
+                </thead>
+                <tbody>
+                {%  for service in services %}
+                    <tr>
+                        <td>{{ service.id }}</td>
+                        <td>
+                            <ul class="service_edit_btns">
+
+                                <li><a href="index.php?route=show-service&id={{ service.id }}"><i class="fa-regular fa-eye"></i></a></li>
+                                <li><a href="index.php?route=delete-service&id={{ service.id }}"><i class="fa-solid fa-trash"></i></a></li>
+                            </ul>
+                        </td>
+                        <td>{{ service.title }}</td>
+                        <td>{{ service.intro }}</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+            <a href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
+        </main>
+    {% endblock %}

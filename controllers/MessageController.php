@@ -25,8 +25,8 @@ class MessageController extends AbstractController
 
                 $mm->createMessage($message);
 
-                // Call the sendMessage method to send an email notification
-                if ($this->sendMessage()) {
+                // Call the NewMessage method to send an email notification
+                if ($this->newMessage()) {
                     $response = ['status' => 'OK', 'message' => "Merci $firstname $lastname pour votre demande. Nous revenons vers vous dans les plus brefs délais."];
                 } else {
                     $response = ['status' => 'error','message' => 'Message envoyé mais l\'email de notification n\'a pas pu être envoyé.'];
