@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block main %}
-    <main>
+    <main id="newService_show">
         <a class= "backBtn" href="index.php?route=list-services"><i class="fa-solid fa-arrow-left"></i></a>
         <form class = "serviceAdminForm" action="index.php?route=check-service-creation" method="post" enctype="multipart/form-data">
             <input type="hidden" name="csrf-token" id="csrf-token" value="{{ sessionToken }}" />

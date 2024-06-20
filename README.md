@@ -24,6 +24,13 @@ Open your terminal and run:
     `composer install`
 
 ---
+# Install PHPMailer :
+
+Useutilisez Composer avec la commande suivante :
+
+    `composer require phpmailer/phpmailer`
+
+---
 # Classes autoload:
 
 *When cloning the project, you will get this folder structure:*
@@ -52,7 +59,8 @@ A vendor folder will be created by composer.
     },
     "require": {
         "vlucas/phpdotenv": "^5.6",
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.0",
+	"phpmailer/phpmailer": "^6.5"
     },
     "require-dev": {
         "symfony/var-dumper": "^7.0"
@@ -78,6 +86,8 @@ DB_USER=""
 DB_PASSWORD=""
 DB_CHARSET=""
 DB_HOST=""
+SMTP_MAIL=""
+SMTP_PASSWORD=""
 ```
 
 Then make a copy of this file named .env and add your database connection information.
@@ -221,6 +231,14 @@ Rendez-vous dans votre terminal :
 
     `composer install`
 
+
+---
+# Installez PHPMailer :
+
+Pour installer PHPMailer, utilisez Composer avec la commande suivante :
+
+    `composer require phpmailer/phpmailer`
+
 ---
 # Autoload des classes :
 
@@ -250,7 +268,8 @@ Un dossier vendor a été créé par composer.
     },
     "require": {
         "vlucas/phpdotenv": "^5.6",
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.0",
+	"phpmailer/phpmailer": "^6.5"
     },
     "require-dev": {
         "symfony/var-dumper": "^7.0"
@@ -276,6 +295,8 @@ DB_USER=""
 DB_PASSWORD=""
 DB_CHARSET=""
 DB_HOST=""
+SMTP_MAIL=""
+SMTP_PASSWORD=""
 ```
 
 ensuite faites une copie de ce fichier que vous appellerez `.env` et ajoutez-y les bonnes informations de connexion à votre base de données.

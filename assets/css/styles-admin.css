@@ -463,7 +463,7 @@ LIST-OPINIONS.HTML.TWIG
 }
 
 #admin_opinion_page .opinion_table {
-    width: 90%;
+    width: 80%;
     border-collapse: collapse;
     margin : 2rem auto;
 }
@@ -672,6 +672,21 @@ SHOW-REAL.HTML.TWIG
 CREATE-REAL.HTML.TWIG
 ***************************************************************** */
 
+#newReal_show {
+    margin : 2rem auto;
+    width: 90%;
+}
+
+#newReal_show .backBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    color: #bf9000;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+
 .realAdminForm {
     display: flex;
     flex-direction: column;
@@ -853,6 +868,20 @@ SHOW-SERVICE.HTML.TWIG
 CREATE-SERVICE.HTML.TWIG
 ***************************************************************** */
 
+#newService_show {
+    margin : 2rem auto;
+    width: 90%;
+}
+
+#newService_show .backBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    color: #bf9000;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
 .serviceAdminForm {
     display: flex;
     flex-direction: column;

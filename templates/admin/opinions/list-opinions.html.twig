@@ -8,7 +8,7 @@
 
     {% block main %}
         <main id="admin_opinion_page">
-            <a class = "backHome" href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
+            <a class = "backBtn" href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
             <h2 class="opinion">Avis</h2>
 
             <table class="opinion_table">
@@ -18,8 +18,8 @@
                     <th scope="col">Username</th>
                     <th scope="col">Note</th>
                     <th scope="col">Message</th>
-                    <th scope="col">Chantier</th>
                     <th scope="col">Statut</th>
+                    <th scope="col">Edition</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -45,7 +45,7 @@
                 {% endfor %}
                 </tbody>
             </table>
-            <a class = "backHome"  href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
+            <a class = "backBtn"  href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
 
         </main>
     {% endblock %}
