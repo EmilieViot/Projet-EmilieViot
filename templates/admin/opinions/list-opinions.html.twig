@@ -8,7 +8,7 @@
 
     {% block main %}
         <main id="admin_opinion_page">
-            <a href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
+            <a class = "backHome" href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
             <h2 class="opinion">Avis</h2>
 
             <table class="opinion_table">
@@ -36,7 +36,7 @@
                             </select>
                         </td>
                         <td>
-                            <ul class="pricing_edit_btns">
+                            <ul class="opinion_edit_btns">
                                 <li><a href="index.php?route=show-opinion&id={{ opinion.id }}"><i class="fa-regular fa-eye"></i></a></li>
                                 <li><a href="index.php?route=delete-opinion&id={{ opinion.id }}"><i class="fa-solid fa-trash"></i></a></li>
                             </ul>
@@ -45,7 +45,7 @@
                 {% endfor %}
                 </tbody>
             </table>
-            <a href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
+            <a class = "backHome"  href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
 
         </main>
     {% endblock %}

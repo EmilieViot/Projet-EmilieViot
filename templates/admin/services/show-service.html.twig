@@ -8,20 +8,18 @@
 
     {% block main %}
         <main id="service_show">
-            <a href="index.php?route=list-services"><i class="fa-solid fa-arrow-left"></i></a>
-            <h2 class="service">Prestation N°{{ service.id }}</h2>
+            <a class= "backBtn" href="index.php?route=list-services"><i class="fa-solid fa-arrow-left"></i></a>
+            <h2 class="service">Prestation N°{{ service.id }}<a class="edit_btns" href="index.php?route=delete-service&id={{ service.id }}"><i class="fa-solid fa-trash"></i></a></h2>
 
-            <p>Titre : {{ service.title }}</p>
-            <p>Description : {{ service.description }}</p>
+            <p><span>Titre :</span> {{ service.title }}</p>
+            <p><span>Description :</span> {{ service.description }}</p>
+            <p><span>Image(s) à l'appui :</span></p>
             {% for picture in service.pictures %}
                 <img class = "serciceImg " src="{{ picture.url }}" alt="{{ picture.alt }}" width="200px"/>
             {% endfor %}
 
-            <ul class="edit_btns">
-                <li><a href="index.php?route=delete-service&id={{ service.id }}"><i class="fa-solid fa-trash"></i></a></li>
-            </ul>
 
-            <a href="index.php?route=list-services"><i class="fa-solid fa-arrow-left"></i></a>
+            <a class= "backBtn" href="index.php?route=list-services"><i class="fa-solid fa-arrow-left"></i></a>
 
 
         </main>

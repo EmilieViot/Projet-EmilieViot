@@ -30,6 +30,14 @@ table {
     border-spacing: 0;
 }
 
+table td, table th {
+    font-size : 1.2rem
+}
+
+main p, main ul li {
+    font-size : 1.2rem
+}
+
 body * {
     box-sizing: border-box;
 }
@@ -48,7 +56,7 @@ GENERAL
 ***************************************************************** */
 body {
     width : 100%;
-    margin : auto;
+    margin : 0 auto;
     padding : 0;
     font-weight:100;
     line-height: 1.5;
@@ -63,7 +71,8 @@ button {
 }
 
 header {
-    margin : 2rem auto!important;
+    margin : 0 auto!important;
+    padding : 1rem;
     position: sticky;
     top: 0;
     z-index: 999;
@@ -71,7 +80,8 @@ header {
     display : flex;
     flex-direction: column;
     align-items: center;
-    justify-items: center;
+    justify-content:center;
+    text-align: center;
 }
 .adminHeader h1 {
     text-align : center;
@@ -83,26 +93,85 @@ header {
     margin : auto;
 }
 
+/* *****************************************************************
+LOGIN.HTML.TWIG
+***************************************************************** */
+#loginPage {
+    margin: auto;
+}
+#loginPage h1 {
+    margin: auto;
+    text-align: center;
+}
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    width : 90%;
+    margin : auto;
+}
+.loginForm fieldset {
+    margin : 2rem auto 0 auto;
+    padding : 2rem;
+    text-align: center;
+}
+.loginForm input,
+.loginForm textarea {
+    background-color : #fff;
+    color : #000;
+    border : 1px solid #404040;
+    border-radius: 10px;
+    font-weight : lighter;
+    font-size: 1.6rem;
+}
+.loginForm label {
+    color : #000;
+    font-size : 1.6rem;
+    text-align : center;
+    margin-top : 2rem;
+    margin-bottom : 1rem;
+    font-weight : bold;
+}
+
+.loginForm button {
+    background-color: #bf9000;
+    color : black;
+    font-size: 1.6rem;
+    font-weight: bold;
+    border-radius: 10px;
+    margin : auto
+}
+
 
 /* *****************************************************************
 ADMIN.HTML.TWIG
 ***************************************************************** */
 
-/* page accueil admin */
-
 .logoAdmin {
     display : flex;
     justify-content: center;
     align-content: center;
-    margin : auto;
-    padding : 4rem 0;
+    margin : 1rem auto;
+    padding : 0;
     text-align: center;
-    width : 20%
+    width : 30%
 }
 
-.fa.fa-sign-out {
+header h1 {
+    font-size : 1.6rem;
+    margin : 4rem
+}
+header>p {
+    margin : auto
+}
+header>p:last-child {
     color : #bf9000;
-    font-size : 2rem;
+}
+header>p>a>i {
+    color : #bf9000;
+    font-size : 1.6rem;
+    margin : auto!important;
+    display : inline;
+    text-align: center;
 }
 .adminHome {
     margin : 8rem 2rem;
@@ -139,22 +208,706 @@ ADMIN.HTML.TWIG
     color : #fff;
 }
 
+footer {
+    display : flex;
+    flex-direction : column;
+    align-content : center;
+    align-items: center;
+    justify-content: center;
+    margin : auto;
+}
+.controls {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    border : none;
+    display : flex;
+    flex-direction: column;
+    background-color: transparent;
+    align-content: center;
+    justify-content: center;
+}
+.controls button {
+    margin : 0.2rem;
+    padding : 0;
+    align-content: center;
+    justify-content: center;
+}
+.controls #increase-font,.controls #decrease-font {
+    font-size: 1rem;
+    width : 3rem;
+    height : 3rem;
+    border-radius: 50%;
+    background-color: #000;
+    color : #bf9000;
+    font-weight : lighter;
+    border : 1px solid #bf9000;
+}
 /* *****************************************************************
 LIST-PRICINGS.HTML.TWIG
 ***************************************************************** */
 
 #admin_pricing_page {
-
+    margin : 2rem auto;
+    margin : 2rem auto;
+    width: 90%;
+}
+#admin_pricing_page .backBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    color: #bf9000;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+#admin_pricing_page h2 {
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
-.edit_btns {
+#admin_pricing_page .pricing_table {
+    width: 90%;
+    border-collapse: collapse;
+    margin : 2rem auto;
+}
 
+#admin_pricing_page .pricing_table th,
+#admin_pricing_page .pricing_table td {
+    border: 1px solid rgba(191, 144, 0, 0.85);
+    padding: 1rem;
+    text-align: left;
+}
+td .pricing_edit_btns {
+    text-align: center;
+    margin : 0
+}
+.pricing_edit_btns a i {
+    text-decoration: none;
+    color : #bf9000;
+    text-align: center;
+}
+.pricing_edit_btns a:first-of-type i {
+    margin-bottom : 1rem
+}
+
+/* *****************************************************************
+SHOW-PRICING.HTML.TWIG
+***************************************************************** */
+
+#pricing_show {
+    margin : 2rem auto;
+    width: 90%;
+}
+#pricing_show .backBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    color: #bf9000;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+#pricing_show h2 {
+    display : flex;
+    flex-direction : column;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+#pricing_show .edit_btns {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    color: #bf9000;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+#pricing_show .edit_btns a {
+    text-decoration: none !important;
+    color: #bf9000 !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+#pricing_show .edit_btns a i{
+    color : #bf9000!important;
+}
+#pricing_show img {
+    margin: 1rem auto;
+    display: block; /* Assurez-vous que l'image est centrée */
+}
+
+#pricing_show p span {
+    font-weight : bold;
 }
 
 /* *****************************************************************
 LIST-MESSAGES.HTML.TWIG
 ***************************************************************** */
+#admin_contact_page {
+    margin : 2rem auto;
+    margin : 2rem auto;
+    width: 90%;
+}
+#admin_contact_page .backBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    color: #bf9000;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+#admin_contact_page h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
 
-tr {
+#admin_contact_page .contact_table {
+    width: 90%;
+    border-collapse: collapse;
+    margin : 2rem auto;
+}
+
+#admin_contact_page .contact_table th,
+#admin_contact_page .contact_table td {
+    border: 1px solid rgba(191, 144, 0, 0.85);
+    padding: 1rem;
+    text-align: left;
+}
+td .contact_edit_btns {
+    text-align: center;
+    margin : 0
+}
+.contact_edit_btns a i {
+    text-decoration: none;
+    color : #bf9000;
+    text-align: center;
+}
+.contact_edit_btns a:first-of-type i {
+    margin-bottom : 1rem
+}
+
+/* *****************************************************************
+SHOW-MESSAGE.HTML.TWIG
+***************************************************************** */
+
+#message_show {
+    margin : 2rem auto;
+    width: 90%;
+}
+#message_show .backBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    color: #bf9000;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+#message_show h2 {
+    display : flex;
+    flex-direction : column;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+#message_show .edit_btns {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    color: #bf9000;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+#message_show .edit_btns a {
+    text-decoration: none !important;
+    color: #bf9000 !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+#message_show .edit_btns a i{
+    color : #bf9000!important;
+}
+#message_show img {
+    margin: 1rem auto;
+    display: block; /* Assurez-vous que l'image est centrée */
+}
+
+#message_show p span {
     font-weight : bold;
+}
+
+/* *****************************************************************
+LIST-OPINIONS.HTML.TWIG
+***************************************************************** */
+#admin_opinion_page {
+    margin : 2rem auto;
+    margin : 2rem auto;
+    width: 90%;
+}
+#admin_opinion_page .backBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    color: #bf9000;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+#admin_opinion_page h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#admin_opinion_page .opinion_table {
+    width: 90%;
+    border-collapse: collapse;
+    margin : 2rem auto;
+}
+
+#admin_opinion_page .opinion_table th,
+#admin_opinion_page .opinion_table td {
+    border: 1px solid rgba(191, 144, 0, 0.85);
+    padding: 1rem;
+    text-align: left;
+}
+td .opinion_edit_btns {
+    text-align: center;
+    margin : 0
+}
+.opinion_edit_btns a i {
+    text-decoration: none;
+    color : #bf9000;
+    text-align: center;
+}
+.opinion_edit_btns a:first-of-type i {
+    margin-bottom : 1rem
+}
+
+/* *****************************************************************
+SHOW-OPINION.HTML.TWIG
+***************************************************************** */
+
+#opinion_show {
+    margin : 2rem auto;
+    width: 90%;
+}
+#opinion_show .backBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    color: #bf9000;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+#opinion_show h2 {
+    display : flex;
+    flex-direction : column;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+#opinion_show .edit_btns {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    color: #bf9000;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+#opinion_show .edit_btns a {
+    text-decoration: none !important;
+    color: #bf9000 !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+#opinion_show .edit_btns a i{
+    color : #bf9000!important;
+}
+#opinion_show img {
+    margin: 1rem auto;
+    display: block; /* Assurez-vous que l'image est centrée */
+}
+
+#opinion_show p span {
+    font-weight : bold;
+}
+
+/* *****************************************************************
+LIST-REALS.HTML.TWIG
+***************************************************************** */
+#admin_reals_page {
+    margin : 2rem auto;
+    margin : 2rem auto;
+    width: 90%;
+}
+#admin_reals_page .backBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    color: #bf9000;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+#admin_reals_page p {
+    margin : auto;
+    text-align: center;
+}
+#admin_reals_page .addBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    color: #bf9000;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+#admin_reals_page h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#admin_reals_page .reals_table {
+    width: 90%;
+    border-collapse: collapse;
+    margin : 2rem auto;
+}
+
+#admin_reals_page .reals_table th,
+#admin_reals_page .reals_table td {
+    border: 1px solid rgba(191, 144, 0, 0.85);
+    padding: 1rem;
+    text-align: left;
+}
+td .real_edit_btns {
+    text-align: center;
+    margin : 0
+}
+td .real_edit_btns a i {
+    text-decoration: none;
+    color : #bf9000;
+    text-align: center;
+}
+td .real_edit_btns a:first-of-type i {
+    margin-bottom : 1rem
+}
+
+/* *****************************************************************
+SHOW-REAL.HTML.TWIG
+***************************************************************** */
+
+#realisation_show {
+    margin : 2rem auto;
+    width: 90%;
+}
+#realisation_show .backBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    color: #bf9000;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+#realisation_show h2 {
+    display : flex;
+    flex-direction : column;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+#realisation_show .edit_btns {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    color: #bf9000;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+#realisation_show .edit_btns a {
+    text-decoration: none !important;
+    color: #bf9000 !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+#realisation_show .edit_btns a i{
+    color : #bf9000!important;
+}
+#realisation_show .addBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    color: #bf9000;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+#realisation_show .addBtn a {
+    text-decoration: none !important;
+    color: #bf9000 !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+#realisation_show .addBtn a i{
+    color : #bf9000!important;
+}
+#realisation_show img {
+    margin: 1rem auto;
+    display: block; /* Assurez-vous que l'image est centrée */
+}
+
+#realisation_show p span {
+    font-weight : bold;
+}
+
+/* *****************************************************************
+CREATE-REAL.HTML.TWIG
+***************************************************************** */
+
+.realAdminForm {
+    display: flex;
+    flex-direction: column;
+    width : 90%;
+    margin : auto;
+}
+.realAdminForm fieldset {
+    margin-top : 2rem;
+    padding : 2rem;
+    border : 1px solid #404040;
+}
+.realAdminForm input,
+.realAdminForm textarea {
+    background-color : #fff;
+    color : #000;
+    border : 1px solid #404040;
+    border-radius: 10px;
+    font-weight : lighter;
+    font-size: 1.6rem;
+}
+.realAdminForm label {
+    color : #000;
+    font-size : 1.6rem;
+    text-align : center;
+    margin-top : 2rem;
+    margin-bottom : 1rem;
+    font-weight : bold;
+}
+
+.realAdminForm button {
+    background-color: #bf9000;
+    color : black;
+    font-size: 1.6rem;
+    font-weight: bold;
+    border-radius: 10px;
+    margin : 2rem 0 2rem 0
+}
+.realFormOKMessage {
+    color : #bf9000;
+    font-weight : lighter;
+    font-style: italic;
+    font-size : 1.2rem;
+    text-align : center;
+    margin-bottom : 2rem;
+    margin-top : 2rem;
+}
+
+/* *****************************************************************
+LIST-SERVICES.HTML.TWIG
+***************************************************************** */
+#admin_services_page {
+    margin : 2rem auto;
+    margin : 2rem auto;
+    width: 90%;
+}
+#admin_services_page .backBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    color: #bf9000;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+#admin_services_page p {
+    margin : auto;
+    text-align: center;
+}
+#admin_services_page .addBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    color: #bf9000;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+#admin_services_page h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#admin_services_page .services_table {
+    width: 90%;
+    border-collapse: collapse;
+    margin : 2rem auto;
+}
+
+#admin_services_page .services_table th,
+#admin_services_page .services_table td {
+    border: 1px solid rgba(191, 144, 0, 0.85);
+    padding: 1rem;
+    text-align: left;
+}
+td .service_edit_btns {
+    text-align: center;
+    margin : 0
+}
+td .service_edit_btns a i {
+    text-decoration: none;
+    color : #bf9000;
+    text-align: center;
+}
+td .service_edit_btns a:first-of-type i {
+    margin-bottom : 1rem
+}
+
+/* *****************************************************************
+SHOW-SERVICE.HTML.TWIG
+***************************************************************** */
+
+#service_show {
+    margin : 2rem auto;
+    width: 90%;
+}
+#service_show .backBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    color: #bf9000;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+#service_show h2 {
+    display : flex;
+    flex-direction : column;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+#service_show .edit_btns {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    color: #bf9000;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+#service_show .edit_btns a {
+    text-decoration: none !important;
+    color: #bf9000 !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+#service_show .edit_btns a i{
+    color : #bf9000!important;
+}
+#service_show .addBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    color: #bf9000;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+#service_show .addBtn a {
+    text-decoration: none !important;
+    color: #bf9000 !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+#service_show .addBtn a i{
+    color : #bf9000!important;
+}
+#service_show img {
+    margin: 1rem auto;
+    display: block; /* Assurez-vous que l'image est centrée */
+}
+
+#service_show p span {
+    font-weight : bold;
+}
+
+/* *****************************************************************
+CREATE-SERVICE.HTML.TWIG
+***************************************************************** */
+
+.serviceAdminForm {
+    display: flex;
+    flex-direction: column;
+    width : 90%;
+    margin : auto;
+}
+.serviceAdminForm fieldset {
+    margin-top : 2rem;
+    padding : 2rem;
+    border : 1px solid #404040;
+}
+.serviceAdminForm input,
+.serviceAdminForm textarea {
+    background-color : #fff;
+    color : #000;
+    border : 1px solid #404040;
+    border-radius: 10px;
+    font-weight : lighter;
+    font-size: 1.6rem;
+}
+.serviceAdminForm label {
+    color : #000;
+    font-size : 1.6rem;
+    text-align : center;
+    margin-top : 2rem;
+    margin-bottom : 1rem;
+    font-weight : bold;
+}
+
+.serviceAdminForm button {
+    background-color: #bf9000;
+    color : black;
+    font-size: 1.6rem;
+    font-weight: bold;
+    border-radius: 10px;
+    margin : 2rem 0 2rem 0
+}
+.serviceFormOKMessage {
+    color : #bf9000;
+    font-weight : lighter;
+    font-style: italic;
+    font-size : 1.2rem;
+    text-align : center;
+    margin-bottom : 2rem;
+    margin-top : 2rem;
+}
+
+
+/****** DESKTOP ******/
+
+@media only screen and (min-width: 1200px) {
+    .logoAdmin {
+        width : 10%
+    }
+    #admin_pricing_page {
+        width: 60%;
+    }
 }

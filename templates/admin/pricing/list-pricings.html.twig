@@ -8,7 +8,7 @@
 
     {% block main %}
     <main id="admin_pricing_page">
-        <a href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
+        <a class = "backBtn" href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
         <h2 class="pricing">Devis</h2>
 
             <table class="pricing_table">
@@ -18,6 +18,7 @@
                     <th scope="col">À recontacter par</th>
                     <th scope="col">Prénom</th>
                     <th scope="col">Nom</th>
+                    <th scope="col">Édition</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -39,6 +40,6 @@
 
                 </tbody>
             </table>
-        <a href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
+        <a class = "backBtn" href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
     </main>
     {% endblock %}

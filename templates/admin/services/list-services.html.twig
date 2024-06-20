@@ -8,11 +8,11 @@
 
     {% block main %}
         <main id="admin_services_page">
-            <a href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
+            <a class= "backBtn" href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
             <h2 class="reals">Prestations</h2>
-            <a href="index.php?route=create-service"><i class="fa-solid fa-circle-plus"></i>Ajouter une prestation</a>
+            <p><a class="addBtn" href="index.php?route=create-service"><i class="fa-solid fa-circle-plus"></i>&nbsp;&nbsp;Ajouter une prestation</a></p>
 
-            <table class="srrvices_table">
+            <table class="services_table">
                 <thead>
                 <tr>
                     <th scope="col">Prestation N°</th>
@@ -39,6 +39,6 @@
 
                 </tbody>
             </table>
-            <a href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
+            <a class= "backBtn" href="index.php?route=admin"><i class="fa-solid fa-arrow-left"></i></a>
         </main>
     {% endblock %}

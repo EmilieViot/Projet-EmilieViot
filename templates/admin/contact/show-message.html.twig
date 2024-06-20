@@ -6,20 +6,17 @@
 {% endblock %}
 
     {% block main %}
-        <main id="pricing_show">
-            <a href="index.php?route=list-messages"><i class="fa-solid fa-arrow-left"></i></a>
-            <h2 class="message">Devis N°{{ message.id }}</h2>
+        <main id="message_show">
+            <a class="backBtn" href="index.php?route=list-messages"><i class="fa-solid fa-arrow-left"></i></a>
+            <h2 class="message">Message N°{{ message.id }} <a class="edit_btns" href="index.php?route=delete-message&id={{ message.id }}"><i class="fa-solid fa-trash"></i></a></h2>
 
-            <p>Prénom : {{ message.firstname }}</p>
-            <p>Nom : {{ message.lastname }}</p>
-            <p>Ville : {{ message.city }}</p>
-            <p>Email : {{ message.email }}</p>
-            <p>Message : {{ message.content }}</p>
+            <p><span>Prénom :</span> {{ message.firstname }}</p>
+            <p><span>Nom :</span> {{ message.lastname }}</p>
+            <p><span>Ville :</span> {{ message.city }}</p>
+            <p><span>Email :</span> {{ message.email }}</p>
+            <p><span>Message :</span> {{ message.content }}</p>
 
-            <ul class="edit_btns">
-                <li><a href="index.php?route=delete-message&id={{ message.id }}"><i class="fa-solid fa-trash"></i></a></li>
-            </ul>
-            <a href="index.php?route=list-messages"><i class="fa-solid fa-arrow-left"></i></a>
+            <a class="backBtn" href="index.php?route=list-messages"><i class="fa-solid fa-arrow-left"></i></a>
 
         </main>
     {% endblock %}

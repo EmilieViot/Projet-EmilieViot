@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const route = getRoute();
 
-    if (route === 'list-messages') {
+    if (route === 'list-messages' || route === 'show-message') {
         const eyeIcon = document.querySelectorAll('.fa-eye');
         eyeIcon.addEventListener('click', function(event) {
             // Empêcher le comportement par défaut du lien
@@ -54,4 +54,22 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+});
+
+/* ACCESSIBILITY - POLICES SIZES */
+const increaseFontButton = document.getElementById('increase-font');
+const decreaseFontButton = document.getElementById('decrease-font');
+
+const changeFontSize = (amount) => {
+    const currentFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const newFontSize = currentFontSize + amount;
+    document.documentElement.style.fontSize = newFontSize + 'px';
+};
+
+increaseFontButton.addEventListener('click', function () {
+    changeFontSize(2); // Augmente la taille de 2 pixels
+});
+
+decreaseFontButton.addEventListener('click', function () {
+    changeFontSize(-2); // Diminue la taille de 2 pixels
 });

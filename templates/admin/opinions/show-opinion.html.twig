@@ -5,25 +5,19 @@
     {{ parent() }}
 {% endblock %}
 
-
     {% block main %}
         <main id="opinion_show">
-            <a href="index.php?route=list-opinions"><i class="fa-solid fa-arrow-left"></i></a>
-            <h2 class="opinion">Avis N°{{ opinion.id }}</h2>
-
-            <p>Pseudonyme : {{ opinion.username }}</p>
-            <p>Message : {{ opinion.content }}</p>
-            <p>Note : {{ opinion.notation  }} / 5</p>
-            {% if opinion.realisation_id is defined and opinion.realisation_id is not null %}
-                <p>Realisation associée : {{ opinion.realisation_id }}</p>
-            {% endif %}
-            <p>Status : {{ opinion.status }}</p>
-
-            <ul class="edit_btns">
-                <li><a href="index.php?route=delete-opinion&id={{ opinion.id }}"><i class="fa-solid fa-trash"></i></a></li>
-            </ul>
-            <a href="index.php?route=list-opinions"><i class="fa-solid fa-arrow-left"></i></a>
-
-
+            <a class="backBtn" href="index.php?route=list-opinions"><i class="fa-solid fa-arrow-left"></i></a>
+            <h2 class="opinion">Avis N°{{ opinion.id }}<a class="edit_btns" href="index.php?route=delete-opinion&id={{ opinion.id }}"><i class="fa-solid fa-trash"></i></a></h2>
+            <p><span>Pseudonyme :</span> {{ opinion.username }}</p>
+            <p><span>Message :</span> {{ opinion.content }}</p>
+            <p><span>Note :</span> {{ opinion.notation  }} / 5</p>
+            <p><span>Statut :</span>
+                <select name="status" class="status" data-id="{{ opinion.id }}">
+                    <option value="en attente" {% if opinion.status == 'en attente' %}selected{% endif %}>en attente</option>
+                    <option value="OK" {% if opinion.status == 'OK' %}selected{% endif %}>OK</option>
+                </select>
+            </p>
+            <a class="backBtn" href="index.php?route=list-opinions"><i class="fa-solid fa-arrow-left"></i></a>
         </main>
     {% endblock %}

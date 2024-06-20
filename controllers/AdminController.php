@@ -3,6 +3,10 @@ class AdminController extends AbstractController
 {
     public function admin(): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $this->render("admin/admin.html.twig", []);
     }
 
@@ -60,47 +64,6 @@ class AdminController extends AbstractController
         $this->render("admin/opinions/show-opinion.html.twig", ["opinion" => $opinion]);
     }
 
-    public function editOpinion(int $id): void
-    {
-        $om = new OpinionManager();
-        $opinion = $om->getOpinionById($id);
-
-        $this->render("admin/opinions/edit-opinion.html.twig", ["opinion" => $opinion]);
-    }
-
-    public function checkEditOpinion(): void
-    {
-        if (isset($_POST['title']) && isset($_POST['intro']) && isset($_POST['description']) /*&& $_POST['photo_path']*/) {
-
-            $tokenManager = new CSRFTokenManager();
-            if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
-
-                $dm = new DetailManager();
-                $pm = new PricingManager();
-
-                $contact_mode = htmlspecialchars($_POST["contact_mode"]);
-                $firstname = htmlspecialchars($_POST["firstname"]);
-                $lastname = htmlspecialchars($_POST["lastname"]);
-                $email = htmlspecialchars($_POST["email"]);
-                $tel = htmlspecialchars($_POST["tel"]);
-                $city = htmlspecialchars($_POST["city"]);
-                $message = htmlspecialchars($_POST["message"]);
-
-                $pricing = new Pricing($contact_mode, $firstname, $lastname, $email, $tel, $city, $message);
-                unset($_SESSION["error-message"]);
-                $sm->updateOpinion($service);
-
-                $message = "L'avis a bien été mis à jour.";
-                $this->render("admin/opinions/list-opinions.html.twig", ['message' => $message]);
-            } else {
-                $_SESSION["error-message"] = "CSRF token invalide";
-                $this->redirect("edit-opinion");
-            }
-        } else {
-            $message = "Une erreur s'est produite, veuillez réessayer.";
-            $this->render("admin/opinions/edit-opinion.html.twig", ['message' => $message]);
-        }
-    }
     public function deleteOpinion(int $id): void
     {
         $om = new OpinionManager();

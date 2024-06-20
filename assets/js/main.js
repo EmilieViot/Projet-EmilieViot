@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    /* MODALE - PAGE ONE SERVICE */
+    /* MODALE - PAGE ONE SERVICE/ONE REALISATION */
     if (route === 'service' || route === 'realisation') {
         const thumbnails = document.querySelectorAll('.thumbnails');
         const modal = document.querySelector('.modal');
@@ -354,7 +354,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* ACCESSIBILITY - CONTRASTE */
+    /*/!* ACCESSIBILITY - CONTRASTE *!/
     const body = document.body;
     const metaColorScheme = document.querySelector('meta[name="color-scheme"]');
 
@@ -384,6 +384,6 @@ document.addEventListener("DOMContentLoaded", () => {
             body.classList.add('light-mode');
             body.classList.remove('dark-mode');
         }
-    }
+    }*/
 })
 

@@ -34,15 +34,6 @@
                     {% endif %}
                     <p class = "opinionContent dark-mode-white-text">{{ opinion.content }}</p>
                     <p class = "opinionAuthor">Avis laissé par :<br> {{ opinion.username }}</p>
-                    {% if opinion.getRealisation() is defined and opinion.getRealisation() is not null %}
-                        <p class="opinionRealisation">
-                            Avis en lien avec la réalisation suivante :<br>
-                                <a href="index.php?route=realisation&id={{ opinion.getRealisation().getId()}}">
-                                    {{ opinion.getRealisation().getTitle() }}
-                                </a><br>
-                            (cliquez pour découvrir)
-                        </p>
-                    {% endif %}
                 </article>
             {% endif %}
         {% endfor %}

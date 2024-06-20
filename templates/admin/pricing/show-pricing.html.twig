@@ -8,36 +8,28 @@
 
     {% block main %}
         <main id="pricing_show">
-            <a href="index.php?route=list-messages"><i class="fa-solid fa-arrow-left"></i></a>
-            <h2 class="pricing">Devis N°{{ pricing.id }}</h2>
+            <a class="backBtn" href="index.php?route=list-pricings"><i class="fa-solid fa-arrow-left"></i></a>
+            <h2 class="pricing">Devis N°{{ pricing.id }} <a class="edit_btns" href="index.php?route=delete-pricing&id={{ pricing.id }}"><i class="fa-solid fa-trash"></i></a></h2>
 
-                <p>Recontacter par : {{ pricing.contact_mode }}</p>
-                <p>Prénom : {{ pricing.firstname }}</p>
-                <p>Nom : {{ pricing.lastname }}</p>
-                <p>Email : {{ pricing.email }}</p>
-                <p>Téléphone : {{ pricing.tel }}</p>
-                <p>Ville : {{ pricing.city }}</p>
-                <p>Message : {{ pricing.message }}</p>
+                <p><span>À recontacter par :</span> {{ pricing.contact_mode }}</p>
+                <p><span>Prénom :</span> {{ pricing.firstname }}</p>
+                <p><span>Nom :</span> {{ pricing.lastname }}</p>
+                <p><span>Email :</span> {{ pricing.email }}</p>
+                <p><span>Téléphone :</span> {{ pricing.tel }}</p>
+                <p><span>Ville :</span> {{ pricing.city }}</p>
+                <p><span>Message :</span> {{ pricing.message }}</p>
                 {% if pricing.details is defined and pricing.details is not null %}
-                    <p>Options :</p>
+                    <p><span>Options :</span></p>
                     <ul>
                         {%  for detail in pricing.details %}
-                            <li>{{ detail.title }}</li>
+                            <li>• {{ detail.title }}</li>
                         {% endfor %}
                     </ul>
                 {% endif %}
-
-
+                <p><span>Image(s) à l'appui :</span></p>
                 {% if pricing.photo_path is defined and pricing.photo_path is not null %}
-                <p>Image à l'appui : <img src="{{ pricing.photo_path }}" alt="image"/></p>
+                    <img src="{{ pricing.photo_path }}" alt="image"/>
                 {% endif %}
-
-                <ul class="edit_btns">
-                    <li><a href="index.php?route=delete-pricing&id={{ pricing.id }}"><i class="fa-solid fa-trash"></i></a></li>
-                </ul>
-
-            <a href="index.php?route=list-messages"><i class="fa-solid fa-arrow-left"></i></a>
-
-
+            <a class="backBtn" href="index.php?route=list-pricings"><i class="fa-solid fa-arrow-left"></i></a>
         </main>
     {% endblock %}
