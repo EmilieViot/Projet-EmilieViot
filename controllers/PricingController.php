@@ -11,10 +11,22 @@ class PricingController extends AbstractController
 
     public function pricingRegister(): void
     {
+        if (!isset($_POST["details"]) || empty($_POST["details"])) {
+            $error = "Veuillez cocher au moins un détail.";
+            $this->render("pricing/pricing.html.twig", ['message' => $error]);
+            return; // Arrête l'exécution de la méthode
+        }
+        $dm = new DetailManager();
+        $details = $_POST["details"];
+        $details_array = [];
+        foreach ($details as $detailData) {
+            $detail = $dm->findByTitle($detailData);
+            $details_array[] = $detail;
+        }
+
         if (isset($_POST["contact_mode"]) && isset($_POST["firstname"]) && isset($_POST["lastname"]) && (isset($_POST["email"]) || isset($_POST["tel"]))) {
             $tokenManager = new CSRFTokenManager();
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
-                $dm = new DetailManager();
                 $pm = new PricingManager();
 
                 $contact_mode = htmlspecialchars($_POST["contact_mode"]);
@@ -27,24 +39,14 @@ class PricingController extends AbstractController
 
                 $photo_path = null;
 
-                // Vérifier si un fichier a été téléchargé
-                if (isset($_FILES['picture'])) {
+                // check file download
+                if (isset($_FILES['picture']) && !empty($_FILES["picture"]["name"])) {
                     $uploader = new Uploader();
                     $picture = $uploader->upload($_FILES, "picture");
                     if ($picture !== null) {
                         $photo_path = $picture->getUrl();
-                    } else {
-                        $photo_path = null;
                     }
                 }
-
-                $details = $_POST["details"];
-                $details_array = [];
-                foreach ($details as $detailData) {
-                    $detail = $dm->findByTitle($detailData);
-                    $details_array[] = $detail;
-                }
-
                 $pricing = new Pricing($contact_mode, $firstname, $lastname, $email, $tel, $city, $message, $details_array, $photo_path);
                 unset($_SESSION["error-message"]);
                 $pm->createPricing($pricing);

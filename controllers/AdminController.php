@@ -12,20 +12,31 @@ class AdminController extends AbstractController
 
     public function messagesList(): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $mm = new MessageManager();
         $messages = $mm->findAll();
-
         $this->render("admin/contact/list-messages.html.twig", ["messages" => $messages]);
     }
 
     public function showMessage(int $id): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $mm = new MessageManager();
         $message = $mm->getMessageById($id);
         $this->render("admin/contact/show-message.html.twig", ["message" => $message]);
     }
     public function deleteMessage(int $id): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $mm = new MessageManager();
         $mm->deleteMessage($id);
         $this->redirect('list-messages');
@@ -33,6 +44,10 @@ class AdminController extends AbstractController
 
     public function opinionsList(): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $om = new OpinionManager();
         $opinions = $om->findAll();
         $this->render("admin/opinions/list-opinions.html.twig", ["opinions" => $opinions]);
@@ -40,12 +55,14 @@ class AdminController extends AbstractController
 
     public function statusRegister(): void
     {
-
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         if (!isset($_POST["status"]) && !isset($_POST["id"])) {
             $this->renderJson(['success' => false, 'message' => 'No input received']);
             return;
         }
-
         if (isset($_POST["status"]) && isset($_POST["id"])) {
                 $status = htmlspecialchars($_POST["status"]);
                 $id = (int)$_POST["id"];
@@ -59,6 +76,10 @@ class AdminController extends AbstractController
     }
     public function showOpinion(int $id): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $om = new OpinionManager();
         $opinion= $om->getOpinionById($id);
         $this->render("admin/opinions/show-opinion.html.twig", ["opinion" => $opinion]);
@@ -66,6 +87,10 @@ class AdminController extends AbstractController
 
     public function deleteOpinion(int $id): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $om = new OpinionManager();
         $om->deleteOpinion($id);
         $this->redirect('list-opinions');
@@ -73,6 +98,10 @@ class AdminController extends AbstractController
 
     public function pricingsList(): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $pm = new PricingManager();
         $pricings = $pm->findAll();
         $this->render("admin/pricing/list-pricings.html.twig", ["pricings" => $pricings]);
@@ -80,12 +109,20 @@ class AdminController extends AbstractController
 
     public function showPricing(int $id): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $pm = new PricingManager();
         $pricing = $pm->findOne($id);
         $this->render("admin/pricing/show-pricing.html.twig", ["pricing" => $pricing]);
     }
     public function deletePricing(int $id): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $pm = new PricingManager();
         $pm->deletePricing($id);
         $this->redirect('list-pricings');
@@ -93,6 +130,10 @@ class AdminController extends AbstractController
 
     public function realsList(): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $rm = new RealisationManager();
         $realisations = $rm->findAll();
         $this->render("admin/realisations/list-reals.html.twig", ["realisations" => $realisations]);
@@ -100,30 +141,32 @@ class AdminController extends AbstractController
 
     public function createReal(): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $this->render("admin/realisations/create-real.html.twig", []);
     }
 
     public function checkRealCreation(): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         if (isset($_POST['title']) && isset($_POST['description']) && (isset($_FILES['picture1']) || isset($_FILES['picture2']) || isset($_FILES['picture3']) || isset($_FILES['picture4']))) {
-
             $tokenManager = new CSRFTokenManager();
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
-
                 if(!empty($_POST['title'])) {$title = $_POST['title'];} else {$title = null;}
                 if(!empty($_POST['description'])) {$description = $_POST['description'];} else {$description = null;}
                 if(!empty($_FILES['picture1'])) {$picture1 = $_FILES['picture1'];}
                 if(!empty($_FILES['picture2'])) {$picture2 = $_FILES['picture2'];}
                 if(!empty($_FILES['picture3'])) {$picture3 = $_FILES['picture3'];}
                 if(!empty($_FILES['picture4'])) {$picture4 = $_FILES['picture4'];}
-
                 $rm = new RealisationManager();
-
                 /*dump($picture1);dump($picture2);dump($picture3);dump($picture4);*/
-
                 $pictures = [];
                 $uploader = new Uploader();
-
                 for ($i = 1; $i <= 4; $i++) {
                     if (!empty($_FILES["picture$i"])) {
                         $pic = $uploader->uploadPictures($_FILES, "picture$i");
@@ -158,9 +201,12 @@ class AdminController extends AbstractController
             $this->redirect("create-real");
         }
     }
-
     public function showReal(int $id): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $rpm = new RealisationPictureManager();
         $realisation = $rpm->findByRealisationId($id);
         if ($realisation) {
@@ -170,9 +216,12 @@ class AdminController extends AbstractController
             $this->render("admin/realisations/show-real.html.twig", ["error" => "Réalisation non trouvée"]);
         }
     }
-
     public function deleteReal(int $id): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $rm = new RealisationManager();
         $rm->deleteReal($id);
         $this->redirect('list-reals');
@@ -180,6 +229,10 @@ class AdminController extends AbstractController
 
     public function servicesList(): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $sm = new ServiceManager();
         $services = $sm->findAll();
         $this->render("admin/services/list-services.html.twig", ["services" => $services]);
@@ -187,16 +240,22 @@ class AdminController extends AbstractController
 
     public function createService(): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $this->render("admin/services/create-service.html.twig", []);
     }
 
     public function checkServiceCreation(): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         if (isset($_POST['title']) && isset($_POST['intro']) && isset($_POST['description']) && (isset($_FILES['picture1']) || isset($_FILES['picture2']) || isset($_FILES['picture3']) || isset($_FILES['picture4']))) {
-
             $tokenManager = new CSRFTokenManager();
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
-
                 if(!empty($_POST['title'])) {$title = $_POST['title'];} else {$title = null;}
                 if(!empty($_POST['intro'])) {$intro = $_POST['intro'];} else {$intro = null;}
                 if(!empty($_POST['description'])) {$description = $_POST['description'];} else {$description = null;}
@@ -204,14 +263,10 @@ class AdminController extends AbstractController
                 if(!empty($_FILES['picture2'])) {$picture2 = $_FILES['picture2'];}
                 if(!empty($_FILES['picture3'])) {$picture3 = $_FILES['picture3'];}
                 if(!empty($_FILES['picture4'])) {$picture4 = $_FILES['picture4'];}
-
                 $sm = new ServiceManager();
-
                 /*dump($picture1);dump($picture2);dump($picture3);dump($picture4);*/
-
                 $pictures = [];
                 $uploader = new Uploader();
-
                 for ($i = 1; $i <= 4; $i++) {
                     if (!empty($_FILES["picture$i"])) {
                         $pic = $uploader->uploadPictures($_FILES, "picture$i");
@@ -246,22 +301,27 @@ class AdminController extends AbstractController
             $this->redirect("create-service");
         }
     }
-
     public function showService(int $id): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $sm = new ServiceManager();
         $service = $sm->findById($id);
-
         $this->render("admin/services/show-service.html.twig", ["service" => $service]);
     }
 
     public function deleteService(int $id): void
     {
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("login");
+            return;
+        }
         $sm = new ServiceManager();
         $sm->deleteService($id);
         $this->redirect('list-services');
     }
-
 }
 
 

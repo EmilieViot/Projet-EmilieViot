@@ -17,7 +17,6 @@
                     <th scope="col">opinion N°</th>
                     <th scope="col">Username</th>
                     <th scope="col">Note</th>
-                    <th scope="col">Message</th>
                     <th scope="col">Statut</th>
                     <th scope="col">Edition</th>
                 </tr>
@@ -28,7 +27,6 @@
                         <td>{{ opinion.id }}</td>
                         <td>{{ opinion.username }}</td>
                         <td>{{ opinion.notation }} / 5</td>
-                        <td>{{ opinion.realisationId }}</td>
                         <td>
                             <select name="status" class="status" data-id="{{ opinion.id }}">
                                 <option value="en attente" {% if opinion.status == 'en attente' %}selected{% endif %}>en attente</option>

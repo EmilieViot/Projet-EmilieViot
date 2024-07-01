@@ -6,7 +6,6 @@ class MessageManager extends AbstractManager
     {
         parent::__construct();
     }
-
     public function findAll(): array
     {
         $query = $this->db->prepare('SELECT * FROM messages');
@@ -21,7 +20,6 @@ class MessageManager extends AbstractManager
         }
         return $messages;
     }
-    
     public function createMessage(Message $message): void
     {
         $query = $this->db->prepare('INSERT INTO messages (id, firstname, lastname, city, email, content) VALUES (NULL, :firstname, :lastname, :city, :email, :content)');
@@ -35,14 +33,11 @@ class MessageManager extends AbstractManager
         $query->execute($parameters);
         $message->setId($this->db->lastInsertId());
     }
-
     public function getMessageById(int $id): ?Message
     {
         $query = $this->db->prepare('SELECT * FROM messages WHERE id = :id');
         $query->execute(["id" => $id]);
-
         $result = $query->fetch(PDO::FETCH_ASSOC);
-
         if ($result)
         {
             $message = new Message($result['firstname'], $result['lastname'], $result['city'], $result['email'], $result['content']);
@@ -51,7 +46,6 @@ class MessageManager extends AbstractManager
         }
         return null;
     }
-
     public function updateMessage(Message $message): void
     {
         $query = $this->db->prepare('UPDATE messages SET firstname = :firstname, lastname = :lastname, city = :city, email = :email, content = :content WHERE id = :id');
@@ -65,11 +59,9 @@ class MessageManager extends AbstractManager
         ];
         $query->execute($parameters);
     }
-
     public function deleteMessage(int $id): void
     {
         $query = $this->db->prepare('DELETE FROM messages WHERE id = :id');
         $query->execute(["id" => $id]);
     }
-
 }

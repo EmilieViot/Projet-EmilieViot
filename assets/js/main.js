@@ -308,6 +308,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let lastname = document.getElementById("lastname");
         let telField = document.getElementById("tel");
         let emailField = document.getElementById("email");
+        let detailsChecked = document.querySelectorAll('input[name="details[]"]:checked');
         let btn = document.querySelector("button[type='submit']");
         contact_mode.addEventListener("change", function () {
             if (contact_mode.value === "Téléphone") {
@@ -332,6 +333,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 event.preventDefault();
                 alert("Veuillez renseigner votre adresse email pour être recontacté(e).");
             }
+            if (detailsChecked.length === 0) {
+                event.preventDefault(); // Empêche l'envoi du formulaire
+                alert('Veuillez cocher au moins un détail.');
+            }
         });
     }
 
@@ -352,38 +357,5 @@ document.addEventListener("DOMContentLoaded", () => {
     decreaseFontButton.addEventListener('click', function () {
         changeFontSize(-2); // Diminue la taille de 2 pixels
     });
-
-
-    /*/!* ACCESSIBILITY - CONTRASTE *!/
-    const body = document.body;
-    const metaColorScheme = document.querySelector('meta[name="color-scheme"]');
-
-// Initialize mode based on browser preference
-    let isDarkMode = metaColorScheme.content.includes('dark');
-    updateMode();
-
-// Add event listeners for mode toggle buttons
-    const darkModeButton = document.querySelector('#dark-mode-button');
-    const lightModeButton = document.querySelector('#light-mode-button');
-
-    darkModeButton.addEventListener('click', () => {
-        isDarkMode = true;
-        updateMode();
-    });
-
-    lightModeButton.addEventListener('click', () => {
-        isDarkMode = false;
-        updateMode();
-    });
-
-    function updateMode() {
-        if (isDarkMode) {
-            body.classList.add('dark-mode');
-            body.classList.remove('light-mode');
-        } else {
-            body.classList.add('light-mode');
-            body.classList.remove('dark-mode');
-        }
-    }*/
 })
 

@@ -1,7 +1,6 @@
 <?php
 
 class Uploader {
-
     private array $extensions = ["jpeg","jpg","png", "pdf"];
     private string $uploadFolder = "uploads"; /* pour l'envoi d'un photo via  le formulaire de devis */
     private string $picturesFolder = "assets/img";  /* admin > création d'une réalisation avec photos à l'appui */
@@ -11,13 +10,12 @@ class Uploader {
     {
         $this->gen = new RandomStringGenerator();
     }
-
     /**
      * @param array $files your $_FILES superglobal
      * @param string $uploadField the name of the type="file" input
      *
      */
-    public function upload(array $files, string $uploadField) : ?Picture
+    public function upload($files, string $uploadField) : ?Picture
     {
         if(isset($files[$uploadField])){
             try {
@@ -43,7 +41,6 @@ class Uploader {
             }
             catch(Exception $e)
             {
-                echo $e->getMessage();
                 return null;
             }
         }

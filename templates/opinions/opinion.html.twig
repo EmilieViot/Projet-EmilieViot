@@ -64,14 +64,6 @@
                     <option value="5">5</option>
                 </select>
 
-                <label for="realisation_id">Une réalisation est-elle ciblée par votre avis ? </label>
-                <select class="realChoice dark-mode white-text" name="realisation_id" id="realisation_id">
-                    <option value="">Sélectionnez une réalisation</option>
-                    {% for realisation in realisations %}
-                    <option value="realisation_{{ realisation.id }}">{{ realisation.title }}</option>
-                    {% endfor %}
-                </select>
-
                 <button type="submit">Soumettre mon avis</button>
             </fieldset>
         </form>

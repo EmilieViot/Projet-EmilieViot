@@ -51,7 +51,7 @@
                 {% for detail in details %}
                 <fieldset >
                     <label for="detail{{ detail.id }}">{{ detail.title }}</label>
-                    <input type="checkbox" id="detail{{ detail.id }}" name="details[]" value="{{ detail.title }}">
+                    <input type="checkbox" id="detail{{ detail.id }}" name="details[]" value="{{ detail.title }}"/>
                 </fieldset>
                 {%  endfor %}
             </div>

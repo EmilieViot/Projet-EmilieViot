@@ -94,7 +94,9 @@ abstract class AbstractController
 
             // Set email subject and body
             $mail->Subject = "Nouvelle demande de contact - AVEN Plaquiste";
-            $mail->Body    = "Vous avez une nouvelle demande de contact sur le site d'AVEN Plaquiste. Rendez-vous vite en admin dans la rubrique 'MESSAGES' !";
+            $mail->Body    = 'Vous avez une nouvelle demande de contact sur le site AVEN Plaquiste. <a href="https://aven-plaquiste.go.yj.fr/index.php?route=list-messages">Cliquez ici pour la consulter !</a>';
+            $mail->AltBody = 'Cliquez sur ce lien pour consulter votre nouvelle demande de contact : https://aven-plaquiste.go.yj.fr/index.php?route=list-messages'; // raw text
+
 
             // Send the email
             $mail->send();
@@ -135,8 +137,8 @@ abstract class AbstractController
 
             // Set email subject and body
             $mail->Subject = "Nouvelle demande de devis - AVEN Plaquiste";
-            $mail->Body    = "Vous avez une nouvelle demande de devis sur le site d'AVEN Plaquiste. Rendez-vous vite en admin dans la rubrique 'DEVIS' !";
-
+            $mail->Body    = 'Vous avez une nouvelle demande de devis sur le site AVEN Plaquiste. <a href="https://aven-plaquiste.go.yj.fr/index.php?route=list-pricings">Cliquez ici pour la consulter !</a>';
+            $mail->AltBody = 'Cliquez sur ce lien pour consulter votre nouvelle demande de devis : https://aven-plaquiste.go.yj.fr/index.php?route=list-pricings'; // raw text
             // Send the email
             $mail->send();
             return true;
@@ -175,9 +177,9 @@ abstract class AbstractController
             $mail->isHTML(true);
 
             // Set email subject and body
-            $mail->Subject = "Nouvelle avis laissé - AVEN Plaquiste";
-            $mail->Body    = "Quelqu'un a laissé un nouvel avis sur le site d'AVEN Plaquiste. Rendez-vous vite en admin dans la rubrique 'AVIS' !";
-
+            $mail->Subject = "Nouvel avis laissé - AVEN Plaquiste";
+            $mail->Body    = 'Un nouvel avis a été laissé sur le site AVEN Plaquiste. <a href="https://aven-plaquiste.go.yj.fr/index.php?route=list-opinions">Cliquez ici pour le consulter !</a>';
+            $mail->AltBody = 'Cliquez sur ce lien pour consulter le nouvel avis : https://aven-plaquiste.go.yj.fr/index.php?route=list-opinions'; // raw text
             // Send the email
             $mail->send();
             return true;

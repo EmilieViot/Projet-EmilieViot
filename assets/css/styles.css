@@ -1006,7 +1006,7 @@ OPINION.HTML.TWIG
 }
 .opinionForm label {
     color : #bf9000;
-    font-size : 1.4rem;
+    font-size : 1.6rem;
     text-align : center;
     margin-top : 2rem;
     margin-bottom : 1rem;
@@ -1052,7 +1052,7 @@ CONTACT.HTML.TWIG
 #contactForm {
     display: flex;
     flex-direction: column;
-    width : 80%;
+    width : 90%;
     margin : auto
 }
 #contactForm fieldset {
@@ -1078,7 +1078,7 @@ CONTACT.HTML.TWIG
 }
 #contactForm label {
     color : #bf9000;
-    font-size : 1.4rem;
+    font-size : 1.6rem;
     text-align : center;
     margin-top : 2rem;
     margin-bottom : 1rem;
@@ -1095,7 +1095,7 @@ CONTACT.HTML.TWIG
     color : #bf9000;
     font-weight : lighter;
     font-style: italic;
-    font-size : 1.2rem;
+    font-size : 1.6rem;
     text-align : center;
     margin-bottom : 2rem;
     margin-top : 2rem;
@@ -1111,7 +1111,9 @@ PRICING.HTML.TWIG
 }
 .pricingForm {
     width : 80%;
-    margin : auto;
+    margin-top : 2rem;
+    margin-right : auto;
+    margin-left : auto;
     padding : 0;
     text-align : center;
 }
@@ -1143,7 +1145,7 @@ PRICING.HTML.TWIG
 }
 .pricingForm label {
     color : #bf9000;
-    font-size : 1.4rem;
+    font-size : 1.6rem;
     text-align : center;
     margin-top : 2rem;
     margin-bottom : 1rem;
@@ -1729,7 +1731,7 @@ PRICING.HTML.TWIG
 
     /* Opinions */
     .opinionForm {
-        width : 80%;
+        width : 60%;
         margin : auto
     }
     .opinionFormSection legend {
@@ -1738,7 +1740,7 @@ PRICING.HTML.TWIG
         margin-top : 4rem!important;
         margin-bottom : 1rem;
         padding : 0 1rem 0 1rem;
-        font-size: 3rem;
+        font-size: 2rem;
     }
     .opinionForm label {
         font-size : 1.6rem;
@@ -1746,20 +1748,22 @@ PRICING.HTML.TWIG
     .opinionForm select option {
         font-size : 1.4rem;
     }
-    .realChoice option {
-        font-size : 1.4rem;
-    }
     .opinionFormOKMessage {
         font-size : 1.6rem;
+    }
+    .opinionForm button {
+        width : 50%;
+        margin : 2rem auto 0 auto
     }
 
     /* contact */
 
     #contactForm {
+        width : 60%;
         margin : auto
     }
     #contactForm legend {
-        font-size: 3rem;
+        font-size: 2rem;
     }
     #contactForm label {
         font-size : 1.6rem;
@@ -1767,18 +1771,32 @@ PRICING.HTML.TWIG
     #contactFormOKMessage {
         font-size : 1.6rem
     }
+    #contactForm button {
+        width : 50%!important;
+        margin : 2rem auto 0 auto!important;
+    }
     /* devis */
+
+    .pricingForm {
+        width : 60%;
+        margin : auto;
+        padding : 2rem;
+    }
     .pricingForm legend {
-        font-size: 3rem;
+        font-size: 2rem;
     }
     .pricingForm label {
-        font-size : 1.6rem;
+        font-size : 1.8rem;
     }
     .pricingForm select option {
         font-size : 1.4rem;
     }
     .pricingFormOKMessage {
         font-size : 1.6rem
+    }
+    .pricingForm button {
+        width : 50%!important;
+        margin : 2rem auto 0 auto!important;
     }
     /* mentions légales */
     #legal {
